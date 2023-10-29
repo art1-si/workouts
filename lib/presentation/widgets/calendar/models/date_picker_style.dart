@@ -2,17 +2,17 @@ import 'package:workouts/presentation/widgets/calendar/infinite_scroll_calendar.
 import 'package:workouts/presentation/widgets/calendar/models/calendar_style.dart';
 
 class DatePickerStyle extends CalendarStyle {
-  DatePickerStyle({
-    required super.activeDateCellBuilder,
-    required super.todayDateCellBuilder,
-    required super.calendarContentPadding,
-    required this.selectedStartDateCellBuilder,
-    this.selectedBetweenDateCellBuilder,
-    this.selectedEndDateCellBuilder,
-    required this.singleSelectableSelectedDateCellBuilder,
-    required this.inactiveDateCellBuilder,
-    required super.titleBuilder,
-  });
+  DatePickerStyle(
+      {required super.activeDateCellBuilder,
+      required super.todayDateCellBuilder,
+      required super.calendarContentPadding,
+      required this.selectedStartDateCellBuilder,
+      this.selectedBetweenDateCellBuilder,
+      this.selectedEndDateCellBuilder,
+      required this.singleSelectableSelectedDateCellBuilder,
+      required this.inactiveDateCellBuilder,
+      required super.titleBuilder,
+      required super.headerBuilder});
 
   /// Cell builder for Date range, starting date.
   final DateTimeIndexedBuilder selectedStartDateCellBuilder;
@@ -30,4 +30,18 @@ class DatePickerStyle extends CalendarStyle {
   final DateTimeIndexedBuilder inactiveDateCellBuilder;
 
   final DateTimeIndexedBuilder singleSelectableSelectedDateCellBuilder;
+
+  factory DatePickerStyle.initial() {
+    final defaultCalendarStyle = CalendarStyle.initial();
+    return DatePickerStyle(
+      headerBuilder: defaultCalendarStyle.headerBuilder,
+      activeDateCellBuilder: defaultCalendarStyle.activeDateCellBuilder,
+      todayDateCellBuilder: defaultCalendarStyle.todayDateCellBuilder,
+      calendarContentPadding: defaultCalendarStyle.calendarContentPadding,
+      selectedStartDateCellBuilder: defaultCalendarStyle.todayDateCellBuilder,
+      singleSelectableSelectedDateCellBuilder: defaultCalendarStyle.todayDateCellBuilder,
+      inactiveDateCellBuilder: defaultCalendarStyle.todayDateCellBuilder,
+      titleBuilder: defaultCalendarStyle.titleBuilder,
+    );
+  }
 }

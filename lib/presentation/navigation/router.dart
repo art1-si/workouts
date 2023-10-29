@@ -12,7 +12,13 @@ class AppRouter {
       observers: [
         AnalyticsObserver(),
       ],
-      routes: [],
+      routes: [
+        GoRoute(
+          name: Screen.home.key,
+          path: Screen.home.path,
+          builder: (context, state) => Screen.home.widget(),
+        ),
+      ],
     );
   }
 

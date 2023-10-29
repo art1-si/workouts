@@ -110,7 +110,6 @@ class _InfiniteScrollDatePickerCalendarState extends State<InfiniteScrollDatePic
 class InfiniteScrollCalendar extends StatefulWidget {
   InfiniteScrollCalendar({
     super.key,
-    this.headerBuilder,
     this.onDateTapped,
     this.calendarContentPadding = EdgeInsets.zero,
     this.footer,
@@ -130,11 +129,6 @@ class InfiniteScrollCalendar extends StatefulWidget {
   }
 
   late final CalendarController calendarController;
-
-  /// Builder for days header. Provides day number in a week for that day.
-  ///
-  /// When left `null`, will not be displayed.
-  final WeekdayHeaderBuilder? headerBuilder;
 
   final EdgeInsets calendarContentPadding;
 
@@ -188,7 +182,7 @@ class InfiniteScrollCalendar extends StatefulWidget {
         },
         children: [
           TableRow(
-            children: List.generate(7, (index) => headerBuilder!(index))
+            children: List.generate(7, (index) => calendarStyle.headerBuilder(index))
               ..insert(
                 0,
                 const SizedBox(),
@@ -216,7 +210,7 @@ class _InfiniteScrollCalendarState extends State<InfiniteScrollCalendar> {
         itemBuilder: (context, index) {
           return CalendarView(
             index: index,
-            style: widget.calendarStyle!,
+            style: widget.calendarStyle,
             controller: widget.calendarController,
             onDateTapped: widget.onDateTapped,
             sideLabelSize: widget.sideLabelSize,

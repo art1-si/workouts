@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:workouts/presentation/screens/home/home_screen.dart';
 
 /// Screens in the App.
 enum Screen {
@@ -14,13 +15,13 @@ enum Screen {
   /// Returns a [Widget] for the corresponding `Screen`.
   Widget widget({Map<String, dynamic>? params}) {
     return switch (this) {
-      Screen.home => throw UnimplementedError(),
+      Screen.home => const HomeScreen(),
     };
   }
 
   String get path {
     return switch (this) {
-      Screen.home => 'newsItem/:id',
+      Screen.home => '/home',
     };
   }
 }

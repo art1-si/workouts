@@ -2,9 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:workouts/presentation/global_widgets/calendar/infinite_page_view/infinite_page_controller.dart';
-import 'package:workouts/presentation/global_widgets/calendar/infinite_page_view/widgets/limited_page_scroll_physics.dart';
-import 'package:workouts/presentation/global_widgets/calendar/infinite_page_view/widgets/size_notifier_widget.dart';
+import 'package:workouts/presentation/widgets/calendar/infinite_page_view/infinite_page_controller.dart';
+import 'package:workouts/presentation/widgets/calendar/infinite_page_view/widgets/limited_page_scroll_physics.dart';
+import 'package:workouts/presentation/widgets/calendar/infinite_page_view/widgets/size_notifier_widget.dart';
 
 /// Infinite page view.
 ///

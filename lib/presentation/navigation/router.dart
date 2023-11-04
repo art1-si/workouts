@@ -1,22 +1,101 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:workouts/presentation/navigation/screens.dart';
+import 'package:workouts/presentation/screens/dashboard/dashboard_screen.dart';
 import 'package:workouts/tools/logger/logger.dart';
 
 class AppRouter {
   final rootNavigatorKey = GlobalKey<NavigatorState>();
 
   AppRouter._() {
+    final logOverviewNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'logOverview');
+    final plansNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'plans');
+    final exerciseSelectorNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'exerciseSelector');
+    final settingsNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'settings');
+
     _goRouter = GoRouter(
-      initialLocation: Screen.logs.path,
+      initialLocation: Screens.splash.path,
       observers: [
         AnalyticsObserver(),
       ],
       routes: [
         GoRoute(
-          name: Screen.logs.key,
-          path: Screen.logs.path,
-          builder: (context, state) => Screen.logs.widget(),
+          name: Screens.splash.key,
+          path: Screens.splash.path,
+          builder: (context, state) => Screens.splash.widget(),
+        ),
+        StatefulShellRoute.indexedStack(
+          builder: (context, state, navigationShell) {
+            return DashboardScreen(
+              navigationShell: navigationShell,
+            );
+          },
+          branches: [
+            StatefulShellBranch(
+              navigatorKey: logOverviewNavigatorKey,
+              routes: [
+                GoRoute(
+                  name: Screens.logsOverview.key,
+                  path: Screens.logsOverview.path,
+                  builder: (context, state) => Screens.logsOverview.widget(),
+                ),
+              ],
+            ),
+            StatefulShellBranch(
+              navigatorKey: plansNavigatorKey,
+              routes: [
+                GoRoute(
+                  name: Screens.plan.key,
+                  path: Screens.plan.path,
+                  builder: (context, state) => Screens.plan.widget(
+                    params: state.extra == null ? {} : state.extra as Map<String, dynamic>,
+                  ),
+                  routes: [
+                    GoRoute(
+                      name: Screens.planCreation.key,
+                      path: Screens.planCreation.path,
+                      builder: (context, state) =>
+                          Screens.planCreation.widget(params: state.extra as Map<String, dynamic>),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            StatefulShellBranch(
+              navigatorKey: exerciseSelectorNavigatorKey,
+              routes: [
+                GoRoute(
+                  name: Screens.exerciseSelector.key,
+                  path: Screens.exerciseSelector.path,
+                  builder: (context, state) => Screens.exerciseSelector.widget(),
+                  routes: [
+                    GoRoute(
+                      name: Screens.exerciseCreation.key,
+                      path: Screens.exerciseCreation.path,
+                      builder: (context, state) =>
+                          Screens.exerciseCreation.widget(params: state.extra as Map<String, dynamic>),
+                    ),
+                    GoRoute(
+                      name: Screens.logCreation.key,
+                      path: Screens.logCreation.path,
+                      builder: (context, state) =>
+                          Screens.logCreation.widget(params: state.extra as Map<String, dynamic>),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            StatefulShellBranch(
+              navigatorKey: settingsNavigatorKey,
+              routes: [
+                GoRoute(
+                  name: Screens.settings.key,
+                  path: Screens.settings.path,
+                  builder: (context, state) => Screens.settings.widget(),
+                ),
+              ],
+            ),
+          ],
         ),
       ],
     );

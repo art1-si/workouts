@@ -6,9 +6,6 @@ class PlanScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Plan Screen'),
-      ),
       body: Center(
         child: Text('This is the Plan Screen'),
       ),

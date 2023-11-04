@@ -39,7 +39,7 @@ class CalendarGrid extends StatelessWidget {
       padding: calendarContentPadding,
       child: Table(
         columnWidths: {
-          0: FlexColumnWidth(sideLabelSize.sideLabelFlexColumnWidth),
+          if (sideLabelSize != SideLabelSize.none) 0: FlexColumnWidth(sideLabelSize.sideLabelFlexColumnWidth),
         },
         children: [
           ...weeks,

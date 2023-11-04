@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:workouts/global/extensions/date_time.dart';
+import 'package:workouts/presentation/theme/app_colors.dart';
 import 'package:workouts/presentation/theme/typography.dart';
 import 'package:workouts/presentation/widgets/calendar/calendar_grid.dart';
 import 'package:workouts/presentation/widgets/calendar/infinite_scroll_calendar.dart';
@@ -15,17 +16,17 @@ class CalendarStyle {
     this.outsideCurrentMonthCellBuilder,
     this.weekNumberBuilder,
   });
-  // List<String> weekDaysAbbr(AppLocalizations localization) {
-  //   return [
-  //     localization.mondayAbbr,
-  //     localization.tuesdayAbbr,
-  //     localization.wednesdayAbbr,
-  //     localization.thursdayAbbr,
-  //     localization.fridayAbbr,
-  //     localization.saturdayAbbr,
-  //     localization.sundayAbbr,
-  //   ];
-  // }
+  static List<String> weekDaysAbbr() {
+    return [
+      'M',
+      'T',
+      'W',
+      'T',
+      'F',
+      'S',
+      'S',
+    ];
+  }
 
   final WeekdayHeaderBuilder headerBuilder;
 
@@ -49,37 +50,38 @@ class CalendarStyle {
   factory CalendarStyle.initial() {
     // ignore: avoid_types_as_parameter_names, non_constant_identifier_names
     return CalendarStyle(
-      headerBuilder: (index) => StyledText.body(index.toString()),
+      calendarContentPadding: const EdgeInsets.only(bottom: 4.0),
+      weekNumberBuilder: null,
+      headerBuilder: (index) => Padding(
+        padding: const EdgeInsets.only(bottom: 3.0),
+        child: Center(child: StyledText.label(weekDaysAbbr()[index])),
+      ),
       titleBuilder: (date) => Padding(
         padding: const EdgeInsets.only(
-          left: 21,
-          top: 27,
-          bottom: 17,
+          left: 16,
+          top: 24,
+          bottom: 24,
         ),
-        child: StyledText.body(date.isCurrentYear ? DateFormat.MMMM().format(date) : DateFormat.yMMMM().format(date)),
+        child: StyledText.headlineSmall(DateFormat.yMMMM().format(date)),
       ),
       activeDateCellBuilder: (date) => Container(
         color: Colors.transparent,
-        height: 40,
+        height: 50,
         child: Center(
-          child: StyledText.body(
+          child: StyledText.bodyLarge(
             date.day.toString(),
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),
       todayDateCellBuilder: (date) => Center(
         child: Container(
-          height: 40,
+          height: 50,
           width: 40,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(
-              60,
-            ),
-          ),
           child: Center(
-            child: StyledText.body(
+            child: StyledText.bodyLarge(
               date.day.toString(),
+              fontWeight: FontWeight.bold,
             ),
           ),
         ),

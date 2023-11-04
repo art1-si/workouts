@@ -118,6 +118,13 @@ class DatePickerCalendarView extends CalendarView {
     if (!_insideValidRange(date)) {
       return datePickerStyle.inactiveDateCellBuilder(date);
     }
+    if (_insideValidRange(date) &&
+        selectionType == DatePickerSelectionType.singleDate &&
+        _controller.dateRangeStartDate != null &&
+        date.isEqual(_controller.dateRangeStartDate!)) {
+      return datePickerStyle.singleSelectableSelectedDateCellBuilder.call(date) ??
+          datePickerStyle.selectedStartDateCellBuilder(date);
+    }
 
     /// Case when `date` is today.
     if (date.isToday()) {
@@ -126,14 +133,6 @@ class DatePickerCalendarView extends CalendarView {
 
     if (_insideValidRange(date) &&
         selectionType == DatePickerSelectionType.singleDate &&
-        _controller.dateRangeStartDate != null &&
-        date.isEqual(_controller.dateRangeStartDate!)) {
-      return datePickerStyle.singleSelectableSelectedDateCellBuilder?.call(date) ??
-          datePickerStyle.selectedStartDateCellBuilder(date);
-    }
-
-    if (_insideValidRange(date) &&
-        selectionType != DatePickerSelectionType.singleDate &&
         _controller.dateRangeStartDate != null &&
         date.isEqual(_controller.dateRangeStartDate!)) {
       return datePickerStyle.singleSelectableSelectedDateCellBuilder?.call(date) ??

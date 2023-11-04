@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:workouts/presentation/theme/app_colors.dart';
 import 'package:workouts/presentation/widgets/calendar/calendar_controller.dart';
 import 'package:workouts/presentation/widgets/calendar/calendar_grid.dart';
 import 'package:workouts/presentation/widgets/calendar/calendar_view.dart';
@@ -156,16 +157,13 @@ class InfiniteScrollCalendar extends StatefulWidget {
 
   Widget get monthHeaderBuilder {
     return Padding(
-      padding: const EdgeInsets.only(right: 8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          _CalendarViewTitle(
-            calendarController: calendarController,
-            builder: calendarStyle.titleBuilder,
-          ),
-          disablePageScroll ? const SizedBox() : _SwipeActions(calendarController: calendarController),
-        ],
+      padding: const EdgeInsets.only(left: 8, right: 8.0),
+      child: _SwipeActions(
+        calendarController: calendarController,
+        label: _CalendarViewTitle(
+          calendarController: calendarController,
+          builder: calendarStyle.titleBuilder,
+        ),
       ),
     );
   }
@@ -352,29 +350,52 @@ class _CalendarViewTitleState extends State<_CalendarViewTitle> {
 class _SwipeActions extends StatelessWidget {
   const _SwipeActions({
     required this.calendarController,
+    required this.label,
   });
 
   final CalendarController calendarController;
+  final Widget label;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 8.0),
+      padding: const EdgeInsets.only(top: 0.0),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           GestureDetector(
             onTap: calendarController.animateBack,
-            child: const Icon(
-              Icons.chevron_left_rounded,
-              size: 38,
+            child: Container(
+              height: 35,
+              width: 35,
+              decoration: BoxDecoration(
+                color: AppColors.primaryShades.shade80,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Center(
+                child: Icon(
+                  Icons.chevron_left_rounded,
+                  size: 32,
+                  color: AppColors.primaryShades.shade70,
+                ),
+              ),
             ),
           ),
-          const SizedBox(width: 8),
+          label,
           GestureDetector(
             onTap: calendarController.animateForward,
-            child: const Icon(
-              Icons.chevron_right_rounded,
-              size: 38,
+            child: Container(
+              height: 35,
+              width: 35,
+              decoration: BoxDecoration(
+                color: AppColors.primaryShades.shade80,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Icon(
+                Icons.chevron_right_rounded,
+                size: 32,
+                color: AppColors.primaryShades.shade70,
+              ),
             ),
           ),
         ],

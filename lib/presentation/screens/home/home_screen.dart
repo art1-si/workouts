@@ -4,8 +4,8 @@ import 'package:workouts/presentation/widgets/calendar/calendar_grid.dart';
 import 'package:workouts/presentation/widgets/calendar/infinite_scroll_calendar.dart';
 import 'package:workouts/presentation/widgets/calendar/models/date_picker_style.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class LogsScreen extends StatelessWidget {
+  const LogsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

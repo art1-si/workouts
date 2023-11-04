@@ -8,15 +8,15 @@ class AppRouter {
 
   AppRouter._() {
     _goRouter = GoRouter(
-      initialLocation: Screen.home.path,
+      initialLocation: Screen.logs.path,
       observers: [
         AnalyticsObserver(),
       ],
       routes: [
         GoRoute(
-          name: Screen.home.key,
-          path: Screen.home.path,
-          builder: (context, state) => Screen.home.widget(),
+          name: Screen.logs.key,
+          path: Screen.logs.path,
+          builder: (context, state) => Screen.logs.widget(),
         ),
       ],
     );

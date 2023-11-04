@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:workouts/presentation/screens/exercise_creation/execise_creation_screen.dart';
 import 'package:workouts/presentation/screens/exercise_selector/exercise_selector_screen.dart';
 import 'package:workouts/presentation/screens/log_creation/log_creation_screen.dart';
+import 'package:workouts/presentation/screens/login/login_screen.dart';
 import 'package:workouts/presentation/screens/logs_overview/logs_overview_screen.dart';
 import 'package:workouts/presentation/screens/plan/plan_screen.dart';
 import 'package:workouts/presentation/screens/plan_creation/plan_creation_screen.dart';
@@ -11,6 +12,7 @@ import 'package:workouts/presentation/screens/splash/splash_screen.dart';
 /// Screens in the App.
 enum Screens {
   splash,
+  login,
   logsOverview,
   plan,
   exerciseSelector,
@@ -23,6 +25,7 @@ enum Screens {
   String get key {
     return switch (this) {
       Screens.splash => 'splash',
+      Screens.login => 'login',
       Screens.logsOverview => 'logs',
       Screens.plan => 'plan',
       Screens.exerciseSelector => 'exerciseSelector',
@@ -37,6 +40,7 @@ enum Screens {
   Widget widget({Map<String, dynamic>? params}) {
     return switch (this) {
       Screens.splash => const SplashScreen(),
+      Screens.login => const LoginScreen(),
       Screens.logsOverview => const LogsOverviewScreen(),
       Screens.plan => const PlanScreen(),
       Screens.exerciseSelector => const ExerciseSelectorScreen(),
@@ -50,6 +54,7 @@ enum Screens {
   String get path {
     return switch (this) {
       Screens.splash => '/splash',
+      Screens.login => '/login',
       Screens.logsOverview => '/logsOverview',
       Screens.plan => '/plan',
       Screens.exerciseSelector => '/exerciseSelector',

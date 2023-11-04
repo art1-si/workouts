@@ -24,6 +24,11 @@ class AppRouter {
           path: Screens.splash.path,
           builder: (context, state) => Screens.splash.widget(),
         ),
+        GoRoute(
+          name: Screens.login.key,
+          path: Screens.login.path,
+          builder: (context, state) => Screens.login.widget(),
+        ),
         StatefulShellRoute.indexedStack(
           builder: (context, state, navigationShell) {
             return DashboardScreen(

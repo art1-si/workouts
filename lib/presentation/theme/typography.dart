@@ -34,4 +34,8 @@ class StyledText extends Text {
   factory StyledText.label(String data) {
     return StyledText(data, style: const TextStyle(fontSize: 10, color: Colors.white));
   }
+
+  factory StyledText.button(String data) {
+    return StyledText(data, style: const TextStyle(fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold));
+  }
 }

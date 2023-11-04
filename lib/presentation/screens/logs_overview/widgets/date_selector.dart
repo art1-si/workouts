@@ -7,14 +7,17 @@ import 'package:workouts/presentation/widgets/calendar/infinite_scroll_calendar.
 import 'package:workouts/presentation/widgets/calendar/models/date_picker_style.dart';
 
 class DateSelector extends StatefulWidget {
-  const DateSelector({super.key});
+  const DateSelector({
+    super.key,
+    required this.datePickerController,
+  });
+  final CalendarDatePickerController datePickerController;
 
   @override
   State<DateSelector> createState() => _DateSelectorState();
 }
 
 class _DateSelectorState extends State<DateSelector> {
-  final datePickerController = CalendarDatePickerController(initialCalendarView: CalendarViewType.weekly);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,7 +25,7 @@ class _DateSelectorState extends State<DateSelector> {
       color: AppColors.primaryShades.shade90,
       child: InfiniteScrollDatePicker(
         selectionType: DatePickerSelectionType.singleDate,
-        controller: datePickerController,
+        controller: widget.datePickerController,
         sideLabelSize: SideLabelSize.none,
         style: DatePickerStyle.logOverview(),
       ),

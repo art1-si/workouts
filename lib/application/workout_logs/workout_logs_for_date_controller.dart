@@ -1,20 +1,25 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:workouts/application/workout_logs/models/workout_log_view_model.dart';
 import 'package:workouts/application/workout_logs/workout_logs_controller.dart';
-import 'package:workouts/data/workout_logs/models/workout_log.dart';
 import 'package:workouts/global/extensions/date_time.dart';
 
 final workoutLogForDateProvider =
-    StreamNotifierProvider.family<WorkoutLogForDateController, List<WorkoutLog>, DateTime>(
+    StreamNotifierProvider.family<WorkoutLogForDateController, List<WorkoutLogViewModel>, DateTime>(
   WorkoutLogForDateController.new,
 );
 
-class WorkoutLogForDateController extends FamilyStreamNotifier<List<WorkoutLog>, DateTime> {
+class WorkoutLogForDateController extends FamilyStreamNotifier<List<WorkoutLogViewModel>, DateTime> {
   WorkoutLogForDateController();
 
   @override
-  Stream<List<WorkoutLog>> build(DateTime date) async* {
-    final logs = await ref.watch(workoutLogProvider.future);
+  Stream<List<WorkoutLogViewModel>> build(DateTime date) async* {
+    final logs = ref.watch(workoutLogProvider);
+    print('logs: $logs');
 
-    yield logs.where((element) => DateTime.parse(element.dateCreated).isEqual(date)).toList();
+    if (!logs.hasValue) {
+      yield [];
+    }
+
+    yield logs.value!.where((element) => DateTime.parse(element.workoutLog.dateCreated).isEqual(date)).toList();
   }
 }

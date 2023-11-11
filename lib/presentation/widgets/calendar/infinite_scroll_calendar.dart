@@ -157,7 +157,7 @@ class InfiniteScrollCalendar extends StatefulWidget {
 
   Widget get monthHeaderBuilder {
     return Padding(
-      padding: const EdgeInsets.only(left: 8, right: 8.0),
+      padding: const EdgeInsets.only(left: 12, right: 12.0),
       child: _SwipeActions(
         calendarController: calendarController,
         label: _CalendarViewTitle(

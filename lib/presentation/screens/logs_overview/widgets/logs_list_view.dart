@@ -1,6 +1,8 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:workouts/application/workout_logs/workout_logs_for_date_controller.dart';
+import 'package:workouts/presentation/screens/logs_overview/widgets/log_overview_card.dart';
 import 'package:workouts/presentation/widgets/calendar/calendar_controller.dart';
 
 class LogsListView extends ConsumerWidget {
@@ -18,13 +20,13 @@ class LogsListView extends ConsumerWidget {
           print(asyncList);
           return asyncList.when(
             data: (data) {
+              final loggedSets = groupBy(data, (element) => element.exercise.exerciseName);
               return ListView.builder(
                 shrinkWrap: true,
-                itemCount: data.length,
+                itemCount: loggedSets.keys.length,
                 itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Text(data[index].exerciseID),
-                    subtitle: Text(data[index].dateCreated),
+                  return LogOverviewCard(
+                    workoutLog: loggedSets[loggedSets.keys.elementAt(index)]!,
                   );
                 },
               );

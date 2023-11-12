@@ -29,6 +29,16 @@ class AppRouter {
           path: Screens.login.path,
           builder: (context, state) => Screens.login.widget(),
         ),
+        GoRoute(
+          name: Screens.exerciseCreation.key,
+          path: Screens.exerciseCreation.path,
+          builder: (context, state) => Screens.exerciseCreation.widget(params: state.extra as Map<String, dynamic>),
+        ),
+        GoRoute(
+          name: Screens.logCreation.key,
+          path: Screens.logCreation.path,
+          builder: (context, state) => Screens.logCreation.widget(params: state.extra as Map<String, dynamic>),
+        ),
         StatefulShellRoute.indexedStack(
           builder: (context, state, navigationShell) {
             return DashboardScreen(
@@ -73,20 +83,6 @@ class AppRouter {
                   name: Screens.exerciseSelector.key,
                   path: Screens.exerciseSelector.path,
                   builder: (context, state) => Screens.exerciseSelector.widget(),
-                  routes: [
-                    GoRoute(
-                      name: Screens.exerciseCreation.key,
-                      path: Screens.exerciseCreation.path,
-                      builder: (context, state) =>
-                          Screens.exerciseCreation.widget(params: state.extra as Map<String, dynamic>),
-                    ),
-                    GoRoute(
-                      name: Screens.logCreation.key,
-                      path: Screens.logCreation.path,
-                      builder: (context, state) =>
-                          Screens.logCreation.widget(params: state.extra as Map<String, dynamic>),
-                    ),
-                  ],
                 ),
               ],
             ),

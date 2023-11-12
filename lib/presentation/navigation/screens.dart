@@ -46,7 +46,10 @@ enum Screens {
       Screens.exerciseSelector => const ExerciseSelectorScreen(),
       Screens.settings => const SettingsScreen(),
       Screens.exerciseCreation => const ExerciseCreationScreen(),
-      Screens.logCreation => const LogCreationScreen(),
+      Screens.logCreation => LogCreationScreen(
+          exercises: params!['exercises'],
+          indexOfSelectedExercise: params['indexOfSelectedExercise'],
+        ),
       Screens.planCreation => const PlanCreationScreen(),
     };
   }
@@ -59,8 +62,8 @@ enum Screens {
       Screens.plan => '/plan',
       Screens.exerciseSelector => '/exerciseSelector',
       Screens.settings => '/settings',
-      Screens.exerciseCreation => 'exerciseCreation',
-      Screens.logCreation => 'logCreation',
+      Screens.exerciseCreation => '/exerciseCreation',
+      Screens.logCreation => '/logCreation',
       Screens.planCreation => 'planCreation',
     };
   }

@@ -1,9 +1,11 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:workouts/application/exercises/combine_exercises_controller.dart';
 import 'package:workouts/data/exercises/model/exercise.dart';
 import 'package:workouts/global/extensions/string_extensions.dart';
+import 'package:workouts/presentation/navigation/screens.dart';
 import 'package:workouts/presentation/theme/app_colors.dart';
 import 'package:workouts/presentation/theme/typography.dart';
 
@@ -111,10 +113,12 @@ class _ExpandableExerciseTypeTileState extends State<ExpandableExerciseTypeTile>
   Widget get _exercisesList {
     return Column(
       children: widget.exercises
-          .map(
-            (e) => Padding(
+          .mapIndexed(
+            (index, e) => Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: ListTile(
+                onTap: () => context.pushNamed(Screens.logCreation.key,
+                    extra: {'exercises': widget.exercises, 'indexOfSelectedExercise': index}),
                 title: StyledText.body(
                   e.exerciseName,
                 ),

@@ -22,10 +22,7 @@ class _LogsOverviewScreenState extends ConsumerState<LogsOverviewScreen> {
         children: [
           const SizedBox(height: 70),
           DateSelector(datePickerController: _datePickerController),
-          Expanded(
-              child: LogsListView(
-            datePickerController: _datePickerController,
-          )),
+          const Expanded(child: LogsListView()),
         ],
       ),
     );

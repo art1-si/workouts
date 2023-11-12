@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:workouts/presentation/theme/typography.dart';
 
 typedef void VoidIntCallback(int i);
 
@@ -21,9 +22,9 @@ class RPEPicker extends StatelessWidget {
         height: 90,
         child: Column(
           children: [
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text('RPE'),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: StyledText.labelMedium('RPE'),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,

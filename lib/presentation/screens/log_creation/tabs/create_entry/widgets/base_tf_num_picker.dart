@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:workouts/presentation/theme/typography.dart';
 
 class BaseTFNumPicker extends StatelessWidget {
   const BaseTFNumPicker({
@@ -29,7 +30,7 @@ class BaseTFNumPicker extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Text(title),
+          StyledText.labelMedium(title),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [

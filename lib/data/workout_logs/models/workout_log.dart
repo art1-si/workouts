@@ -16,7 +16,7 @@ class WorkoutLog {
   final String exerciseType;
   final double weight;
   final int reps;
-  final String dateCreated;
+  final DateTime dateCreated;
   final int exerciseRPE;
 
   WorkoutLog copyWith({
@@ -25,7 +25,7 @@ class WorkoutLog {
     String? exerciseType,
     double? weight,
     int? reps,
-    String? dateCreated,
+    DateTime? dateCreated,
     int? exerciseRPE,
   }) {
     return WorkoutLog(
@@ -58,7 +58,7 @@ class WorkoutLog {
       exerciseType: map['exerciseType'] as String,
       weight: map['weight'] as double,
       reps: map['reps'] as int,
-      dateCreated: map['dateCreated'] as String,
+      dateCreated: DateTime.parse(map['dateCreated'] as String),
       exerciseRPE: map['exerciseRPE'] as int,
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:workouts/application/workout_logs/models/workout_log_view_model.dart';
+import 'package:workouts/presentation/theme/app_colors.dart';
 
 typedef void VoidLogCallback(WorkoutLogViewModel? log);
 
@@ -49,14 +50,13 @@ class _CurrentEntriesState extends State<CurrentEntries> {
                 });
               },
               entry: widget.currentEntries[index],
-              selected: widget.currentEntries[index] == _selectedLog,
+              selectedEntry: _selectedLog,
             );
           },
-          separatorBuilder: (_, __) => const Divider(
-            indent: 100,
-            endIndent: 100,
-            thickness: 2,
+          separatorBuilder: (_, __) => Divider(
+            thickness: 1,
             height: 1,
+            color: AppColors.primaryShades.shade90,
           ),
         ),
       ],
@@ -66,7 +66,7 @@ class _CurrentEntriesState extends State<CurrentEntries> {
 
 class _TableHeader extends StatelessWidget {
   const _TableHeader({Key? key}) : super(key: key);
-  static const TextStyle _style = TextStyle(fontSize: 10, letterSpacing: 2.0);
+  static const TextStyle _style = TextStyle(fontSize: 10, letterSpacing: 2.0, color: Colors.white70);
   @override
   Widget build(BuildContext context) {
     return const Row(
@@ -98,20 +98,25 @@ class _EntryRow extends StatelessWidget {
     Key? key,
     this.entry,
     this.onLongPressed,
-    this.selected = false,
+    this.selectedEntry,
     this.setCount,
   }) : super(key: key);
 
   final WorkoutLogViewModel? entry;
   final VoidCallback? onLongPressed;
   final int? setCount;
-  final bool selected;
+  final WorkoutLogViewModel? selectedEntry;
+
+  bool get selected => selectedEntry == entry;
+
+  bool get differentSelected => selectedEntry != null && selectedEntry != entry;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onLongPressed,
-      child: SizedBox(
+      child: Container(
+        color: Colors.transparent,
         height: 40,
         child: Stack(
           children: [
@@ -123,14 +128,14 @@ class _EntryRow extends StatelessWidget {
                 width: selected ? MediaQuery.of(context).size.width : 10,
                 decoration: BoxDecoration(
                   //TODO(Artur):User change color
-                  color: selected ? Colors.orange.withOpacity(0.1) : null,
+                  color: selected ? AppColors.primaryShades.shade90 : null,
                 ),
               ),
             ),
             AnimatedDefaultTextStyle(
               style: TextStyle(
-                color: selected ? Colors.white : Colors.white54,
-                fontSize: selected ? 18 : 16,
+                color: differentSelected ? Colors.white30 : Colors.white,
+                fontSize: 16,
                 fontWeight: selected ? FontWeight.bold : FontWeight.w400,
               ),
               duration: const Duration(milliseconds: 250),

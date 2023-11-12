@@ -20,6 +20,6 @@ class WorkoutLogForDateController extends StreamNotifier<List<WorkoutLogViewMode
       yield [];
     }
 
-    yield logs.value!.where((element) => DateTime.parse(element.workoutLog.dateCreated).isEqual(selectedDate)).toList();
+    yield logs.value!.where((element) => element.workoutLog.dateCreated.isEqual(selectedDate)).toList();
   }
 }

@@ -9,4 +9,22 @@ class FirebaseWorkoutLogsRepository implements WorkoutLogsRepository {
     return _firestore.collectionStream(
         path: 'users/$userId/exerciseLog', builder: (data, id) => WorkoutLog.fromMap(data));
   }
+
+  @override
+  Future<void> addWorkoutLog({required String userId, required WorkoutLog workoutLog}) {
+    return _firestore.setData(path: 'users/$userId/exerciseLog/${workoutLog.id}', data: workoutLog.toMap());
+  }
+
+  @override
+  Future<void> updateWorkoutLog({required String userId, required WorkoutLog workoutLog}) {
+    return _firestore.updateData(
+      path: 'users/$userId/exerciseLog/${workoutLog.id}',
+      data: workoutLog.toMap(),
+    );
+  }
+
+  @override
+  Future<void> deleteWorkoutLog({required String userId, required WorkoutLog workoutLog}) {
+    return _firestore.deleteData(path: 'users/$userId/exerciseLog/${workoutLog.id}');
+  }
 }

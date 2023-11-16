@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:workouts/presentation/screens/log_creation/tabs/create_entry/widgets/base_tf_num_picker.dart';
 
-class TextFieldNumberPicker extends ConsumerWidget {
+class TextFieldNumberPicker extends StatefulWidget {
   const TextFieldNumberPicker({
     Key? key,
     required this.title,
@@ -17,11 +16,27 @@ class TextFieldNumberPicker extends ConsumerWidget {
   final int changesByValue;
 
   @override
+  State<TextFieldNumberPicker> createState() => _TextFieldNumberPickerState();
+}
+
+class _TextFieldNumberPickerState extends State<TextFieldNumberPicker> {
+  late final _controller = TextEditingController(text: widget.initValue.toString());
+  late int _value = widget.initValue;
+
+  void _updateValue(int newValue) {
+    setState(() {
+      _value = newValue;
+    });
+
+    widget.onChange(newValue);
+    _controller.text = newValue.toString();
+  }
+
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return BaseTFNumPicker(
-      width: initValue.toString().length.toDouble() * 36,
-      title: title,
+      width: _value.toString().length.toDouble() * 36,
+      title: widget.title,
       child: TextFormField(
         validator: (String? value) {
           if (value == null || value.isEmpty) {
@@ -40,29 +55,31 @@ class TextFieldNumberPicker extends ConsumerWidget {
           letterSpacing: 2.5,
         ),
         textAlign: TextAlign.center,
-        controller: TextEditingController(text: initValue.toString()),
+        controller: _controller,
         onChanged: (value) {
-          var inputValue = value.isEmpty ? 0 : int.tryParse(value);
-          //context.read(createNewEntryProvider).repsSetter(inputValue!);
-        },
-        onFieldSubmitted: (value) {
-          var inputValue = value.isEmpty ? 0.0 : double.parse(value);
-          // context.read(createNewEntryProvider).setWeightWithNewValue(inputValue);
+          final _newValue = int.tryParse(value);
+          if (_newValue != null) {
+            setState(() {
+              _value = _newValue;
+            });
+            widget.onChange(_newValue);
+          }
         },
       ),
       onPressedLeftArrow: () {
-        if (initValue > 0) {
-          var inputValue = initValue - changesByValue;
-          onChange(inputValue);
+        if (_value > 0) {
+          var inputValue = _value - widget.changesByValue;
+
+          _updateValue(inputValue);
         }
       },
       onPressedRightArrow: () {
-        var inputValue = initValue + changesByValue;
-        onChange(inputValue);
+        var inputValue = _value + widget.changesByValue;
+        _updateValue(inputValue);
       },
-      leftSubText: '${initValue - changesByValue}',
-      rightSubText: '${initValue + changesByValue}',
-      reachedZero: initValue > 0,
+      leftSubText: '${_value - widget.changesByValue}',
+      rightSubText: '${_value + widget.changesByValue}',
+      reachedZero: _value <= 0,
     );
   }
 }

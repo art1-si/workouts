@@ -47,7 +47,7 @@ class StyledText extends Text {
     return StyledText(data, style: const TextStyle(fontSize: 10, color: Colors.white));
   }
 
-  factory StyledText.button(String data) {
-    return StyledText(data, style: const TextStyle(fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold));
+  factory StyledText.button(String data, {Color? color}) {
+    return StyledText(data, style: TextStyle(fontSize: 14, color: color ?? Colors.white, fontWeight: FontWeight.bold));
   }
 }

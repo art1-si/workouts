@@ -12,6 +12,7 @@ class AppRouter {
     final plansNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'plans');
     final exerciseSelectorNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'exerciseSelector');
     final settingsNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'settings');
+    final logCreationNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'logCreation');
 
     _goRouter = GoRouter(
       initialLocation: Screens.splash.path,
@@ -32,12 +33,17 @@ class AppRouter {
         GoRoute(
           name: Screens.exerciseCreation.key,
           path: Screens.exerciseCreation.path,
-          builder: (context, state) => Screens.exerciseCreation.widget(params: state.extra as Map<String, dynamic>),
+          pageBuilder: (context, state) => MaterialPage(
+            fullscreenDialog: true,
+            child: Screens.exerciseCreation.widget(params: state.extra as Map<String, dynamic>),
+          ),
         ),
         GoRoute(
           name: Screens.logCreation.key,
           path: Screens.logCreation.path,
-          builder: (context, state) => Screens.logCreation.widget(params: state.extra as Map<String, dynamic>),
+          pageBuilder: (context, state) => MaterialPage(
+            child: Screens.logCreation.widget(params: state.extra as Map<String, dynamic>),
+          ),
         ),
         StatefulShellRoute.indexedStack(
           builder: (context, state, navigationShell) {

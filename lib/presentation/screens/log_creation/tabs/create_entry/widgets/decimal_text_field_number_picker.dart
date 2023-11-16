@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:workouts/presentation/screens/log_creation/tabs/create_entry/widgets/base_tf_num_picker.dart';
+import 'package:workouts/presentation/theme/app_colors.dart';
 
-class DecimalTextFieldNumPicker extends ConsumerWidget {
+class DecimalTextFieldNumPicker extends StatefulWidget {
   const DecimalTextFieldNumPicker({
     Key? key,
     required this.title,
@@ -17,13 +17,30 @@ class DecimalTextFieldNumPicker extends ConsumerWidget {
   final double changesByValue;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final _tfWidth =
-        initValue.toString().length.toDouble() < 3 ? 3 * 45 : (initValue.toString().length.toDouble() - 1) * 36;
+  State<DecimalTextFieldNumPicker> createState() => _DecimalTextFieldNumPickerState();
+}
+
+class _DecimalTextFieldNumPickerState extends State<DecimalTextFieldNumPicker> {
+  late final _controller = TextEditingController(text: widget.initValue.toString());
+  late double _value = widget.initValue;
+
+  void _updateValue(double newValue) {
+    setState(() {
+      _value = newValue;
+    });
+
+    widget.onChange(newValue);
+    _controller.text = newValue.toString();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final _tfWidth = _value.toString().length.toDouble() < 3 ? 3 * 45 : (_value.toString().length.toDouble() - 1) * 36;
     return BaseTFNumPicker(
       width: _tfWidth as double,
-      title: title,
+      title: widget.title,
       child: TextFormField(
+        cursorColor: AppColors.primaryShades.shade80,
         validator: (String? value) {
           if (value == null || value.isEmpty) {
             return 'Please enter value';
@@ -41,29 +58,30 @@ class DecimalTextFieldNumPicker extends ConsumerWidget {
           letterSpacing: 2.5,
         ),
         textAlign: TextAlign.center,
-        controller: TextEditingController(text: initValue.toString()),
+        controller: _controller,
         onChanged: (value) {
-          var inputValue = value.isEmpty ? 0.0 : double.parse(value);
-          //context.read(createNewEntryProvider).weightSetter(inputValue);
-        },
-        onFieldSubmitted: (value) {
-          var inputValue = value.isEmpty ? 0.0 : double.parse(value);
-          // context.read(createNewEntryProvider).setWeightWithNewValue(inputValue);
+          final _newValue = double.tryParse(value);
+          if (_newValue != null) {
+            setState(() {
+              _value = _newValue;
+            });
+            widget.onChange(_newValue);
+          }
         },
       ),
       onPressedLeftArrow: () {
-        if (initValue > 0) {
-          var inputValue = initValue - changesByValue;
-          onChange(inputValue);
+        if (widget.initValue > 0) {
+          var inputValue = _value - widget.changesByValue;
+          _updateValue(inputValue);
         }
       },
       onPressedRightArrow: () {
-        var inputValue = initValue + changesByValue;
-        onChange(inputValue);
+        var inputValue = _value + widget.changesByValue;
+        _updateValue(inputValue);
       },
-      leftSubText: '${initValue - changesByValue}',
-      rightSubText: '${initValue + changesByValue}',
-      reachedZero: initValue > 0,
+      leftSubText: '${_value - widget.changesByValue}',
+      rightSubText: '${_value + widget.changesByValue}',
+      reachedZero: _value <= 0,
     );
   }
 }

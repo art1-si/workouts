@@ -46,7 +46,7 @@ class WorkoutLog {
       'exerciseType': exerciseType,
       'weight': weight,
       'reps': reps,
-      'dateCreated': dateCreated,
+      'dateCreated': dateCreated.toIso8601String(),
       'exerciseRPE': exerciseRPE,
     };
   }

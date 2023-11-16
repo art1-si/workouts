@@ -1,39 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:workouts/presentation/screens/log_creation/tabs/create_entry/new_entry_controller.dart';
 import 'package:workouts/presentation/screens/log_creation/tabs/create_entry/widgets/decimal_text_field_number_picker.dart';
 import 'package:workouts/presentation/screens/log_creation/tabs/create_entry/widgets/rpe_picker.dart';
 import 'package:workouts/presentation/screens/log_creation/tabs/create_entry/widgets/text_field_number_picker.dart';
 
-class CreateNewEntry extends ConsumerWidget {
+class CreateNewEntry extends StatelessWidget {
   const CreateNewEntry({
     Key? key,
-    required this.bottomButtons,
+    required this.newEntryController,
   }) : super(key: key);
 
-  final Widget bottomButtons;
+  final NewEntryMediator newEntryController;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Column(
-      children: <Widget>[
-        DecimalTextFieldNumPicker(
-          title: 'WEIGHT',
-          initValue: 0, // _createNewEntry.weight,
-          onChange: (d) {}, // _createNewEntry.setWeightWithNewValue,
-          changesByValue: 2.5,
-        ),
-        TextFieldNumberPicker(
-          title: 'Reps',
-          initValue: 12, // _createNewEntry.reps,
-          onChange: (d) {}, // _createNewEntry.setRepsWithNewValue,
-          changesByValue: 1,
-        ),
-        RPEPicker(
-          value: 10, // _createNewEntry.rpe,
-          onChanged: (d) {}, // _createNewEntry.setRPEWithNewValue,
-        ),
-        bottomButtons,
-      ],
-    );
+  Widget build(BuildContext context) {
+    return ListenableBuilder(
+        listenable: newEntryController.editableWorkoutLog,
+        builder: (context, child) {
+          return Column(
+            children: <Widget>[
+              DecimalTextFieldNumPicker(
+                key: ValueKey(newEntryController.weight),
+                title: 'WEIGHT',
+                initValue: newEntryController.weight,
+                onChange: newEntryController.setWeightWithNewValue,
+                //TODO(Artur):Make this as exercise setting
+                changesByValue: 2.5,
+              ),
+              TextFieldNumberPicker(
+                key: ValueKey(newEntryController.reps),
+                title: 'Reps',
+                initValue: newEntryController.reps,
+                onChange: newEntryController.setRepsWithNewValue,
+                changesByValue: 1,
+              ),
+              RPEPicker(
+                key: ValueKey(newEntryController.rpe),
+                initValue: newEntryController.rpe,
+                onChanged: newEntryController.setRPEWithNewValue,
+              ),
+            ],
+          );
+        });
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:workouts/application/workout_logs/models/workout_log_view_model.dart';
-import 'package:workouts/application/workout_logs/workout_logs_for_exercise_controller.dart';
+import 'package:workouts/application/workout_logs/workout_logs_view_model_controller.dart';
 import 'package:workouts/data/exercises/model/exercise.dart';
 import 'package:workouts/presentation/screens/log_creation/exercise_log_view_controller.dart';
 import 'package:workouts/presentation/screens/log_creation/tabs/create_entry/log_screen.dart';
@@ -16,7 +16,7 @@ class LogCreationScreen extends ConsumerWidget {
   final WorkoutLogViewController viewController;
 
   Widget _body({
-    required List<WorkoutLogViewModel> exerciseLog,
+    required WorkoutLogViewModel exerciseLog,
     required BuildContext context,
   }) {
     return Column(
@@ -59,7 +59,7 @@ class LogCreationScreen extends ConsumerWidget {
     return ListenableBuilder(
         listenable: viewController,
         builder: (context, child) {
-          final logsForSelectedExercise = ref.watch(workoutLogsForExercisesProvider(viewController.value));
+          final logsForSelectedExercise = ref.watch(workoutLogsForExerciseProvider(viewController.value));
           return DefaultTabController(
             length: 4,
             child: GestureDetector(
@@ -116,7 +116,13 @@ class LogCreationScreen extends ConsumerWidget {
                         );
                       },
                       //TODO(Artur):Create shimmer effect
-                      loading: CircularProgressIndicator.new,
+                      loading: () {
+                        print('loading');
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      },
+
                       //TODO(Artur):better error handling
                       error: (error, __) => const Center(
                         child: Text('Something went wrong\nerror'),
@@ -145,19 +151,19 @@ class _TabBars extends StatelessWidget implements PreferredSizeWidget {
       tabs: <Widget>[
         SizedBox(
           height: 25,
-          child: Center(child: Text('LOG')),
+          child: Center(child: Text('LOG', overflow: TextOverflow.ellipsis)),
         ),
         SizedBox(
           height: 25,
-          child: Center(child: Text('GRAPH')),
+          child: Center(child: Text('GRAPH', overflow: TextOverflow.ellipsis)),
         ),
         SizedBox(
           height: 25,
-          child: Center(child: Text('HISTORY')),
+          child: Center(child: Text('HISTORY', overflow: TextOverflow.ellipsis)),
         ),
         SizedBox(
           height: 25,
-          child: Center(child: Text('%RM')),
+          child: Center(child: Text('%RM', overflow: TextOverflow.ellipsis)),
         ),
       ],
     );

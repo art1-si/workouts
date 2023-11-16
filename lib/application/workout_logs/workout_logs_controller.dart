@@ -1,22 +1,21 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:workouts/application/authentication/authentication_controller.dart';
 import 'package:workouts/application/exercises/default_exercises_controller.dart';
-import 'package:workouts/application/workout_logs/models/workout_log_view_model.dart';
-import 'package:workouts/data/exercises/model/exercise.dart';
 import 'package:workouts/data/workout_logs/firebase_workout_logs_repository.dart';
+import 'package:workouts/data/workout_logs/models/workout_log.dart';
 import 'package:workouts/data/workout_logs/workout_logs_repository.dart';
 
-final workoutLogProvider = StreamNotifierProvider<WorkoutLogController, List<WorkoutLogViewModel>>(
+final workoutLogControllerProvider = StreamNotifierProvider<WorkoutLogController, List<WorkoutLog>>(
   () => WorkoutLogController(workoutLogsRepository: FirebaseWorkoutLogsRepository()),
 );
 
-class WorkoutLogController extends StreamNotifier<List<WorkoutLogViewModel>> {
+class WorkoutLogController extends StreamNotifier<List<WorkoutLog>> {
   WorkoutLogController({required WorkoutLogsRepository workoutLogsRepository})
       : _workoutLogsRepository = workoutLogsRepository;
 
   final WorkoutLogsRepository _workoutLogsRepository;
   @override
-  Stream<List<WorkoutLogViewModel>> build() {
+  Stream<List<WorkoutLog>> build() {
     final userId = ref.watch(authControllerProvider).asAuthenticated.user.id;
 
     final exercisesAsyncValue = ref.watch(defaultExercisesControllerProvider);
@@ -24,30 +23,21 @@ class WorkoutLogController extends StreamNotifier<List<WorkoutLogViewModel>> {
       return Stream.value([]);
     }
 
-    final logs = _workoutLogsRepository.getWorkoutLogs(userId: userId);
+    return _workoutLogsRepository.getWorkoutLogs(userId: userId);
+  }
 
-    final exercises = exercisesAsyncValue.value!;
+  Future<void> addLog(WorkoutLog log) async {
+    final userId = ref.watch(authControllerProvider).asAuthenticated.user.id;
+    await _workoutLogsRepository.addWorkoutLog(userId: userId, workoutLog: log);
+  }
 
-    return logs.map((event) {
-      return event.map(
-        (log) {
-          try {
-            final exercise = exercises.firstWhere(
-              (element) => element.id == log.exerciseID,
-            );
+  Future<void> updateLog(WorkoutLog log) async {
+    final userId = ref.watch(authControllerProvider).asAuthenticated.user.id;
+    await _workoutLogsRepository.updateWorkoutLog(userId: userId, workoutLog: log);
+  }
 
-            return WorkoutLogViewModel(
-              workoutLog: log,
-              exercise: exercise,
-            );
-          } catch (e) {
-            return WorkoutLogViewModel(
-              workoutLog: log,
-              exercise: Exercise.unknown(),
-            );
-          }
-        },
-      ).toList();
-    });
+  Future<void> deleteLog(WorkoutLog log) async {
+    final userId = ref.watch(authControllerProvider).asAuthenticated.user.id;
+    await _workoutLogsRepository.deleteWorkoutLog(userId: userId, workoutLog: log);
   }
 }

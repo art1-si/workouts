@@ -3,16 +3,23 @@ import 'package:workouts/presentation/theme/typography.dart';
 
 typedef void VoidIntCallback(int i);
 
-class RPEPicker extends StatelessWidget {
+class RPEPicker extends StatefulWidget {
   const RPEPicker({
     Key? key,
     required this.onChanged,
-    required this.value,
+    required this.initValue,
   }) : super(key: key);
   final ValueChanged<int> onChanged;
-  final int value;
+  final int initValue;
 
   static const List<int> _rpePicker = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+  @override
+  State<RPEPicker> createState() => _RPEPickerState();
+}
+
+class _RPEPickerState extends State<RPEPicker> {
+  late int _value = widget.initValue;
 
   @override
   Widget build(BuildContext context) {
@@ -28,14 +35,19 @@ class RPEPicker extends StatelessWidget {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: _rpePicker
+              children: RPEPicker._rpePicker
                   .map(
                     (rpe) => _Item(
-                      onPressed: onChanged,
+                      onPressed: (value) {
+                        setState(() {
+                          _value = value;
+                        });
+                        widget.onChanged(_value);
+                      },
                       //TODO(Artur): change color based on theme
                       selectedColor: Colors.green,
                       rpe: rpe,
-                      selected: rpe == value,
+                      selected: rpe == _value,
                     ),
                   )
                   .toList(),

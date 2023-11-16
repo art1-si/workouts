@@ -35,7 +35,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               labelText: 'Password',
             ),
             const SizedBox(height: 16),
-            MainButton(
+            PrimaryButton(
               child: StyledText.button('Log in'),
               onPressed: () async {
                 await ref.read(authControllerProvider.notifier).signInWithCredentials(

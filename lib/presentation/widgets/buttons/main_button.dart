@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-class MainButton extends StatefulWidget {
-  const MainButton({
+class PrimaryButton extends StatefulWidget {
+  const PrimaryButton({
     super.key,
     required this.onPressed,
     required this.child,
@@ -13,10 +13,10 @@ class MainButton extends StatefulWidget {
   final Widget child;
 
   @override
-  State<MainButton> createState() => _MainButtonState();
+  State<PrimaryButton> createState() => _PrimaryButtonState();
 }
 
-class _MainButtonState extends State<MainButton> {
+class _PrimaryButtonState extends State<PrimaryButton> {
   bool _isLoading = false;
   @override
   Widget build(BuildContext context) {

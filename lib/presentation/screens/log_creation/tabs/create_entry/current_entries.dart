@@ -1,66 +1,63 @@
 import 'package:flutter/material.dart';
 import 'package:workouts/application/workout_logs/models/workout_log_view_model.dart';
+import 'package:workouts/data/workout_logs/models/workout_log.dart';
+import 'package:workouts/presentation/screens/log_creation/tabs/create_entry/new_entry_controller.dart';
+import 'package:workouts/presentation/screens/log_creation/tabs/create_entry/widgets/bottom_buttons.dart';
 import 'package:workouts/presentation/theme/app_colors.dart';
 
-typedef void VoidLogCallback(WorkoutLogViewModel? log);
+typedef void VoidLogCallback(WorkoutLog? log);
 
-class CurrentEntries extends StatefulWidget {
+class CurrentEntries extends StatelessWidget {
   const CurrentEntries({
     Key? key,
-    required this.currentEntries,
-    required this.onLongPressed,
+    required this.currentEntry,
+    required this.newEntryMediator,
   }) : super(key: key);
 
-  final List<WorkoutLogViewModel> currentEntries;
-  final VoidLogCallback onLongPressed;
+  final WorkoutLogViewModel currentEntry;
+  final NewEntryMediator newEntryMediator;
 
-  @override
-  State<CurrentEntries> createState() => _CurrentEntriesState();
-}
-
-class _CurrentEntriesState extends State<CurrentEntries> {
-  WorkoutLogViewModel? _selectedLog;
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Padding(
-          padding: EdgeInsets.only(
-            top: 16.0,
-            bottom: 8.0,
-          ),
-          child: _TableHeader(),
-        ),
-        ListView.separated(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: widget.currentEntries.length,
-          itemBuilder: (BuildContext context, index) {
-            return _EntryRow(
-              setCount: index + 1,
-              onLongPressed: () {
-                setState(() {
-                  if (_selectedLog != widget.currentEntries[index]) {
-                    _selectedLog = widget.currentEntries[index];
-                    widget.onLongPressed(_selectedLog);
-                  } else {
-                    _selectedLog = null;
-                    widget.onLongPressed(_selectedLog);
-                  }
-                });
-              },
-              entry: widget.currentEntries[index],
-              selectedEntry: _selectedLog,
-            );
-          },
-          separatorBuilder: (_, __) => Divider(
-            thickness: 1,
-            height: 1,
-            color: AppColors.primaryShades.shade90,
-          ),
-        ),
-      ],
-    );
+    return ValueListenableBuilder(
+        valueListenable: newEntryMediator.editableWorkoutLog,
+        builder: (context, value, child) {
+          return Column(
+            children: [
+              RowWithBottomButtons(
+                newEntryMediator: newEntryMediator,
+                editModeActive: value != null,
+              ),
+              const SizedBox(height: 16.0),
+              const Padding(
+                padding: EdgeInsets.only(
+                  top: 16.0,
+                  bottom: 8.0,
+                ),
+                child: _TableHeader(),
+              ),
+              ListView.separated(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: currentEntry.workoutLog.length,
+                itemBuilder: (BuildContext context, index) {
+                  final workoutLogs = currentEntry.workoutLog;
+                  return _EntryRow(
+                    setCount: index + 1,
+                    onLongPressed: () => newEntryMediator.toggleEditMode(workoutLogs[index]),
+                    entry: workoutLogs[index],
+                    selectedEntry: value,
+                  );
+                },
+                separatorBuilder: (_, __) => Divider(
+                  thickness: 1,
+                  height: 1,
+                  color: AppColors.primaryShades.shade90,
+                ),
+              ),
+            ],
+          );
+        });
   }
 }
 
@@ -102,10 +99,10 @@ class _EntryRow extends StatelessWidget {
     this.setCount,
   }) : super(key: key);
 
-  final WorkoutLogViewModel? entry;
+  final WorkoutLog? entry;
   final VoidCallback? onLongPressed;
   final int? setCount;
-  final WorkoutLogViewModel? selectedEntry;
+  final WorkoutLog? selectedEntry;
 
   bool get selected => selectedEntry == entry;
 
@@ -146,13 +143,13 @@ class _EntryRow extends StatelessWidget {
                     text: setCount?.toString() ?? 'SET',
                   ),
                   _Field(
-                    text: entry?.workoutLog.weight.toString() ?? 'WEIGHT',
+                    text: entry?.weight.toString() ?? 'WEIGHT',
                   ),
                   _Field(
-                    text: entry?.workoutLog.reps.toString() ?? 'REPS',
+                    text: entry?.reps.toString() ?? 'REPS',
                   ),
                   _Field(
-                    text: entry?.workoutLog.exerciseRPE.toString() ?? 'RPE',
+                    text: entry?.exerciseRPE.toString() ?? 'RPE',
                   ),
                 ],
               ),

@@ -34,27 +34,30 @@ class BaseTFNumPicker extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              GestureDetector(
-                onTap: onPressedLeftArrow,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      child: Icon(
-                        Icons.keyboard_arrow_left,
-                        color: reachedZero ? Colors.white : Colors.white30,
-                        size: _sideFontSize.toDouble(),
+              Opacity(
+                opacity: reachedZero ? 0.0 : 1.0,
+                child: GestureDetector(
+                  onTap: onPressedLeftArrow,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        child: Icon(
+                          Icons.keyboard_arrow_left,
+                          color: reachedZero ? Colors.white30 : Colors.white,
+                          size: _sideFontSize.toDouble(),
+                        ),
                       ),
-                    ),
-                    Text(
-                      leftSubText,
-                      style: TextStyle(
-                        fontSize: _sideFontSize.toDouble(),
-                        color: Colors.white38,
-                        letterSpacing: 2.5,
+                      Text(
+                        leftSubText,
+                        style: TextStyle(
+                          fontSize: _sideFontSize.toDouble(),
+                          color: Colors.white54,
+                          letterSpacing: 2.5,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
               SizedBox(
@@ -70,7 +73,7 @@ class BaseTFNumPicker extends StatelessWidget {
                       rightSubText,
                       style: TextStyle(
                         fontSize: _sideFontSize.toDouble(),
-                        color: Colors.white38,
+                        color: Colors.white54,
                         letterSpacing: 2.5,
                       ),
                     ),

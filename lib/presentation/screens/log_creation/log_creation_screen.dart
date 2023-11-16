@@ -117,7 +117,6 @@ class LogCreationScreen extends ConsumerWidget {
                       },
                       //TODO(Artur):Create shimmer effect
                       loading: () {
-                        print('loading');
                         return const Center(
                           child: CircularProgressIndicator(),
                         );

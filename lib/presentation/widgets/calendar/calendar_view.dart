@@ -122,8 +122,7 @@ class DatePickerCalendarView extends CalendarView {
         selectionType == DatePickerSelectionType.singleDate &&
         _controller.dateRangeStartDate != null &&
         date.isEqual(_controller.dateRangeStartDate!)) {
-      return datePickerStyle.singleSelectableSelectedDateCellBuilder.call(date) ??
-          datePickerStyle.selectedStartDateCellBuilder(date);
+      return datePickerStyle.singleSelectableSelectedDateCellBuilder.call(date);
     }
 
     /// Case when `date` is today.
@@ -135,8 +134,7 @@ class DatePickerCalendarView extends CalendarView {
         selectionType == DatePickerSelectionType.singleDate &&
         _controller.dateRangeStartDate != null &&
         date.isEqual(_controller.dateRangeStartDate!)) {
-      return datePickerStyle.singleSelectableSelectedDateCellBuilder?.call(date) ??
-          datePickerStyle.selectedStartDateCellBuilder(date);
+      return datePickerStyle.singleSelectableSelectedDateCellBuilder.call(date);
     }
 
     /// Case when `date` is starting date of range.

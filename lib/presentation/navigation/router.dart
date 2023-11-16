@@ -12,7 +12,6 @@ class AppRouter {
     final plansNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'plans');
     final exerciseSelectorNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'exerciseSelector');
     final settingsNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'settings');
-    final logCreationNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'logCreation');
 
     _goRouter = GoRouter(
       initialLocation: Screens.splash.path,

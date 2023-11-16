@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:workouts/presentation/screens/log_creation/tabs/create_entry/new_entry_controller.dart';
 import 'package:workouts/presentation/screens/log_creation/tabs/create_entry/widgets/decimal_text_field_number_picker.dart';
 import 'package:workouts/presentation/screens/log_creation/tabs/create_entry/widgets/rpe_picker.dart';

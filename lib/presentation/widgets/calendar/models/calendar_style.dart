@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:workouts/global/extensions/date_time.dart';
-import 'package:workouts/presentation/theme/app_colors.dart';
 import 'package:workouts/presentation/theme/typography.dart';
 import 'package:workouts/presentation/widgets/calendar/calendar_grid.dart';
 import 'package:workouts/presentation/widgets/calendar/infinite_scroll_calendar.dart';

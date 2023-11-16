@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:workouts/global/models/week_number.dart';
 import 'package:workouts/presentation/theme/app_colors.dart';
 import 'package:workouts/presentation/theme/typography.dart';
 import 'package:workouts/presentation/widgets/calendar/infinite_scroll_calendar.dart';
@@ -30,10 +28,10 @@ class DatePickerStyle extends CalendarStyle {
   /// Cell builder for Date range, for dates inbetween start and end date.
   final DateTimeIndexedBuilder? selectedBetweenDateCellBuilder;
 
-  /// Builder for dates that did not passed [CalendarDatePickerController.startDateValidator]
-  /// or [CalendarDatePickerController.endDateValidator] .
+  /// Builder for dates that did not passed `CalendarDatePickerController.startDateValidator`
+  /// or `CalendarDatePickerController.endDateValidator`.
   ///
-  /// If [CalendarDatePickerController.startDateValidator] is `null` then all the dates will be treated as active.
+  /// If `CalendarDatePickerController.startDateValidator` is `null` then all the dates will be treated as active.
   final DateTimeIndexedBuilder inactiveDateCellBuilder;
 
   final DateTimeIndexedBuilder singleSelectableSelectedDateCellBuilder;

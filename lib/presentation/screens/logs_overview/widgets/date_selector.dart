@@ -29,7 +29,7 @@ class _DateSelectorState extends ConsumerState<DateSelector> {
         selectionType: DatePickerSelectionType.singleDate,
         controller: widget.datePickerController,
         sideLabelSize: SideLabelSize.none,
-        style: DatePickerStyle.logOverview(),
+        style: DatePickerStyle.logOverview(ref: ref),
         onDateRangeSelected: (startDate, endDate) => ref.read(selectedDateProvider.notifier).setDate(startDate),
       ),
     );

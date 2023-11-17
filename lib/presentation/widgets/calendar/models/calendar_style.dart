@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:workouts/presentation/theme/app_colors.dart';
 import 'package:workouts/presentation/theme/typography.dart';
 import 'package:workouts/presentation/widgets/calendar/calendar_grid.dart';
 import 'package:workouts/presentation/widgets/calendar/infinite_scroll_calendar.dart';
@@ -60,7 +61,7 @@ class CalendarStyle {
           top: 24,
           bottom: 24,
         ),
-        child: StyledText.headlineSmall(DateFormat.yMMMM().format(date)),
+        child: StyledText.labelMedium(DateFormat.yMMMM().format(date)),
       ),
       activeDateCellBuilder: (date) => Container(
         color: Colors.transparent,
@@ -80,6 +81,7 @@ class CalendarStyle {
             child: StyledText.bodyLarge(
               date.day.toString(),
               fontWeight: FontWeight.bold,
+              color: AppColors.primaryShades.shade90,
             ),
           ),
         ),

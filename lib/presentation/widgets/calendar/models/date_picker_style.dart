@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:workouts/application/workout_logs/workout_logs_event_peak_for_date_controller.dart';
 import 'package:workouts/presentation/theme/app_colors.dart';
 import 'package:workouts/presentation/theme/typography.dart';
 import 'package:workouts/presentation/widgets/calendar/infinite_scroll_calendar.dart';
 import 'package:workouts/presentation/widgets/calendar/models/calendar_style.dart';
+import 'package:workouts/tools/logger/logger.dart';
 
 class DatePickerStyle extends CalendarStyle {
   DatePickerStyle({
@@ -36,7 +39,32 @@ class DatePickerStyle extends CalendarStyle {
 
   final DateTimeIndexedBuilder singleSelectableSelectedDateCellBuilder;
 
-  factory DatePickerStyle.logOverview() {
+  static Widget _eventPeekBuilder(DateTime date, WidgetRef ref) {
+    final events = ref.watch(workoutLogsEventPeakForDateProvider(date));
+
+    return events.when(
+      data: (hasEvents) => hasEvents
+          ? Padding(
+              padding: const EdgeInsets.only(top: 3.0),
+              child: Container(
+                height: 6,
+                width: 6,
+                decoration: BoxDecoration(
+                  color: AppColors.primaryShades.shade70,
+                  borderRadius: BorderRadius.circular(4),
+                ),
+              ),
+            )
+          : Container(),
+      loading: Container.new,
+      error: (error, stackTrace) {
+        Logger.warning(error.toString(), stackTrace: stackTrace);
+        return Container();
+      },
+    );
+  }
+
+  factory DatePickerStyle.logOverview({required WidgetRef ref}) {
     final defaultCalendarStyle = CalendarStyle.initial();
     return DatePickerStyle(
       weekNumberBuilder: defaultCalendarStyle.weekNumberBuilder,
@@ -57,6 +85,7 @@ class DatePickerStyle extends CalendarStyle {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
+                  _eventPeekBuilder(date, ref),
                 ],
               ),
             ),
@@ -77,8 +106,10 @@ class DatePickerStyle extends CalendarStyle {
                     child: StyledText.bodyLarge(
                       date.day.toString(),
                       fontWeight: FontWeight.bold,
+                      color: AppColors.accent,
                     ),
                   ),
+                  _eventPeekBuilder(date, ref),
                 ],
               ),
             ),
@@ -110,6 +141,7 @@ class DatePickerStyle extends CalendarStyle {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
+                  _eventPeekBuilder(date, ref),
                 ],
               ),
             ),

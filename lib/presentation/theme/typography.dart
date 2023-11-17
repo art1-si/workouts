@@ -47,7 +47,11 @@ class StyledText extends Text {
     return StyledText(data, style: TextStyle(fontSize: 14, color: color ?? Colors.white));
   }
 
-  factory StyledText.label(String data, {Color? color}) {
+  factory StyledText.labelSemiMedium(String data, {Color? color}) {
+    return StyledText(data, style: TextStyle(fontSize: 12, color: color ?? Colors.white));
+  }
+
+  factory StyledText.labelSmall(String data, {Color? color}) {
     return StyledText(data, style: TextStyle(fontSize: 10, color: color ?? Colors.white));
   }
 

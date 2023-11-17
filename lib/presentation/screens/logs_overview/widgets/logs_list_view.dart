@@ -13,6 +13,7 @@ class LogsListView extends ConsumerWidget {
     return workoutLogsAsyncList.when(
       data: (data) {
         return ListView.builder(
+          physics: const BouncingScrollPhysics(),
           shrinkWrap: true,
           itemCount: data.length,
           itemBuilder: (context, index) {

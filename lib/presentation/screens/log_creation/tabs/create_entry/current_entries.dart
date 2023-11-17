@@ -24,11 +24,12 @@ class CurrentEntries extends StatelessWidget {
         builder: (context, value, child) {
           return Column(
             children: [
+              const SizedBox(height: 8),
               RowWithBottomButtons(
                 newEntryMediator: newEntryMediator,
                 editModeActive: value != null,
               ),
-              const SizedBox(height: 16.0),
+              const SizedBox(height: 32.0),
               const Padding(
                 padding: EdgeInsets.only(
                   top: 16.0,
@@ -52,7 +53,7 @@ class CurrentEntries extends StatelessWidget {
                 separatorBuilder: (_, __) => Divider(
                   thickness: 1,
                   height: 1,
-                  color: AppColors.primaryShades.shade90,
+                  color: AppColors.primaryShades.shade100,
                 ),
               ),
             ],
@@ -63,29 +64,32 @@ class CurrentEntries extends StatelessWidget {
 
 class _TableHeader extends StatelessWidget {
   const _TableHeader({Key? key}) : super(key: key);
-  static const TextStyle _style = TextStyle(fontSize: 10, letterSpacing: 2.0, color: Colors.white70);
+  static final TextStyle _style = TextStyle(fontSize: 10, letterSpacing: 2.0, color: AppColors.primaryShades.shade80);
   @override
   Widget build(BuildContext context) {
-    return const Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        _Field(
-          text: 'SET',
-          textStyle: _style,
-        ),
-        _Field(
-          text: 'WEIGHT',
-          textStyle: _style,
-        ),
-        _Field(
-          text: 'REPS',
-          textStyle: _style,
-        ),
-        _Field(
-          text: 'RPE',
-          textStyle: _style,
-        ),
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          _Field(
+            text: 'SET',
+            textStyle: _style,
+          ),
+          _Field(
+            text: 'WEIGHT',
+            textStyle: _style,
+          ),
+          _Field(
+            text: 'REPS',
+            textStyle: _style,
+          ),
+          _Field(
+            text: 'RPE',
+            textStyle: _style,
+          ),
+        ],
+      ),
     );
   }
 }
@@ -114,14 +118,14 @@ class _EntryRow extends StatelessWidget {
       onTap: onLongPressed,
       child: Container(
         color: Colors.transparent,
-        height: 40,
+        height: 35,
         child: Stack(
           children: [
             Center(
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 250),
                 curve: Curves.easeInOutCubic,
-                height: selected ? 40 : 10,
+                height: selected ? 35 : 10,
                 width: selected ? MediaQuery.of(context).size.width : 10,
                 decoration: BoxDecoration(
                   //TODO(Artur):User change color
@@ -137,7 +141,7 @@ class _EntryRow extends StatelessWidget {
               ),
               duration: const Duration(milliseconds: 250),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   _Field(
                     text: setCount?.toString() ?? 'SET',
@@ -175,10 +179,7 @@ class _Field extends StatelessWidget {
     return SizedBox(
       width: MediaQuery.of(context).size.width / 5,
       child: Center(
-        child: Text(
-          text,
-          style: textStyle,
-        ),
+        child: Text(text, style: textStyle ?? const TextStyle(fontSize: 14, color: Colors.white)),
       ),
     );
   }

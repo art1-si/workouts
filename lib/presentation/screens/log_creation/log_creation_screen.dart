@@ -21,9 +21,10 @@ class LogCreationScreen extends ConsumerWidget {
   }) {
     return Column(
       children: [
-        const Divider(
-          height: 20,
+        Divider(
+          height: 1,
           thickness: 1,
+          color: AppColors.primaryShades.shade90,
         ),
         Expanded(
           child: TabBarView(

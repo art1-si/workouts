@@ -52,7 +52,7 @@ class _DecimalTextFieldNumPickerState extends State<DecimalTextFieldNumPicker> {
           border: InputBorder.none,
         ),
         style: const TextStyle(
-          fontSize: 36.0,
+          fontSize: 32.0,
           color: Colors.white,
           fontWeight: FontWeight.bold,
           letterSpacing: 2.5,

@@ -33,7 +33,6 @@ class AppRouter {
           name: Screens.exerciseCreation.key,
           path: Screens.exerciseCreation.path,
           pageBuilder: (context, state) => MaterialPage(
-            fullscreenDialog: true,
             child: Screens.exerciseCreation.widget(params: state.extra as Map<String, dynamic>),
           ),
         ),

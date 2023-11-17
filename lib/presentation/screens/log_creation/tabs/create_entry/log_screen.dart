@@ -20,7 +20,9 @@ class LogScreen extends ConsumerWidget {
     final newEntryController = NewEntryMediator(exerciseLog, selectedDate);
 
     return ListView(
+      physics: const BouncingScrollPhysics(),
       children: <Widget>[
+        const SizedBox(height: 16),
         CreateNewEntry(
           newEntryController: newEntryController,
         ),

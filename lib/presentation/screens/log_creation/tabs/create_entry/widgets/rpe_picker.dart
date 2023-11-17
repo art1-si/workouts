@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:workouts/presentation/theme/app_colors.dart';
 import 'package:workouts/presentation/theme/typography.dart';
 
 typedef void VoidIntCallback(int i);
@@ -12,7 +13,7 @@ class RPEPicker extends StatefulWidget {
   final ValueChanged<int> onChanged;
   final int initValue;
 
-  static const List<int> _rpePicker = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  static const List<int> _rpePicker = [5, 6, 7, 8, 9, 10];
 
   @override
   State<RPEPicker> createState() => _RPEPickerState();
@@ -24,7 +25,7 @@ class _RPEPickerState extends State<RPEPicker> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: SizedBox(
         height: 90,
         child: Column(
@@ -34,7 +35,7 @@ class _RPEPickerState extends State<RPEPicker> {
               child: StyledText.labelMedium('RPE'),
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: RPEPicker._rpePicker
                   .map(
                     (rpe) => _Item(
@@ -45,7 +46,7 @@ class _RPEPickerState extends State<RPEPicker> {
                         widget.onChanged(_value);
                       },
                       //TODO(Artur): change color based on theme
-                      selectedColor: Colors.green,
+                      selectedColor: AppColors.accent,
                       rpe: rpe,
                       selected: rpe == _value,
                     ),
@@ -73,11 +74,10 @@ class _Item extends StatelessWidget {
   final VoidIntCallback onPressed;
   @override
   Widget build(BuildContext context) {
-    final _width = (MediaQuery.of(context).size.width - 16) / 10;
     return GestureDetector(
       onTap: () => onPressed(rpe),
       child: AnimatedContainer(
-        width: _width,
+        width: 40,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           border: selected ? Border.all(color: selectedColor.withOpacity(0.2)) : null,
@@ -90,7 +90,7 @@ class _Item extends StatelessWidget {
             child: AnimatedDefaultTextStyle(
               duration: const Duration(milliseconds: 250),
               style: TextStyle(
-                  fontSize: selected ? 24 : 14,
+                  fontSize: selected ? 18 : 14,
                   color: selected ? selectedColor.withOpacity(0.7) : Colors.white54,
                   fontWeight: selected ? FontWeight.bold : null),
               child: Text(

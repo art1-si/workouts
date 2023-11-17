@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:workouts/presentation/screens/exercise_creation/execise_creation_screen.dart';
 import 'package:workouts/presentation/screens/exercise_selector/exercise_selector_screen.dart';
@@ -66,5 +67,23 @@ enum Screens {
       Screens.logCreation => '/logCreation',
       Screens.planCreation => 'planCreation',
     };
+  }
+
+  static Screens? fromLocation(String location) {
+    final rootLevelLocation = Screens.values.firstWhereOrNull((screen) => screen.path == location);
+    if (rootLevelLocation != null) {
+      return rootLevelLocation;
+    }
+
+    return null;
+  }
+
+  bool get isModal {
+    switch (this) {
+      case Screens.logCreation:
+        return true;
+      default:
+        return false;
+    }
   }
 }

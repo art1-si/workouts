@@ -24,7 +24,7 @@ class BaseTFNumPicker extends StatelessWidget {
   final double width;
   @override
   Widget build(BuildContext context) {
-    final _sideFontSize = rightSubText.length > 4 ? 20 : 24;
+    final _sideFontSize = rightSubText.length > 4 ? 16 : 18;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: Column(
@@ -34,29 +34,31 @@ class BaseTFNumPicker extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Opacity(
-                opacity: reachedZero ? 0.0 : 1.0,
-                child: GestureDetector(
-                  onTap: onPressedLeftArrow,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        child: Icon(
-                          Icons.keyboard_arrow_left,
-                          color: reachedZero ? Colors.white30 : Colors.white,
-                          size: _sideFontSize.toDouble(),
+              Expanded(
+                child: Opacity(
+                  opacity: reachedZero ? 0.0 : 1.0,
+                  child: GestureDetector(
+                    onTap: onPressedLeftArrow,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          child: Icon(
+                            Icons.keyboard_arrow_left,
+                            color: reachedZero ? Colors.white30 : Colors.white,
+                            size: _sideFontSize.toDouble(),
+                          ),
                         ),
-                      ),
-                      Text(
-                        leftSubText,
-                        style: TextStyle(
-                          fontSize: _sideFontSize.toDouble(),
-                          color: Colors.white54,
-                          letterSpacing: 2.5,
+                        Text(
+                          leftSubText,
+                          style: TextStyle(
+                            fontSize: _sideFontSize.toDouble(),
+                            color: Colors.white54,
+                            letterSpacing: 2.5,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -64,27 +66,29 @@ class BaseTFNumPicker extends StatelessWidget {
                 width: width,
                 child: child,
               ),
-              GestureDetector(
-                onTap: onPressedRightArrow,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      rightSubText,
-                      style: TextStyle(
-                        fontSize: _sideFontSize.toDouble(),
-                        color: Colors.white54,
-                        letterSpacing: 2.5,
+              Expanded(
+                child: GestureDetector(
+                  onTap: onPressedRightArrow,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        rightSubText,
+                        style: TextStyle(
+                          fontSize: _sideFontSize.toDouble(),
+                          color: Colors.white54,
+                          letterSpacing: 2.5,
+                        ),
                       ),
-                    ),
-                    Container(
-                      child: Icon(
-                        Icons.keyboard_arrow_right,
-                        color: Colors.white,
-                        size: _sideFontSize.toDouble(),
+                      Container(
+                        child: Icon(
+                          Icons.keyboard_arrow_right,
+                          color: Colors.white,
+                          size: _sideFontSize.toDouble(),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ],

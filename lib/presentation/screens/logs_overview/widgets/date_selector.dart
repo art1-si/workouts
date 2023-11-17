@@ -25,12 +25,15 @@ class _DateSelectorState extends ConsumerState<DateSelector> {
     return Container(
       height: 140,
       color: AppColors.primaryShades.shade90,
-      child: InfiniteScrollDatePicker(
-        selectionType: DatePickerSelectionType.singleDate,
-        controller: widget.datePickerController,
-        sideLabelSize: SideLabelSize.none,
-        style: DatePickerStyle.logOverview(ref: ref),
-        onDateRangeSelected: (startDate, endDate) => ref.read(selectedDateProvider.notifier).setDate(startDate),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        child: InfiniteScrollDatePicker(
+          selectionType: DatePickerSelectionType.singleDate,
+          controller: widget.datePickerController,
+          sideLabelSize: SideLabelSize.none,
+          style: DatePickerStyle.logOverview(ref: ref),
+          onDateRangeSelected: (startDate, endDate) => ref.read(selectedDateProvider.notifier).setDate(startDate),
+        ),
       ),
     );
   }

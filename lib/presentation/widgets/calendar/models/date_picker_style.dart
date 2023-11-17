@@ -45,10 +45,10 @@ class DatePickerStyle extends CalendarStyle {
     return events.when(
       data: (hasEvents) => hasEvents
           ? Padding(
-              padding: const EdgeInsets.only(top: 3.0),
+              padding: const EdgeInsets.only(top: 2.0),
               child: Container(
-                height: 6,
-                width: 6,
+                height: 5,
+                width: 5,
                 decoration: BoxDecoration(
                   color: AppColors.primaryShades.shade70,
                   borderRadius: BorderRadius.circular(4),

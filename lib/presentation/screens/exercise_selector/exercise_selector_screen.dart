@@ -57,6 +57,7 @@ class _ExerciseSelectorListState extends State<ExerciseSelectorList> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      physics: const BouncingScrollPhysics(),
       itemCount: groupedExercisesByType.keys.length,
       itemBuilder: (context, index) {
         final exerciseType = groupedExercisesByType.keys.elementAt(index);

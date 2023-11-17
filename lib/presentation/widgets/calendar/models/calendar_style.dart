@@ -53,7 +53,7 @@ class CalendarStyle {
       weekNumberBuilder: null,
       headerBuilder: (index) => Padding(
         padding: const EdgeInsets.only(bottom: 3.0),
-        child: Center(child: StyledText.label(weekDaysAbbr()[index])),
+        child: Center(child: StyledText.labelSmall(weekDaysAbbr()[index])),
       ),
       titleBuilder: (date) => Padding(
         padding: const EdgeInsets.only(

@@ -23,7 +23,7 @@ class LogOverviewCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               StyledText.bodyLarge(workoutLog.exercise.exerciseName),
-              const SizedBox(height: 8.0),
+              const SizedBox(height: 2.0),
               LoggedSetsTable(
                 exerciseSets: workoutLog.workoutLog,
               ),
@@ -77,7 +77,7 @@ class _KeyCell extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
-      child: Center(child: StyledText.labelMedium(value, color: AppColors.primaryShades.shade80)),
+      child: Center(child: StyledText.labelSemiMedium(value, color: AppColors.primaryShades.shade80)),
     );
   }
 }

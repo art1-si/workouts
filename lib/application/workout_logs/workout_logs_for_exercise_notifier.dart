@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:workouts/application/workout_logs/models/workout_log_view_model.dart';
 import 'package:workouts/application/workout_logs/workout_logs_controller.dart';

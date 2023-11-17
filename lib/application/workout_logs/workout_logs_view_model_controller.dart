@@ -12,11 +12,6 @@ final workoutLogsForSelectedDateProvider = AsyncNotifierProvider<WorkoutLogsForD
   WorkoutLogsForDateNotifier.new,
 );
 
-final workoutLogsForExerciseProvider =
-    AsyncNotifierProvider.family<WorkoutLogsForExerciseNotifier, WorkoutLogViewModel, Exercise>(
-  WorkoutLogsForExerciseNotifier.new,
-);
-
 class WorkoutLogsForDateNotifier extends AsyncNotifier<List<WorkoutLogViewModel>> {
   List<WorkoutLogViewModel>? _previousState;
 
@@ -45,15 +40,5 @@ class WorkoutLogsForDateNotifier extends AsyncNotifier<List<WorkoutLogViewModel>
     }).toList();
     _previousState = workoutLogs;
     return workoutLogs;
-  }
-}
-
-class WorkoutLogsForExerciseNotifier extends FamilyAsyncNotifier<WorkoutLogViewModel, Exercise> {
-  @override
-  FutureOr<WorkoutLogViewModel> build(Exercise arg) async {
-    final logs = await ref.watch(workoutLogControllerProvider.future);
-    final logsForExercise = logs.where((element) => element.exerciseID == arg.id).toList();
-
-    return WorkoutLogViewModel(exercise: arg, workoutLog: logsForExercise);
   }
 }

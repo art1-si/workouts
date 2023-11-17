@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:workouts/application/workout_logs/models/workout_log_view_model.dart';
-import 'package:workouts/application/workout_logs/workout_logs_view_model_controller.dart';
+import 'package:workouts/application/workout_logs/workout_logs_for_exercise_notifier.dart';
 import 'package:workouts/data/exercises/model/exercise.dart';
 import 'package:workouts/presentation/screens/log_creation/exercise_log_view_controller.dart';
 import 'package:workouts/presentation/screens/log_creation/tabs/create_entry/log_screen.dart';

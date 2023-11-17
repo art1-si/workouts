@@ -20,7 +20,7 @@ class CreateNewEntry extends StatelessWidget {
           return Column(
             children: <Widget>[
               DecimalTextFieldNumPicker(
-                key: ValueKey(newEntryController.weight),
+                key: ValueKey<String>('weight: ${newEntryController.weight}'),
                 title: 'WEIGHT',
                 initValue: newEntryController.weight,
                 onChange: newEntryController.setWeightWithNewValue,
@@ -28,14 +28,14 @@ class CreateNewEntry extends StatelessWidget {
                 changesByValue: 2.5,
               ),
               TextFieldNumberPicker(
-                key: ValueKey(newEntryController.reps),
+                key: ValueKey<String>('reps: ${newEntryController.reps}'),
                 title: 'Reps',
                 initValue: newEntryController.reps,
                 onChange: newEntryController.setRepsWithNewValue,
                 changesByValue: 1,
               ),
               RPEPicker(
-                key: ValueKey(newEntryController.rpe),
+                key: ValueKey<String>('rpe: ${newEntryController.rpe}'),
                 initValue: newEntryController.rpe,
                 onChanged: newEntryController.setRPEWithNewValue,
               ),

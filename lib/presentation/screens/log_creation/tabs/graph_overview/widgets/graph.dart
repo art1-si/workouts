@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:workouts/data/workout_logs/models/workout_log.dart';
+import 'package:workouts/presentation/screens/log_creation/tabs/graph_overview/services/graph_selector_provider.dart';
 import 'package:workouts/presentation/screens/log_creation/tabs/graph_overview/widgets/graph_widget/draw_graph.dart';
 import 'package:workouts/presentation/screens/log_creation/tabs/graph_overview/widgets/graph_widget/draw_point.dart';
 import 'package:workouts/presentation/screens/log_creation/tabs/graph_overview/widgets/graph_widget/graph_view_controller.dart';
 import 'package:workouts/presentation/screens/log_creation/tabs/graph_overview/widgets/graph_widget/line_divider.dart';
 import 'package:workouts/presentation/screens/log_creation/tabs/graph_overview/widgets/onPressDialog.dart';
+import 'package:workouts/presentation/screens/log_creation/tabs/graph_overview/widgets/proerties_drop_down_menu.dart';
 import 'package:workouts/presentation/screens/log_creation/tabs/rep_max_view.dart';
 
 class WorkoutOverviewGraph extends StatefulWidget {
   WorkoutOverviewGraph({
     Key? key,
-    required List<WorkoutLog> workoutLogs,
+    required this.workoutLogs,
     this.onElementSelected,
-  })  : graphViewController =
-            GraphViewController(data: workoutLogs, valueYGetter: (log) => epleyCalOneRepMax(log.weight, log.reps)),
-        super(key: key);
+  }) : super(key: key);
 
-  final GraphViewController<WorkoutLog> graphViewController;
+  final List<WorkoutLog> workoutLogs;
   final void Function(WorkoutLog?)? onElementSelected;
 
   @override
@@ -24,16 +24,39 @@ class WorkoutOverviewGraph extends StatefulWidget {
 }
 
 class _WorkoutOverviewGraphState extends State<WorkoutOverviewGraph> {
+  var _graphProperties = GraphProperties.oneRepMax;
+
+  double valueYGetter(WorkoutLog log) {
+    switch (_graphProperties) {
+      case GraphProperties.oneRepMax:
+        return epleyCalOneRepMax(log.weight, log.reps);
+      case GraphProperties.perWeight:
+        return log.weight;
+      case GraphProperties.simpleVolumePerSet:
+        return log.weight * log.reps.toDouble();
+    }
+  }
+
+  late var graphViewController = GraphViewController(data: widget.workoutLogs, valueYGetter: valueYGetter);
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         const SizedBox(
-          height: 40,
+          height: 16,
         ),
-        // const PropertiesDropDown(),
+        PropertiesDropDown(
+          initialValue: _graphProperties,
+          onChanged: (value) {
+            setState(() {
+              _graphProperties = value;
+              graphViewController = GraphViewController(data: widget.workoutLogs, valueYGetter: valueYGetter);
+            });
+          },
+        ),
         OnPressDialog(
-          details: widget.graphViewController.pressedElement ?? widget.graphViewController.graphPoints.last,
+          details: graphViewController.pressedElement ?? graphViewController.graphPoints.last,
         ),
         Expanded(
           child: Container(
@@ -61,9 +84,9 @@ class _WorkoutOverviewGraphState extends State<WorkoutOverviewGraph> {
                       getXOffset(details.globalPosition.dx),
                       details.globalPosition.dy,
                     );
-                    widget.graphViewController.setTappedEntryByOffset(_res);
+                    graphViewController.setTappedEntryByOffset(_res);
                     setState(() {
-                      widget.onElementSelected?.call(widget.graphViewController.pressedElement!.data);
+                      widget.onElementSelected?.call(graphViewController.pressedElement!.data);
                     });
                   },
                   onPanStart: (details) {
@@ -71,9 +94,9 @@ class _WorkoutOverviewGraphState extends State<WorkoutOverviewGraph> {
                       getXOffset(details.globalPosition.dx),
                       details.globalPosition.dy,
                     );
-                    widget.graphViewController.setTappedEntryByOffset(_res);
+                    graphViewController.setTappedEntryByOffset(_res);
                     setState(() {
-                      widget.onElementSelected?.call(widget.graphViewController.pressedElement!.data);
+                      widget.onElementSelected?.call(graphViewController.pressedElement!.data);
                     });
                   },
                   onPanUpdate: (details) {
@@ -81,19 +104,19 @@ class _WorkoutOverviewGraphState extends State<WorkoutOverviewGraph> {
                       getXOffset(details.globalPosition.dx),
                       details.globalPosition.dy,
                     );
-                    widget.graphViewController.setTappedEntryByOffset(_res);
+                    graphViewController.setTappedEntryByOffset(_res);
                     setState(() {
-                      widget.onElementSelected?.call(widget.graphViewController.pressedElement!.data);
+                      widget.onElementSelected?.call(graphViewController.pressedElement!.data);
                     });
                   },
                   onPanEnd: (details) {
-                    widget.graphViewController.resetPressedElement();
+                    graphViewController.resetPressedElement();
                     setState(() {
                       widget.onElementSelected?.call(null);
                     });
                   },
                   onPanCancel: () {
-                    widget.graphViewController.resetPressedElement();
+                    graphViewController.resetPressedElement();
                     setState(() {
                       widget.onElementSelected?.call(null);
                     });
@@ -101,19 +124,19 @@ class _WorkoutOverviewGraphState extends State<WorkoutOverviewGraph> {
                   child: Stack(
                     children: [
                       LineDividers(
-                        graphViewController: widget.graphViewController,
+                        graphViewController: graphViewController,
                       ),
                       LinerGraph(
-                        data: widget.graphViewController.graphPoints,
-                        isPressed: widget.graphViewController.pressedElement != null,
+                        data: graphViewController.graphPoints,
+                        isPressed: graphViewController.pressedElement != null,
                       ),
                       Builder(
                         builder: (context) {
-                          if (widget.graphViewController.pressedElement == null) {
+                          if (graphViewController.pressedElement == null) {
                             return const SizedBox();
                           } else {
                             return GraphPoint(
-                              entry: widget.graphViewController.pressedElement!,
+                              entry: graphViewController.pressedElement!,
                             );
                           }
                         },

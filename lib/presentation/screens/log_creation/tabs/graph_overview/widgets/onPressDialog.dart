@@ -50,80 +50,81 @@ class _PopUpTable extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
-      child: Container(
-        height: 70,
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: StyledText.labelSmall(
-                          'WEIGHT X REPS:',
-                          color: AppColors.primaryShades.shade80,
-                        ),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: StyledText.labelSmall(
+                        'WEIGHT X REPS:',
+                        color: AppColors.primaryShades.shade80,
                       ),
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: StyledText.headline2(
-                          '$field1 x $field2',
-                        ),
+                    ),
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: StyledText.headline2(
+                        '$field1 x $field2',
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      StyledText.labelSmall(
+                        'RPE:',
+                        color: AppColors.primaryShades.shade80,
+                      ),
+                      StyledText.headline2(
+                        '$rpeCount',
                       ),
                     ],
                   ),
                 ),
-                Expanded(
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        StyledText.labelSmall(
-                          'RPE:',
-                          color: AppColors.primaryShades.shade80,
-                        ),
-                        StyledText.headline2(
-                          '$rpeCount',
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Align(
-                    alignment: Alignment.centerRight,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        StyledText.labelSmall(
-                          'VALUE:',
-                          color: AppColors.primaryShades.shade80,
-                        ),
-                        StyledText.headline2(
-                          field3 == null ? '0.0' : field3!,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 4),
-            Align(
-              alignment: Alignment.bottomLeft,
-              child: StyledText.labelSemiMedium(
-                field4,
-                color: AppColors.primaryShades.shade70,
               ),
+              Expanded(
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      StyledText.labelSmall(
+                        'VALUE:',
+                        color: AppColors.primaryShades.shade80,
+                      ),
+                      StyledText.headline2(
+                        field3 == null ? '0.0' : field3!,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 4),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [],
+          ),
+          Align(
+            alignment: Alignment.bottomLeft,
+            child: StyledText.labelSemiMedium(
+              field4,
+              color: AppColors.primaryShades.shade80,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

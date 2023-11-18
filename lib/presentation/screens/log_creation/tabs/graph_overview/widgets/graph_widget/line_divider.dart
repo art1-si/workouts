@@ -94,11 +94,6 @@ class _DrawLines extends CustomPainter {
     while (_correspondingGap < gridGap) {
       _correspondingGap = _correspondingGap + _distanceToSize;
     }
-    // var gap = 0.07 * size.width; //*may couse bugs in graph layout part 2
-    // for (var i = 0; i < 5; i++) {
-    //   canvas.drawLine(Offset(gap, -10), Offset(gap, size.height), dividerLine);
-    //   gap = gap + _correspondingGap;
-    // }
   }
 
   @override

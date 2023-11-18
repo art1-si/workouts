@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:workouts/application/workout_logs/models/workout_log_view_model.dart';
+import 'package:workouts/presentation/theme/typography.dart';
 
 double roundDouble(double value, int places) {
   final mod = pow(10.0, places).toDouble();
@@ -20,9 +21,8 @@ class RepMaxView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text(
+      child: StyledText.headline1(
         'EMPTY LOG',
-        style: Theme.of(context).textTheme.headline2,
       ),
     );
 

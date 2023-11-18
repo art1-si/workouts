@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:workouts/data/workout_logs/models/workout_log.dart';
 import 'package:workouts/presentation/screens/log_creation/tabs/graph_overview/widgets/graph_widget/draw_graph.dart';
 import 'package:workouts/presentation/screens/log_creation/tabs/graph_overview/widgets/graph_widget/draw_point.dart';
@@ -7,7 +6,6 @@ import 'package:workouts/presentation/screens/log_creation/tabs/graph_overview/w
 import 'package:workouts/presentation/screens/log_creation/tabs/graph_overview/widgets/graph_widget/line_divider.dart';
 import 'package:workouts/presentation/screens/log_creation/tabs/graph_overview/widgets/onPressDialog.dart';
 import 'package:workouts/presentation/screens/log_creation/tabs/rep_max_view.dart';
-import 'package:workouts/presentation/theme/app_colors.dart';
 
 class WorkoutOverviewGraph extends StatefulWidget {
   WorkoutOverviewGraph({

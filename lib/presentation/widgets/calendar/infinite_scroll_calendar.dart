@@ -180,7 +180,7 @@ class InfiniteScrollCalendar extends StatefulWidget {
         },
         children: [
           TableRow(
-            children: List.generate(7, (index) => calendarStyle.headerBuilder(index))
+            children: List.generate(7, calendarStyle.headerBuilder)
               ..insert(
                 0,
                 const SizedBox(),

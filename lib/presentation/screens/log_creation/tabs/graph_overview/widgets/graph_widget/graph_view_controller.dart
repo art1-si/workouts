@@ -46,7 +46,7 @@ class GraphViewController<T> {
     var _results = <GraphModel<T>>[];
     final width = 1.0;
     var isLast = false;
-    var distance = 0.12; //!may couse bugs in graph layout part 1
+    var distance = 0.12;
     var nextDistance = (width - 0.12) / (data.length - 1);
     var nextValueIndex = 1;
     for (var element in data) {

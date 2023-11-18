@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:workouts/data/workout_logs/models/workout_log.dart';
 import 'package:workouts/global/extensions/date_time.dart';
 import 'package:workouts/presentation/screens/log_creation/tabs/graph_overview/model/graph_model.dart';

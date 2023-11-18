@@ -67,7 +67,7 @@ extension CalendarExtensions on DateTime {
   }
 
   DateTime get atNoon {
-    return copyWith(hour: 12, minute: 0);
+    return copyWith(hour: 12, minute: 0, second: 0, millisecond: 0, microsecond: 0);
   }
 
   /// Returns list of days for `this` week.

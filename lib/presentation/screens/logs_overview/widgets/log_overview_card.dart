@@ -1,14 +1,18 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:workouts/application/workout_logs/models/workout_log_view_model.dart';
 import 'package:workouts/data/workout_logs/models/workout_log.dart';
 import 'package:workouts/presentation/theme/app_colors.dart';
 import 'package:workouts/presentation/theme/typography.dart';
 
 class LogOverviewCard extends StatelessWidget {
-  const LogOverviewCard({super.key, required this.workoutLog, required this.onTap});
-
-  final WorkoutLogViewModel workoutLog;
+  const LogOverviewCard({
+    super.key,
+    required this.workoutLog,
+    required this.onTap,
+    required this.title,
+  });
+  final String title;
+  final List<WorkoutLog> workoutLog;
   final VoidCallback onTap;
 
   @override
@@ -22,10 +26,10 @@ class LogOverviewCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              StyledText.bodyLarge(workoutLog.exercise.exerciseName),
+              StyledText.bodyLarge(title),
               const SizedBox(height: 2.0),
               LoggedSetsTable(
-                exerciseSets: workoutLog.workoutLog,
+                exerciseSets: workoutLog,
               ),
               const SizedBox(height: 16.0),
               Divider(

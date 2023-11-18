@@ -21,7 +21,7 @@ class OnPressDialog extends StatelessWidget {
       final _formateDate = _date.toPMTViewFormat();
       return _PopUpTable(
         rpeCount: details!.data.exerciseRPE,
-        field1: 'WEIGHT ${details!.data.weight}',
+        field1: '${details!.data.weight}',
         field2: '${details!.data.reps}',
         field4: 'Date: $_formateDate',
         field3: details!.correspondingValue.toString(),
@@ -53,66 +53,74 @@ class _PopUpTable extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
       child: Container(
         height: 70,
-        child: Stack(
+        child: Column(
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: StyledText.labelSmall(
-                        'WEIGHT X REPS:',
-                        color: AppColors.primaryShades.shade80,
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: StyledText.headline1(
-                        '$field1 x $field2',
-                      ),
-                    ),
-                  ],
-                ),
-                Align(
-                  alignment: Alignment.centerRight,
+                Expanded(
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      StyledText.labelSmall(
-                        'RPE:',
-                        color: AppColors.primaryShades.shade80,
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: StyledText.labelSmall(
+                          'WEIGHT X REPS:',
+                          color: AppColors.primaryShades.shade80,
+                        ),
                       ),
-                      StyledText.headline1(
-                        '$rpeCount',
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: StyledText.headline2(
+                          '$field1 x $field2',
+                        ),
                       ),
                     ],
                   ),
                 ),
-                Align(
-                  alignment: Alignment.center,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      StyledText.labelSmall(
-                        'VALUE:',
-                        color: AppColors.primaryShades.shade80,
-                      ),
-                      StyledText.headline1(
-                        field3 == null ? '0.0' : field3!,
-                      ),
-                    ],
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        StyledText.labelSmall(
+                          'RPE:',
+                          color: AppColors.primaryShades.shade80,
+                        ),
+                        StyledText.headline2(
+                          '$rpeCount',
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        StyledText.labelSmall(
+                          'VALUE:',
+                          color: AppColors.primaryShades.shade80,
+                        ),
+                        StyledText.headline2(
+                          field3 == null ? '0.0' : field3!,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
             ),
+            const SizedBox(height: 4),
             Align(
               alignment: Alignment.bottomLeft,
-              child: StyledText.labelSmall(
+              child: StyledText.labelSemiMedium(
                 field4,
-                color: AppColors.primaryShades.shade80,
+                color: AppColors.primaryShades.shade70,
               ),
             ),
           ],

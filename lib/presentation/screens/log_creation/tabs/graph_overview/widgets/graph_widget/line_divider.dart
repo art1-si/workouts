@@ -72,7 +72,7 @@ class _DrawLines extends CustomPainter {
       ..strokeWidth = 0.5;
     if (lowestValue != null && lowestValue != highestValue) {
       var weightValue = lowestValue;
-      for (var i = 0; i < 5; i++) {
+      for (var i = 0; i < 4; i++) {
         var weightGraphValue = roundDouble(weightValue!, 2);
         var relativeYposition = (weightGraphValue - lowestValue!) / (highestValue - lowestValue!);
         var yOffset = size.height - relativeYposition * size.height;
@@ -81,7 +81,7 @@ class _DrawLines extends CustomPainter {
 
         createdWeightParagraph(canvas, yOffset - 12, weightGraphValue);
 
-        weightValue += (highestValue - lowestValue!) / 4;
+        weightValue += (highestValue - lowestValue!) / 3;
       }
     } else {
       createdWeightParagraph(canvas, size.height / 2, highestValue);

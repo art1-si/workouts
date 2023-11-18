@@ -1,9 +1,8 @@
 // import 'package:flutter/material.dart';
 // import 'package:flutter_riverpod/flutter_riverpod.dart';
-// import 'package:workout_notes_app/theme/app_theme.dart';
-// import 'package:workout_notes_app/provider/day_selector_provider.dart';
-
-// import 'package:workout_notes_app/screens/new_entry_page/tabs/graph_page.dart/services/details_provider.dart';
+// import 'package:workouts/global/extensions/date_time.dart';
+// import 'package:workouts/presentation/screens/log_creation/tabs/graph_page.dart/services/details_provider.dart';
+// import 'package:workouts/presentation/theme/app_colors.dart';
 
 // class OnPressDialog extends ConsumerWidget {
 //   OnPressDialog({
@@ -11,28 +10,25 @@
 //   }) : super(key: key);
 
 //   @override
-//   Widget build(BuildContext context, ScopedReader watch) {
-//     final details = watch(detailsProvider);
+//   Widget build(BuildContext context, WidgetRef ref) {
+//     final details = ref.watch(detailsProvider);
 
 //     if (details.logDetails != null) {
-//       final _date =
-//           DateTime.tryParse(details.logDetails!.corespondingLog.dateCreated);
-//       final _formatedDate = _date!.prettyToString();
+//       final _date = details.logDetails!.correspondingLog.dateCreated;
+//       final _formateDate = _date.toPMTViewFormatShort();
 //       return Padding(
 //         padding: const EdgeInsets.symmetric(horizontal: 8.0),
 //         child: Container(
 //           decoration: BoxDecoration(
-//             color: AppTheme.of(context).primary,
+//             color: AppColors.primaryShades.shade80,
 //             borderRadius: BorderRadius.circular(10),
 //           ),
 //           child: _PopUpTable(
-//             rpeCount: details.logDetails!.corespondingLog.exerciseRPE,
-//             field1: "WEIGHT ${details.logDetails!.corespondingLog.weight}",
-//             field2: "${details.logDetails!.corespondingLog.reps}",
-//             field4: "Date: $_formatedDate",
-//             field3: details.pointedValue() == null
-//                 ? null
-//                 : details.pointedValue().toString(),
+//             rpeCount: details.logDetails!.correspondingLog.exerciseRPE,
+//             field1: 'WEIGHT ${details.logDetails!.correspondingLog.weight}',
+//             field2: '${details.logDetails!.correspondingLog.reps}',
+//             field4: 'Date: $_formateDate',
+//             field3: details.pointedValue() == null ? null : details.pointedValue().toString(),
 //           ),
 //         ),
 //       );
@@ -66,17 +62,15 @@
 //         child: Stack(
 //           children: [
 //             AnimatedContainer(
-//               duration: Duration(milliseconds: 350),
-//               width: field3 == null
-//                   ? MediaQuery.of(context).size.width
-//                   : MediaQuery.of(context).size.width * (3 / 5),
+//               duration: const Duration(milliseconds: 350),
+//               width: field3 == null ? MediaQuery.of(context).size.width : MediaQuery.of(context).size.width * (3 / 5),
 //               child: Row(
 //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
 //                 children: [
 //                   Align(
 //                     alignment: Alignment.topLeft,
 //                     child: Text(
-//                       "$field1 x $field2",
+//                       '$field1 x $field2',
 //                       style: Theme.of(context).textTheme.headline5,
 //                     ),
 //                   ),
@@ -85,14 +79,13 @@
 //                     child: Column(
 //                       mainAxisAlignment: MainAxisAlignment.start,
 //                       children: [
-//                         Text(
-//                           "RPE:",
+//                         const Text(
+//                           'RPE:',
 //                           style: TextStyle(fontSize: 10),
 //                         ),
 //                         Text(
-//                           "$rpeCount",
-//                           style: TextStyle(
-//                               fontWeight: FontWeight.bold, fontSize: 22),
+//                           '$rpeCount',
+//                           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
 //                         ),
 //                       ],
 //                     ),
@@ -101,9 +94,8 @@
 //               ),
 //             ),
 //             AnimatedAlign(
-//               alignment:
-//                   field3 == null ? Alignment.bottomRight : Alignment.bottomLeft,
-//               duration: Duration(milliseconds: 350),
+//               alignment: field3 == null ? Alignment.bottomRight : Alignment.bottomLeft,
+//               duration: const Duration(milliseconds: 350),
 //               curve: Curves.easeInOutCubic,
 //               child: Text(
 //                 field4,
@@ -113,7 +105,7 @@
 //             Align(
 //               alignment: Alignment.centerRight,
 //               child: AnimatedOpacity(
-//                 duration: Duration(milliseconds: 350),
+//                 duration: const Duration(milliseconds: 350),
 //                 opacity: field3 != null ? 1 : 0.0,
 //                 curve: Curves.easeInOutCubic,
 //                 child: SizedBox(
@@ -123,7 +115,7 @@
 //                       Align(
 //                         alignment: Alignment.centerLeft,
 //                         child: VerticalDivider(
-//                           color: AppTheme.of(context).divider,
+//                           color: AppColors.primaryShades.shade70,
 //                           thickness: 2,
 //                         ),
 //                       ),
@@ -133,15 +125,12 @@
 //                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 //                           children: [
 //                             Text(
-//                               "VALUE:",
+//                               'VALUE:',
 //                               style: Theme.of(context).textTheme.caption,
 //                             ),
 //                             Text(
-//                               field3 == null ? "0.0" : field3!,
-//                               style: Theme.of(context)
-//                                   .textTheme
-//                                   .headline5!
-//                                   .copyWith(color: Colors.white54),
+//                               field3 == null ? '0.0' : field3!,
+//                               style: Theme.of(context).textTheme.headline5!.copyWith(color: Colors.white54),
 //                             ),
 //                           ],
 //                         ),

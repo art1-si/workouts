@@ -27,6 +27,14 @@ class StyledText extends Text {
     return StyledText(data, style: const TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold));
   }
 
+  factory StyledText.headline1(String data) {
+    return StyledText(data,
+        style: const TextStyle(
+          fontSize: 24,
+          color: Colors.white,
+        ));
+  }
+
   factory StyledText.headline(String data) {
     return StyledText(data, style: const TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold));
   }

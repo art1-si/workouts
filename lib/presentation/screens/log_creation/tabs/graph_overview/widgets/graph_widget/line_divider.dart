@@ -23,7 +23,7 @@ class LineDividers extends ConsumerWidget {
         child: CustomPaint(
           size: Size(constraints.maxWidth, constraints.maxHeight),
           painter: _DrawLines(
-            dividerColor: AppColors.primaryShades.shade100,
+            dividerColor: AppColors.primaryShades.shade80,
             distance: _distance,
             highestValue: graphViewController.maxValue,
             lowestValue: graphViewController.minValue,
@@ -69,7 +69,7 @@ class _DrawLines extends CustomPainter {
       ..color = dividerColor
       ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.fill
-      ..strokeWidth = 1;
+      ..strokeWidth = 0.5;
     if (lowestValue != null && lowestValue != highestValue) {
       var weightValue = lowestValue;
       for (var i = 0; i < 5; i++) {

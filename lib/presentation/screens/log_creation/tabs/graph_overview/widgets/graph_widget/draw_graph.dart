@@ -21,8 +21,8 @@ class LinerGraph extends StatelessWidget {
           painter: DrawGraph(
             tapped: isPressed,
             entries: data,
-            lineColor: Colors.blueAccent[200]!,
-            tappedLineColor: Colors.white,
+            lineColor: AppColors.accent,
+            tappedLineColor: AppColors.accentSecondary,
             topGradientColor: Colors.white.withOpacity(0.1),
             bottomGradientColor: Colors.white.withOpacity(0.07),
             tappedBottomGradientColor: Colors.white.withOpacity(0.07),

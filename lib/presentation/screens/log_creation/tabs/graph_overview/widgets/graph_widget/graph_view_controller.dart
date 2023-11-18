@@ -17,7 +17,7 @@ class GraphViewController<T> {
 
   double get maxValue => _maxValue;
   double get minValue => _minValue;
-  List<GraphModel> get graphPoints => _graphPoints;
+  List<GraphModel<T>> get graphPoints => _graphPoints;
   GraphModel<T>? get pressedElement => _pressedElement;
 
   GraphModel<T>? _pressedElement;
@@ -62,6 +62,7 @@ class GraphViewController<T> {
           y: _yPosition,
           nextY: _nextYPosition,
           data: element,
+          correspondingValue: _valueToProperty,
         ),
       );
 

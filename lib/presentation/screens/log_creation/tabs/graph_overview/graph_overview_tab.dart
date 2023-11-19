@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:workouts/data/workout_logs/models/workout_log.dart';
 import 'package:workouts/presentation/screens/log_creation/tabs/graph_overview/widgets/graph.dart';
+import 'package:workouts/presentation/theme/app_colors.dart';
 
 import 'package:workouts/presentation/theme/typography.dart';
 
@@ -21,6 +22,14 @@ class GraphOverviewTab extends StatelessWidget {
       );
     }
 
-    return WorkoutOverviewGraph(workoutLogs: workoutLogs);
+    return Container(
+        color: AppColors.primaryShades.shade110,
+        child: Column(
+          children: [
+            WorkoutOverviewGraph(
+              workoutLogs: workoutLogs,
+            ),
+          ],
+        ));
   }
 }

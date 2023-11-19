@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:workouts/presentation/theme/app_colors.dart';
 import 'package:workouts/presentation/theme/typography.dart';
 
 class BaseTFNumPicker extends StatelessWidget {
@@ -28,70 +29,76 @@ class BaseTFNumPicker extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          StyledText.labelMedium(title),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Expanded(
-                child: Opacity(
-                  opacity: reachedZero ? 0.0 : 1.0,
+          StyledText.labelMedium(
+            title,
+            color: AppColors.primaryShades.shade80,
+          ),
+          Container(
+            height: 45,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Expanded(
+                  child: Opacity(
+                    opacity: reachedZero ? 0.0 : 1.0,
+                    child: GestureDetector(
+                      onTap: onPressedLeftArrow,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            child: Icon(
+                              Icons.keyboard_arrow_left,
+                              color: reachedZero ? Colors.white30 : Colors.white,
+                              size: _sideFontSize.toDouble(),
+                            ),
+                          ),
+                          Text(
+                            leftSubText,
+                            style: TextStyle(
+                              fontSize: _sideFontSize.toDouble(),
+                              color: Colors.white54,
+                              letterSpacing: 2.5,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: width,
+                  child: child,
+                ),
+                Expanded(
                   child: GestureDetector(
-                    onTap: onPressedLeftArrow,
+                    onTap: onPressedRightArrow,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Container(
-                          child: Icon(
-                            Icons.keyboard_arrow_left,
-                            color: reachedZero ? Colors.white30 : Colors.white,
-                            size: _sideFontSize.toDouble(),
-                          ),
-                        ),
                         Text(
-                          leftSubText,
+                          rightSubText,
                           style: TextStyle(
                             fontSize: _sideFontSize.toDouble(),
                             color: Colors.white54,
                             letterSpacing: 2.5,
                           ),
                         ),
+                        Container(
+                          child: Icon(
+                            Icons.keyboard_arrow_right,
+                            color: Colors.white,
+                            size: _sideFontSize.toDouble(),
+                          ),
+                        ),
                       ],
                     ),
                   ),
                 ),
-              ),
-              SizedBox(
-                width: width,
-                child: child,
-              ),
-              Expanded(
-                child: GestureDetector(
-                  onTap: onPressedRightArrow,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        rightSubText,
-                        style: TextStyle(
-                          fontSize: _sideFontSize.toDouble(),
-                          color: Colors.white54,
-                          letterSpacing: 2.5,
-                        ),
-                      ),
-                      Container(
-                        child: Icon(
-                          Icons.keyboard_arrow_right,
-                          color: Colors.white,
-                          size: _sideFontSize.toDouble(),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ),

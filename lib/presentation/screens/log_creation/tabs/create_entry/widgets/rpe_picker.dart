@@ -13,7 +13,7 @@ class RPEPicker extends StatefulWidget {
   final ValueChanged<int> onChanged;
   final int initValue;
 
-  static const List<int> _rpePicker = [5, 6, 7, 8, 9, 10];
+  static const List<int> _rpePicker = [4, 5, 6, 7, 8, 9, 10];
 
   @override
   State<RPEPicker> createState() => _RPEPickerState();
@@ -32,7 +32,10 @@ class _RPEPickerState extends State<RPEPicker> {
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: StyledText.labelMedium('RPE'),
+              child: StyledText.labelMedium(
+                'RPE',
+                color: AppColors.primaryShades.shade80,
+              ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -46,7 +49,7 @@ class _RPEPickerState extends State<RPEPicker> {
                         widget.onChanged(_value);
                       },
                       //TODO(Artur): change color based on theme
-                      selectedColor: AppColors.accent,
+                      selectedColor: AppColors.accentSecondary,
                       rpe: rpe,
                       selected: rpe == _value,
                     ),

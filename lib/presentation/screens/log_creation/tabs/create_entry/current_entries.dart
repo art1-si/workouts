@@ -4,6 +4,8 @@ import 'package:workouts/data/workout_logs/models/workout_log.dart';
 import 'package:workouts/presentation/screens/log_creation/tabs/create_entry/new_entry_controller.dart';
 import 'package:workouts/presentation/screens/log_creation/tabs/create_entry/widgets/bottom_buttons.dart';
 import 'package:workouts/presentation/theme/app_colors.dart';
+import 'package:workouts/presentation/theme/typography.dart';
+import 'package:workouts/presentation/widgets/widget_block.dart';
 
 typedef void VoidLogCallback(WorkoutLog? log);
 
@@ -22,41 +24,44 @@ class CurrentEntries extends StatelessWidget {
     return ValueListenableBuilder(
         valueListenable: newEntryMediator.editableWorkoutLog,
         builder: (context, value, child) {
-          return Column(
-            children: [
-              const SizedBox(height: 8),
-              RowWithBottomButtons(
-                newEntryMediator: newEntryMediator,
-                editModeActive: value != null,
-              ),
-              const SizedBox(height: 32.0),
-              const Padding(
-                padding: EdgeInsets.only(
-                  top: 16.0,
-                  bottom: 8.0,
+          return WidgetBlock(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 16),
+                Padding(
+                  padding: const EdgeInsets.only(left: 16.0),
+                  child: StyledText.headlineMedium('Current Entries'),
                 ),
-                child: _TableHeader(),
-              ),
-              ListView.separated(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: currentEntry.workoutLog.length,
-                itemBuilder: (BuildContext context, index) {
-                  final workoutLogs = currentEntry.workoutLog;
-                  return _EntryRow(
-                    setCount: index + 1,
-                    onLongPressed: () => newEntryMediator.toggleEditMode(workoutLogs[index]),
-                    entry: workoutLogs[index],
-                    selectedEntry: value,
-                  );
-                },
-                separatorBuilder: (_, __) => Divider(
-                  thickness: 1,
-                  height: 1,
-                  color: AppColors.primaryShades.shade100,
+                const Padding(
+                  padding: EdgeInsets.only(
+                    top: 16.0,
+                    bottom: 8.0,
+                  ),
+                  child: _TableHeader(),
                 ),
-              ),
-            ],
+                ListView.separated(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: currentEntry.workoutLog.length,
+                  itemBuilder: (BuildContext context, index) {
+                    final workoutLogs = currentEntry.workoutLog;
+                    return _EntryRow(
+                      setCount: index + 1,
+                      onLongPressed: () => newEntryMediator.toggleEditMode(workoutLogs[index]),
+                      entry: workoutLogs[index],
+                      selectedEntry: value,
+                    );
+                  },
+                  separatorBuilder: (_, __) => Divider(
+                    thickness: 1,
+                    height: 1,
+                    color: AppColors.primaryShades.shade100,
+                  ),
+                ),
+                const SizedBox(height: 16),
+              ],
+            ),
           );
         });
   }

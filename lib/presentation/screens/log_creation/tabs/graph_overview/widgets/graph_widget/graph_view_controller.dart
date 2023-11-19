@@ -15,8 +15,8 @@ class GraphViewController<T> {
   double _minValue = 1000000;
   double _maxValue = 0;
 
-  double get maxValue => _maxValue;
-  double get minValue => _minValue;
+  double get maxValue => _maxValue + (_maxValue * 0.05);
+  double get minValue => _minValue - (_minValue * 0.1);
   List<GraphModel<T>> get graphPoints => _graphPoints;
   GraphModel<T>? get pressedElement => _pressedElement;
 

@@ -21,31 +21,20 @@ class LogCreationScreen extends ConsumerWidget {
     required WorkoutLogViewModel exerciseLog,
     required BuildContext context,
   }) {
-    return Column(
-      children: [
-        Divider(
-          height: 1,
-          thickness: 1,
-          color: AppColors.primaryShades.shade90,
+    return TabBarView(
+      physics: const NeverScrollableScrollPhysics(),
+      children: <Widget>[
+        LogScreen(
+          exerciseLog: exerciseLog,
         ),
-        Expanded(
-          child: TabBarView(
-            physics: const NeverScrollableScrollPhysics(),
-            children: <Widget>[
-              LogScreen(
-                exerciseLog: exerciseLog,
-              ),
-              GraphOverviewTab(
-                workoutLogs: exerciseLog.workoutLog,
-              ),
-              HistoryView(
-                exerciseLog: exerciseLog.workoutLog,
-              ),
-              RepMaxView(
-                exerciseLog: exerciseLog,
-              ),
-            ],
-          ),
+        GraphOverviewTab(
+          workoutLogs: exerciseLog.workoutLog,
+        ),
+        HistoryView(
+          exerciseLog: exerciseLog.workoutLog,
+        ),
+        RepMaxView(
+          exerciseLog: exerciseLog,
         ),
       ],
     );
@@ -71,7 +60,7 @@ class LogCreationScreen extends ConsumerWidget {
                 color: AppColors.primaryShades.shade100,
                 child: SafeArea(
                   child: Scaffold(
-                    backgroundColor: AppColors.primaryShades.shade100,
+                    backgroundColor: AppColors.primaryShades.shade110,
                     appBar: AppBar(
                       actions: [
                         IconButton(
@@ -99,7 +88,7 @@ class LogCreationScreen extends ConsumerWidget {
                       backgroundColor: AppColors.primaryShades.shade100,
                       elevation: 0,
                       centerTitle: true,
-                      title: StyledText.headlineMedium(
+                      title: StyledText.labelMedium(
                         viewController.value.exerciseName,
                         //style: Theme.of(context).textTheme.headline4,
                       ),

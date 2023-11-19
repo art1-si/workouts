@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:workouts/application/workout_logs/models/workout_log_view_model.dart';
 import 'package:workouts/data/workout_logs/models/workout_log.dart';
 import 'package:workouts/presentation/screens/log_creation/tabs/create_entry/new_entry_controller.dart';
-import 'package:workouts/presentation/screens/log_creation/tabs/create_entry/widgets/bottom_buttons.dart';
 import 'package:workouts/presentation/theme/app_colors.dart';
 import 'package:workouts/presentation/theme/typography.dart';
 import 'package:workouts/presentation/widgets/widget_block.dart';

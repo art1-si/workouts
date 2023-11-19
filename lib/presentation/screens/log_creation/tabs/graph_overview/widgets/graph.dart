@@ -8,7 +8,6 @@ import 'package:workouts/presentation/screens/log_creation/tabs/graph_overview/w
 import 'package:workouts/presentation/screens/log_creation/tabs/graph_overview/widgets/onPressDialog.dart';
 import 'package:workouts/presentation/screens/log_creation/tabs/graph_overview/widgets/proerties_drop_down_menu.dart';
 import 'package:workouts/presentation/screens/log_creation/tabs/rep_max_view.dart';
-import 'package:workouts/presentation/theme/app_colors.dart';
 import 'package:workouts/presentation/widgets/widget_block.dart';
 
 class WorkoutOverviewGraph extends StatefulWidget {

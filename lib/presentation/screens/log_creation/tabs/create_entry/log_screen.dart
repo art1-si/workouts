@@ -6,7 +6,6 @@ import 'package:workouts/application/workout_logs/models/workout_log_view_model_
 import 'package:workouts/presentation/screens/log_creation/tabs/create_entry/create_new_entry.dart';
 import 'package:workouts/presentation/screens/log_creation/tabs/create_entry/current_entries.dart';
 import 'package:workouts/presentation/screens/log_creation/tabs/create_entry/new_entry_controller.dart';
-import 'package:workouts/presentation/theme/app_colors.dart';
 import 'package:workouts/presentation/widgets/widget_block.dart';
 
 class LogScreen extends ConsumerWidget {

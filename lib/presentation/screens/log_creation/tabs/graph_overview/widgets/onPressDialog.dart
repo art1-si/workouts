@@ -113,10 +113,6 @@ class _PopUpTable extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 4),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [],
-          ),
           Align(
             alignment: Alignment.bottomLeft,
             child: StyledText.labelSemiMedium(

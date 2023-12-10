@@ -117,11 +117,21 @@ class _ExpandableExerciseTypeTileState extends State<ExpandableExerciseTypeTile>
           .mapIndexed(
             (index, e) => Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: ListTile(
+              child: GestureDetector(
                 onTap: () => context.pushNamed(Screens.logCreation.key,
                     extra: {'exercises': widget.exercises, 'indexOfSelectedExercise': index}),
-                title: StyledText.body(
-                  e.exerciseName,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Container(
+                    height: 40,
+                    color: Colors.transparent,
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: StyledText.body(
+                        e.exerciseName,
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -132,7 +142,7 @@ class _ExpandableExerciseTypeTileState extends State<ExpandableExerciseTypeTile>
 
   @override
   Widget build(BuildContext context) {
-    final expandedHeight = widget.exercises.length * 56.0 + 56.0;
+    final expandedHeight = widget.exercises.length * 40.0 + 56.0;
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: AnimatedContainer(

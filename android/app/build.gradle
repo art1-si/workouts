@@ -41,14 +41,49 @@ android {
     }
 
     defaultConfig {
+        multiDexEnabled true
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.example.workouts"
+        applicationId "com.wrk.workouts"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdkVersion flutter.minSdkVersion
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+    }
+
+
+    flavorDimensions "version"
+    productFlavors {
+        dev {
+            dimension "version"
+            applicationIdSuffix ".dev"
+            versionNameSuffix "-dev"
+            resValue "string", "app_name", "[dev] Workouts"
+        }
+        internal {
+            dimension "version"
+            applicationIdSuffix ".internal"
+            versionNameSuffix "-internal"
+            resValue "string", "app_name", "[internal] Workouts"
+        }
+        uat {
+            dimension "version"
+            applicationIdSuffix ".uat"
+            versionNameSuffix "-uat"
+            resValue "string", "app_name", "[uat] Workouts"
+        }
+        acceptance {
+            dimension "version"
+            applicationIdSuffix ".acc"
+            versionNameSuffix "-acc"
+            resValue "string", "app_name", "[ACC] Workouts"
+        }
+        production {
+            dimension "version"
+            applicationId "nl.wrk.workouts"
+            resValue "string", "app_name", "Workouts"
+        }
     }
 
     buildTypes {

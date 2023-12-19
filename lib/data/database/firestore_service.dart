@@ -9,6 +9,7 @@ class FirestoreService {
     required Map<String, dynamic> data,
   }) async {
     final reference = FirebaseFirestore.instance.doc(path);
+
     await reference.set(data);
   }
 

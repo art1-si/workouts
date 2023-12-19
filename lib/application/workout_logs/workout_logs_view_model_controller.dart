@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:collection/collection.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:workouts/application/exercises/default_exercises_controller.dart';
+import 'package:workouts/application/exercises/combine_exercises_controller.dart';
 import 'package:workouts/application/selected_date/selected_date_controller.dart';
 import 'package:workouts/application/workout_logs/models/workout_log_view_model.dart';
 import 'package:workouts/application/workout_logs/workout_logs_controller.dart';
@@ -22,7 +22,7 @@ class WorkoutLogsForDateNotifier extends AsyncNotifier<List<WorkoutLogViewModel>
     }
     final selectedDate = ref.watch(selectedDateProvider);
     final logs = await ref.watch(workoutLogControllerProvider.future);
-    final exercises = await ref.watch(defaultExercisesControllerProvider.future);
+    final exercises = await ref.watch(combineExercisesControllerProvider.future);
 
     final logsForDate = logs.where((element) => element.dateCreated.isEqual(selectedDate)).toList();
 

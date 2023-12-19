@@ -12,8 +12,14 @@ class WorkoutsApp extends StatelessWidget {
     return ProviderScope(
       child: ScreenNavigator(
         child: MaterialApp.router(
+          themeMode: ThemeMode.dark,
           routerConfig: AppRouter.router,
+          darkTheme: ThemeData(
+            brightness: Brightness.dark,
+            scaffoldBackgroundColor: AppColors.primaryShades.shade100,
+          ),
           theme: ThemeData(
+            brightness: Brightness.light,
             scaffoldBackgroundColor: AppColors.primaryShades.shade100,
           ),
         ),

@@ -8,7 +8,7 @@ abstract interface class ExercisesRepository {
   Stream<List<Exercise>> getUserDefineExercises({required String userId});
 
   /// Adds a new exercise.
-  Future<void> addExercise({required Exercise exercise, required String userId});
+  Future<void> createExercise({required String userId, required Exercise exercise});
 
   /// Deletes an exercise.
   Future<void> deleteExercise({required Exercise exercise, required String userId});

@@ -5,9 +5,15 @@ import 'package:workouts/data/exercises/model/exercise.dart';
 class FirebaseExercisesRepository implements ExercisesRepository {
   final _firestore = FirestoreService.instance;
   @override
-  Future<void> addExercise({required Exercise exercise, required String userId}) {
-    // TODO: implement addExercise
-    throw UnimplementedError();
+  Future<void> createExercise({required String userId, required Exercise exercise}) {
+    return _firestore.setData(
+      path: 'users/$userId/customExercises/${exercise.id}',
+      data: {
+        'exerciseName': exercise.exerciseName,
+        'exerciseType': exercise.exerciseType,
+        'id': exercise.id,
+      },
+    );
   }
 
   @override

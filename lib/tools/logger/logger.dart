@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:workouts/configuration/build_configuration.dart';
+import 'package:workouts/tools/logger/log_tag.dart';
 
 import 'logger_level.dart';
 
@@ -54,34 +55,25 @@ class Logger {
     }
   }
 
-  /// Symbol representation of the log level.
-  static String _logLevelSymbol(LogLevel level) {
-    switch (level) {
-      case LogLevel.debug:
-        return '🟢';
-      case LogLevel.info:
-        return '🔵';
-      case LogLevel.warning:
-        return '🟡';
-      case LogLevel.error:
-        return '🔴';
-    }
-  }
-
   /// Get the full logging message.
-  static String _fullLogMessage(String message, {required LogLevel level}) {
-    return '${_logLevelSymbol(level)} $message';
+  static String _fullLogMessage(String message, {required LogLevel level, LogTag? tag}) {
+    final tagString = tag?.displayableNameCapitalized ?? level.toString();
+    final divider =
+        ' ${level.colorPrefix}-------------------------------------------------------------------------${level.colorSuffix}';
+
+    return '$divider\n${level.colorPrefix}| $tagString |  $message${level.colorSuffix}\n$divider';
   }
 
   /// Emit a debug event.
   static void debug(
     String message, {
     StackTrace? stackTrace,
+    LogTag? tag,
   }) {
     if (_shouldLog(LogLevel.debug)) {
       /// Log.
       developer.log(
-        _fullLogMessage(message, level: LogLevel.debug),
+        _fullLogMessage(message, level: LogLevel.debug, tag: tag),
         level: _logLevelIntegerRepresentation(LogLevel.debug),
         stackTrace: stackTrace,
       );
@@ -96,11 +88,12 @@ class Logger {
   static void info(
     String message, {
     StackTrace? stackTrace,
+    LogTag? tag,
   }) {
     if (_shouldLog(LogLevel.info)) {
       /// Log.
       developer.log(
-        _fullLogMessage(message, level: LogLevel.info),
+        _fullLogMessage(message, level: LogLevel.info, tag: tag),
         level: _logLevelIntegerRepresentation(LogLevel.info),
         stackTrace: stackTrace,
       );
@@ -111,11 +104,12 @@ class Logger {
   static void warning(
     String message, {
     StackTrace? stackTrace,
+    LogTag? tag,
   }) {
     if (_shouldLog(LogLevel.warning)) {
       /// Log.
       developer.log(
-        _fullLogMessage(message, level: LogLevel.warning),
+        _fullLogMessage(message, level: LogLevel.warning, tag: tag),
         level: _logLevelIntegerRepresentation(LogLevel.warning),
         stackTrace: stackTrace,
       );
@@ -130,11 +124,12 @@ class Logger {
   static void error(
     String message,
     StackTrace stackTrace,
+    LogTag? tag,
   ) {
     if (_shouldLog(LogLevel.error)) {
       /// Log.
       developer.log(
-        _fullLogMessage(message, level: LogLevel.error),
+        _fullLogMessage(message, level: LogLevel.error, tag: tag),
         level: _logLevelIntegerRepresentation(LogLevel.error),
         stackTrace: stackTrace,
       );

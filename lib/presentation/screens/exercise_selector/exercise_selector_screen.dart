@@ -95,7 +95,7 @@ class ExpandableExerciseTypeTile extends StatefulWidget {
 }
 
 class _ExpandableExerciseTypeTileState extends State<ExpandableExerciseTypeTile> {
-  final duration = const Duration(milliseconds: 250);
+  final duration = const Duration(milliseconds: 150);
 
   static const _typeTileHeight = 56.0;
   static const _exerciseTileHeight = 45.0;

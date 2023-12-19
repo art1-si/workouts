@@ -79,22 +79,22 @@ class AppRouter {
                 ),
               ],
             ),
-            StatefulShellBranch(
-              navigatorKey: plansNavigatorKey,
-              routes: [
-                GoRoute(
-                  name: Screens.plan.named,
-                  path: Screens.plan.path,
-                  builder: (context, state) => const PlanScreen(),
-                  routes: [
-                    GoRoute(
-                        name: Screens.planCreation.named,
-                        path: Screens.planCreation.path,
-                        builder: (context, state) => const PlanCreationScreen()),
-                  ],
-                ),
-              ],
-            ),
+            // StatefulShellBranch(
+            //   navigatorKey: plansNavigatorKey,
+            //   routes: [
+            //     GoRoute(
+            //       name: Screens.plan.named,
+            //       path: Screens.plan.path,
+            //       builder: (context, state) => const PlanScreen(),
+            //       routes: [
+            //         GoRoute(
+            //             name: Screens.planCreation.named,
+            //             path: Screens.planCreation.path,
+            //             builder: (context, state) => const PlanCreationScreen()),
+            //       ],
+            //     ),
+            //   ],
+            // ),
             StatefulShellBranch(
               navigatorKey: exerciseSelectorNavigatorKey,
               routes: [
@@ -104,15 +104,15 @@ class AppRouter {
                     builder: (context, state) => const ExerciseSelectorScreen()),
               ],
             ),
-            StatefulShellBranch(
-              navigatorKey: settingsNavigatorKey,
-              routes: [
-                GoRoute(
-                    name: Screens.settings.named,
-                    path: Screens.settings.path,
-                    builder: (context, state) => const SettingsScreen()),
-              ],
-            ),
+            // StatefulShellBranch(
+            //   navigatorKey: settingsNavigatorKey,
+            //   routes: [
+            //     GoRoute(
+            //         name: Screens.settings.named,
+            //         path: Screens.settings.path,
+            //         builder: (context, state) => const SettingsScreen()),
+            //   ],
+            // ),
           ],
         ),
       ],

@@ -35,9 +35,9 @@ class WorkoutsBottomNavigationBar extends StatelessWidget {
         indicatorColor: AppColors.primaryShades.shade80,
         destinations: [
           WorkoutsBottomNavigationBarItem.logOverview(),
-          WorkoutsBottomNavigationBarItem.plans(),
+          // WorkoutsBottomNavigationBarItem.plans(),
           WorkoutsBottomNavigationBarItem.exercises(),
-          WorkoutsBottomNavigationBarItem.settings(),
+          //  WorkoutsBottomNavigationBarItem.settings(),
         ],
         onDestinationSelected: onTap,
       ),

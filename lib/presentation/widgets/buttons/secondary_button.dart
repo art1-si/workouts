@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:workouts/presentation/theme/app_colors.dart';
 
 class SecondaryButton extends StatefulWidget {
   const SecondaryButton({
@@ -48,8 +49,13 @@ class _SecondaryButtonState extends State<SecondaryButton> {
           ),
           child: Center(
             child: _isLoading
-                ? const CircularProgressIndicator(
-                    color: Colors.white,
+                ? Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Center(
+                      child: CircularProgressIndicator(
+                        color: AppColors.primaryShades.shade100,
+                      ),
+                    ),
                   )
                 : widget.child,
           ),

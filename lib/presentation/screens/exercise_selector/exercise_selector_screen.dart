@@ -19,6 +19,16 @@ class ExerciseSelectorScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
+        actions: [
+          exercisesAsyncValue.when(
+            data: (data) => IconButton(
+              onPressed: () => context.pushNamed(Screens.exerciseCreation.named, extra: data),
+              icon: const Icon(Icons.add),
+            ),
+            loading: () => const SizedBox(),
+            error: (error, stackTrace) => const SizedBox(),
+          ),
+        ],
         elevation: 0,
         title: const Text('Select Exercises'),
       ),
@@ -87,6 +97,9 @@ class ExpandableExerciseTypeTile extends StatefulWidget {
 class _ExpandableExerciseTypeTileState extends State<ExpandableExerciseTypeTile> {
   final duration = const Duration(milliseconds: 250);
 
+  static const _typeTileHeight = 56.0;
+  static const _exerciseTileHeight = 45.0;
+
   bool _expanded = false;
 
   Widget get _exerciseTypeTile {
@@ -118,12 +131,12 @@ class _ExpandableExerciseTypeTileState extends State<ExpandableExerciseTypeTile>
             (index, e) => Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: GestureDetector(
-                onTap: () => context.pushNamed(Screens.logCreation.key,
+                onTap: () => context.pushNamed(Screens.logCreation.named,
                     extra: {'exercises': widget.exercises, 'indexOfSelectedExercise': index}),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Container(
-                    height: 40,
+                    height: _exerciseTileHeight,
                     color: Colors.transparent,
                     child: Align(
                       alignment: Alignment.centerLeft,
@@ -142,7 +155,7 @@ class _ExpandableExerciseTypeTileState extends State<ExpandableExerciseTypeTile>
 
   @override
   Widget build(BuildContext context) {
-    final expandedHeight = widget.exercises.length * 40.0 + 56.0;
+    final expandedHeight = (widget.exercises.length * _exerciseTileHeight) + _typeTileHeight + 8;
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: AnimatedContainer(
@@ -154,7 +167,7 @@ class _ExpandableExerciseTypeTileState extends State<ExpandableExerciseTypeTile>
             width: 2,
           ),
         ),
-        height: _expanded ? expandedHeight : 56,
+        height: _expanded ? expandedHeight : _typeTileHeight,
         duration: duration,
         child: _expanded ? _expandedExerciseTypeTile : _exerciseTypeTile,
       ),

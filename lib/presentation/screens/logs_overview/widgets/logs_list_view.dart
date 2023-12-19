@@ -20,7 +20,7 @@ class LogsListView extends ConsumerWidget {
             return LogOverviewCard(
               title: data[index].exercise.exerciseName,
               workoutLog: data[index].workoutLog,
-              onTap: () => context.pushNamed(Screens.logCreation.key,
+              onTap: () => context.pushNamed(Screens.logCreation.named,
                   extra: {'exercises': data.map((e) => e.exercise).toList(), 'indexOfSelectedExercise': index}),
             );
           },

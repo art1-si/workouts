@@ -128,6 +128,7 @@ class _TabBars extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return const TabBar(
+      dividerHeight: 0,
       indicatorWeight: 0.1,
       indicatorColor: Colors.transparent,
       labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, overflow: TextOverflow.fade),
@@ -135,19 +136,19 @@ class _TabBars extends StatelessWidget implements PreferredSizeWidget {
       unselectedLabelStyle: TextStyle(fontSize: 14, overflow: TextOverflow.fade),
       tabs: <Widget>[
         SizedBox(
-          height: 25,
+          height: 35,
           child: Center(child: Text('LOG', overflow: TextOverflow.ellipsis)),
         ),
         SizedBox(
-          height: 25,
+          height: 35,
           child: Center(child: Text('GRAPH', overflow: TextOverflow.ellipsis)),
         ),
         SizedBox(
-          height: 25,
+          height: 35,
           child: Center(child: Text('HISTORY', overflow: TextOverflow.ellipsis)),
         ),
         SizedBox(
-          height: 25,
+          height: 35,
           child: Center(child: Text('%RM', overflow: TextOverflow.ellipsis)),
         ),
       ],

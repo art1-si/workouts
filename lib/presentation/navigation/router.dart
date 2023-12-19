@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:workouts/data/exercises/model/exercise.dart';
 import 'package:workouts/presentation/navigation/screens.dart';
 import 'package:workouts/presentation/screens/dashboard/dashboard_screen.dart';
+import 'package:workouts/presentation/screens/exercise_creation/execise_creation_modal.dart';
+import 'package:workouts/presentation/screens/exercise_selector/exercise_selector_screen.dart';
+import 'package:workouts/presentation/screens/log_creation/log_creation_screen.dart';
+import 'package:workouts/presentation/screens/login/login_screen.dart';
+import 'package:workouts/presentation/screens/logs_overview/logs_overview_screen.dart';
+import 'package:workouts/presentation/screens/plan/plan_screen.dart';
+import 'package:workouts/presentation/screens/plan_creation/plan_creation_screen.dart';
+import 'package:workouts/presentation/screens/settings/settings_screen.dart';
+import 'package:workouts/presentation/screens/splash/splash_screen.dart';
 import 'package:workouts/tools/logger/logger.dart';
 
 class AppRouter {
@@ -20,28 +30,37 @@ class AppRouter {
       ],
       routes: [
         GoRoute(
-          name: Screens.splash.key,
+          name: Screens.splash.named,
           path: Screens.splash.path,
-          builder: (context, state) => Screens.splash.widget(),
+          builder: (context, state) => const SplashScreen(),
         ),
         GoRoute(
-          name: Screens.login.key,
+          name: Screens.login.named,
           path: Screens.login.path,
-          builder: (context, state) => Screens.login.widget(),
+          builder: (context, state) => const LoginScreen(),
         ),
         GoRoute(
-          name: Screens.exerciseCreation.key,
+          name: Screens.exerciseCreation.named,
           path: Screens.exerciseCreation.path,
           pageBuilder: (context, state) => MaterialPage(
-            child: Screens.exerciseCreation.widget(params: state.extra as Map<String, dynamic>),
+            fullscreenDialog: true,
+            child: ExerciseCreationModal(
+              existingExercises: state.extra as List<Exercise>,
+            ),
           ),
         ),
         GoRoute(
-          name: Screens.logCreation.key,
+          name: Screens.logCreation.named,
           path: Screens.logCreation.path,
-          pageBuilder: (context, state) => MaterialPage(
-            child: Screens.logCreation.widget(params: state.extra as Map<String, dynamic>),
-          ),
+          pageBuilder: (context, state) {
+            final params = state.extra as Map<String, dynamic>?;
+            return MaterialPage(
+              child: LogCreationScreen(
+                exercises: params!['exercises'],
+                indexOfSelectedExercise: params['indexOfSelectedExercise'],
+              ),
+            );
+          },
         ),
         StatefulShellRoute.indexedStack(
           builder: (context, state, navigationShell) {
@@ -54,9 +73,9 @@ class AppRouter {
               navigatorKey: logOverviewNavigatorKey,
               routes: [
                 GoRoute(
-                  name: Screens.logsOverview.key,
+                  name: Screens.logsOverview.named,
                   path: Screens.logsOverview.path,
-                  builder: (context, state) => Screens.logsOverview.widget(),
+                  builder: (context, state) => const LogsOverviewScreen(),
                 ),
               ],
             ),
@@ -64,18 +83,14 @@ class AppRouter {
               navigatorKey: plansNavigatorKey,
               routes: [
                 GoRoute(
-                  name: Screens.plan.key,
+                  name: Screens.plan.named,
                   path: Screens.plan.path,
-                  builder: (context, state) => Screens.plan.widget(
-                    params: state.extra == null ? {} : state.extra as Map<String, dynamic>,
-                  ),
+                  builder: (context, state) => const PlanScreen(),
                   routes: [
                     GoRoute(
-                      name: Screens.planCreation.key,
-                      path: Screens.planCreation.path,
-                      builder: (context, state) =>
-                          Screens.planCreation.widget(params: state.extra as Map<String, dynamic>),
-                    ),
+                        name: Screens.planCreation.named,
+                        path: Screens.planCreation.path,
+                        builder: (context, state) => const PlanCreationScreen()),
                   ],
                 ),
               ],
@@ -84,20 +99,18 @@ class AppRouter {
               navigatorKey: exerciseSelectorNavigatorKey,
               routes: [
                 GoRoute(
-                  name: Screens.exerciseSelector.key,
-                  path: Screens.exerciseSelector.path,
-                  builder: (context, state) => Screens.exerciseSelector.widget(),
-                ),
+                    name: Screens.exerciseSelector.named,
+                    path: Screens.exerciseSelector.path,
+                    builder: (context, state) => const ExerciseSelectorScreen()),
               ],
             ),
             StatefulShellBranch(
               navigatorKey: settingsNavigatorKey,
               routes: [
                 GoRoute(
-                  name: Screens.settings.key,
-                  path: Screens.settings.path,
-                  builder: (context, state) => Screens.settings.widget(),
-                ),
+                    name: Screens.settings.named,
+                    path: Screens.settings.path,
+                    builder: (context, state) => const SettingsScreen()),
               ],
             ),
           ],

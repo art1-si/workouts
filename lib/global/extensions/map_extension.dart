@@ -1,3 +1,4 @@
+import 'package:workouts/tools/logger/log_tag.dart';
 import 'package:workouts/tools/logger/logger.dart';
 
 extension Caster on Map<String, dynamic> {
@@ -5,7 +6,7 @@ extension Caster on Map<String, dynamic> {
     try {
       return this[key] as T;
     } catch (e, st) {
-      Logger.error('Error on casting key: $key. Error: $e', st);
+      Logger.error('Error on casting key: $key. Error: $e', st, LogTag.caster);
       rethrow;
     }
   }

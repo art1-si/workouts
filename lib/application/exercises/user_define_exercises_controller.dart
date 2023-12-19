@@ -23,4 +23,16 @@ class UserDefineExercisesController extends StreamNotifier<List<Exercise>> {
     final user = ref.watch(authControllerProvider).asAuthenticated.user;
     return _exercisesRepository.getUserDefineExercises(userId: user.id);
   }
+
+  Future<void> createExercise({required String exerciseName, required String exerciseType}) async {
+    final user = ref.watch(authControllerProvider).asAuthenticated.user;
+    await _exercisesRepository.createExercise(
+      userId: user.id,
+      exercise: Exercise(
+        exerciseName: exerciseName,
+        exerciseType: exerciseType,
+        id: DateTime.now().millisecondsSinceEpoch.toString(),
+      ),
+    );
+  }
 }

@@ -19,9 +19,9 @@ class _ScreenNavigatorState extends ConsumerState<ScreenNavigator> {
     ref.read(authControllerProvider.notifier).isUserAuthenticated()
       ..then((value) {
         if (!value) {
-          AppRouter.router.goNamed(Screens.login.key);
+          AppRouter.router.goNamed(Screens.login.named);
         } else {
-          AppRouter.router.goNamed(Screens.logsOverview.key);
+          AppRouter.router.goNamed(Screens.logsOverview.named);
         }
       });
   }
@@ -30,10 +30,10 @@ class _ScreenNavigatorState extends ConsumerState<ScreenNavigator> {
   Widget build(BuildContext context) {
     ref.listen(authControllerProvider, (previous, next) {
       if (next is Unauthenticated && previous is Authenticated) {
-        AppRouter.router.goNamed(Screens.login.key);
+        AppRouter.router.goNamed(Screens.login.named);
       }
       if (next is Authenticated && !(previous is Authenticated)) {
-        AppRouter.router.goNamed(Screens.logsOverview.key);
+        AppRouter.router.goNamed(Screens.logsOverview.named);
       }
     });
     return widget.child;

@@ -63,17 +63,18 @@ class _ExerciseCreationModalState extends ConsumerState<ExerciseCreationModal> {
               ),
             ),
             const SizedBox(height: 16),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: ExpendableDropDownMenuTextField(
-                labelText: 'Exercise Type',
-                items: existingTypes.toList(),
-                onChanged: (value) {
-                  _exerciseType = value;
-                },
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: ExpendableDropDownMenuTextField(
+                  labelText: 'Exercise Type',
+                  items: existingTypes.toList(),
+                  onChanged: (value) {
+                    _exerciseType = value;
+                  },
+                ),
               ),
             ),
-            const Spacer(),
             Padding(
               padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 32.0),
               child: SecondaryButton(
@@ -173,24 +174,18 @@ class _ExpendableDropDownMenuTextFieldState extends State<ExpendableDropDownMenu
     },
   );
 
-  final _textFieldHeight = 65.0;
   final _itemHeight = 35.0;
 
   @override
   Widget build(BuildContext context) {
-    final containerHeight = _expanded ? (_filteredItems.length * _itemHeight) + _textFieldHeight : _textFieldHeight;
-    return AnimatedContainer(
-      height: containerHeight,
-      duration: const Duration(milliseconds: 250),
-      child: Column(
-        children: [
-          _textField,
-          if (_expanded)
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: StatefulBuilder(builder: (context, setState) {
-                  return ListView(
+    return Column(
+      children: [
+        _textField,
+        _expanded
+            ? Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: ListView(
                     shrinkWrap: true,
                     children: _filteredItems
                         .map(
@@ -212,12 +207,11 @@ class _ExpendableDropDownMenuTextFieldState extends State<ExpendableDropDownMenu
                           ),
                         )
                         .toList(),
-                  );
-                }),
-              ),
-            ),
-        ],
-      ),
+                  ),
+                ),
+              )
+            : const SizedBox(),
+      ],
     );
   }
 }

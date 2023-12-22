@@ -23,7 +23,7 @@ class _DateSelectorState extends ConsumerState<DateSelector> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 140,
+      height: 150,
       color: AppColors.primaryShades.shade90,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),

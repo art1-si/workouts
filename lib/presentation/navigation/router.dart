@@ -8,9 +8,6 @@ import 'package:workouts/presentation/screens/exercise_selector/exercise_selecto
 import 'package:workouts/presentation/screens/log_creation/log_creation_screen.dart';
 import 'package:workouts/presentation/screens/login/login_screen.dart';
 import 'package:workouts/presentation/screens/logs_overview/logs_overview_screen.dart';
-import 'package:workouts/presentation/screens/plan/plan_screen.dart';
-import 'package:workouts/presentation/screens/plan_creation/plan_creation_screen.dart';
-import 'package:workouts/presentation/screens/settings/settings_screen.dart';
 import 'package:workouts/presentation/screens/splash/splash_screen.dart';
 import 'package:workouts/tools/logger/logger.dart';
 
@@ -19,9 +16,7 @@ class AppRouter {
 
   AppRouter._() {
     final logOverviewNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'logOverview');
-    final plansNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'plans');
     final exerciseSelectorNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'exerciseSelector');
-    final settingsNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'settings');
 
     _goRouter = GoRouter(
       initialLocation: Screens.splash.path,

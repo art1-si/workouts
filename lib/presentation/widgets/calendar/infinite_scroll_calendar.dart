@@ -76,7 +76,7 @@ class _InfiniteScrollDatePickerCalendarState extends State<InfiniteScrollDatePic
         if (widget.showTitle) widget.monthHeaderBuilder,
         widget.weekdayAbbrBuilder,
         SizedBox(
-          height: widget.calendarController.value == CalendarViewType.monthly ? null : 50,
+          height: widget.calendarController.value == CalendarViewType.monthly ? null : 60,
           child: InfinitePageView(
             descendingIndexLimit: widget.descendingIndexLimit,
             automaticResizing: widget.calendarController.value == CalendarViewType.monthly,

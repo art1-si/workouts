@@ -63,17 +63,19 @@ class _ExerciseCreationModalState extends ConsumerState<ExerciseCreationModal> {
               ),
             ),
             const SizedBox(height: 16),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: ExpendableDropDownMenuTextField(
-                labelText: 'Exercise Type',
-                items: existingTypes.toList(),
-                onChanged: (value) {
-                  _exerciseType = value;
-                },
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: ExpendableDropDownMenuTextField(
+                  labelText: 'Exercise Type',
+                  items: existingTypes.toList(),
+                  onChanged: (value) {
+                    _exerciseType = value;
+                  },
+                ),
               ),
             ),
-            const Spacer(),
+            const SizedBox(height: 16),
             Padding(
               padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 32.0),
               child: SecondaryButton(
@@ -173,30 +175,36 @@ class _ExpendableDropDownMenuTextFieldState extends State<ExpendableDropDownMenu
     },
   );
 
-  final _textFieldHeight = 65.0;
   final _itemHeight = 35.0;
 
   @override
   Widget build(BuildContext context) {
-    final containerHeight = _expanded ? (_filteredItems.length * _itemHeight) + _textFieldHeight : _textFieldHeight;
-    return AnimatedContainer(
-      height: containerHeight,
-      duration: const Duration(milliseconds: 250),
-      child: Column(
-        children: [
-          _textField,
-          if (_expanded)
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: StatefulBuilder(builder: (context, setState) {
-                  return ListView(
-                    shrinkWrap: true,
-                    children: _filteredItems
-                        .map(
-                          (e) => GestureDetector(
+    return Column(
+      children: [
+        _textField,
+        _expanded
+            ? Flexible(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: AppColors.primaryShades.shade90,
+                      borderRadius: BorderRadius.circular(8.0),
+                      // border: Border.all(color: AppColors.primaryShades.shade70, width: 2.0),
+                    ),
+                    child: ListView.separated(
+                      shrinkWrap: true,
+                      itemCount: _filteredItems.length,
+                      separatorBuilder: (context, index) => const Divider(
+                        height: 0,
+                        color: Color.fromARGB(25, 255, 255, 255),
+                      ),
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
+                          child: GestureDetector(
                             onTap: () {
-                              textController.text = e;
+                              textController.text = _filteredItems[index];
                               setState(() {
                                 _expanded = false;
                                 textFieldFocusNode.unfocus();
@@ -206,18 +214,18 @@ class _ExpendableDropDownMenuTextFieldState extends State<ExpendableDropDownMenu
                               height: _itemHeight,
                               child: Align(
                                 alignment: Alignment.centerLeft,
-                                child: StyledText.labelMedium(e),
+                                child: StyledText.labelMedium(_filteredItems[index]),
                               ),
                             ),
                           ),
-                        )
-                        .toList(),
-                  );
-                }),
-              ),
-            ),
-        ],
-      ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              )
+            : const SizedBox(),
+      ],
     );
   }
 }
@@ -253,11 +261,13 @@ class WorkoutsPrimaryTextField extends StatelessWidget {
         decoration: InputDecoration(
           labelText: labelText,
           labelStyle: const TextStyle(color: Colors.white38, fontSize: 12),
-          enabledBorder: const UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.white24),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8.0),
+            borderSide: const BorderSide(color: Colors.white),
           ),
-          focusedBorder: const UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.white70),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8.0),
+            borderSide: const BorderSide(color: Colors.white),
           ),
         ),
       ),

@@ -73,7 +73,7 @@ class DatePickerStyle extends CalendarStyle {
         color: Colors.transparent,
         child: Center(
           child: Container(
-            height: 50,
+            height: 55,
             width: 40,
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -122,7 +122,7 @@ class DatePickerStyle extends CalendarStyle {
         color: Colors.transparent,
         child: Center(
           child: Container(
-            height: 50,
+            height: 55,
             width: 40,
             decoration: BoxDecoration(
               border: Border.all(

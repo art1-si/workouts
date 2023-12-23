@@ -29,7 +29,7 @@ class ExpandableListView<GroupT, ElementT> extends StatefulWidget {
 class _ExpandableListViewState<GroupT, ElementT> extends State<ExpandableListView<GroupT, ElementT>> {
   final _scrollController = ScrollController();
 
-  final expansionAnimationDuration = const Duration(milliseconds: 20);
+  final expansionAnimationDuration = const Duration(milliseconds: 130);
 
   Map<GroupT, List<ElementT>> get groupedEntries {
     return groupBy(widget.entries, widget.groupBy);

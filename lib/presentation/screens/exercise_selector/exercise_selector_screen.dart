@@ -30,8 +30,6 @@ class ExerciseSelectorScreen extends ConsumerWidget {
         title: const Text('Select Exercises'),
       ),
       body: exercisesAsyncValue.when(
-        // onTap: () => context.pushNamed(Screens.logCreation.named,
-        //     extra: {'exercises': widget.subElements, 'indexOfSelectedExercise': index}),
         data: (data) => ExpandableListView<String, Exercise>(
           entries: data,
           subElementTitle: (exercise) => exercise.exerciseName,
@@ -40,7 +38,6 @@ class ExerciseSelectorScreen extends ConsumerWidget {
           onTap: (exercises, index) => context
               .pushNamed(Screens.logCreation.named, extra: {'exercises': exercises, 'indexOfSelectedExercise': index}),
         ),
-        // ExerciseSelectorList(exercises: data),
         loading: () => const Center(
           child: CircularProgressIndicator(),
         ),

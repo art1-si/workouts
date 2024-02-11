@@ -65,7 +65,6 @@ class _WorkoutOverviewGraphState extends State<WorkoutOverviewGraph> {
             height: 250,
             child: Container(
               decoration: BoxDecoration(
-                //color: AppColors.primaryShades.shade90,
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Padding(

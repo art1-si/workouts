@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:workouts/data/workout_logs/models/workout_log.dart';
 import 'package:workouts/global/extensions/date_time.dart';
 import 'package:workouts/presentation/screens/logs_overview/widgets/log_overview_card.dart';
+import 'package:workouts/presentation/theme/app_colors.dart';
 
 class HistoryTable extends StatelessWidget {
   const HistoryTable({
@@ -16,13 +17,13 @@ class HistoryTable extends StatelessWidget {
   Widget build(BuildContext context) {
     final groupedEntries = groupBy(model, (WorkoutLog entry) => entry.dateCreated.atNoon);
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 24.0),
+      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
       child: ListView.separated(
         padding: EdgeInsets.zero,
         shrinkWrap: true,
         physics: const BouncingScrollPhysics(),
         separatorBuilder: (_, __) => const SizedBox(
-          height: 12,
+          height: 4,
         ),
         itemCount: groupedEntries.length,
         itemBuilder: (context, i) {
@@ -32,6 +33,7 @@ class HistoryTable extends StatelessWidget {
             child: LogOverviewCard(
               title: date.toPMTViewFormat(),
               workoutLog: groupedEntries[date]!,
+              backgroundColor: AppColors.primaryShades.shade100,
               onTap: () {},
             ),
           );

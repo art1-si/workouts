@@ -14,9 +14,9 @@ class GraphPoint extends StatelessWidget {
         size: Size(constraints.maxWidth, constraints.maxHeight),
         painter: DrawPoint(
           pointPosition: entry,
-          color: Colors.orangeAccent[200]!,
-          topGradientColor: AppColors.accent.withOpacity(0.5),
-          bottomGradientColor: AppColors.accent.withOpacity(0.5),
+          color: AppColors.accentSecondary,
+          topGradientColor: AppColors.accentSecondary.withOpacity(0.5),
+          bottomGradientColor: AppColors.accentSecondary.withOpacity(0.5),
         ),
       );
     });

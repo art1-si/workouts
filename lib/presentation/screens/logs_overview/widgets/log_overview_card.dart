@@ -10,33 +10,39 @@ class LogOverviewCard extends StatelessWidget {
     required this.workoutLog,
     required this.onTap,
     required this.title,
+    this.backgroundColor,
   });
   final String title;
   final List<WorkoutLog> workoutLog;
   final VoidCallback onTap;
+  final Color? backgroundColor;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: GestureDetector(
-        onTap: onTap,
-        child: Container(
-          color: Colors.transparent,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              StyledText.bodyLarge(title),
-              const SizedBox(height: 2.0),
-              LoggedSetsTable(
-                exerciseSets: workoutLog,
-              ),
-              const SizedBox(height: 16.0),
-              Divider(
-                color: AppColors.primaryShades.shade80,
-              ),
-              const SizedBox(height: 16.0),
-            ],
+    return Container(
+      color: backgroundColor ?? Colors.transparent,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        child: GestureDetector(
+          onTap: onTap,
+          child: Container(
+            color: backgroundColor ?? Colors.transparent,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 8.0),
+                StyledText.bodyLarge(title),
+                const SizedBox(height: 2.0),
+                LoggedSetsTable(
+                  exerciseSets: workoutLog,
+                ),
+                const SizedBox(height: 16.0),
+                Divider(
+                  color: AppColors.primaryShades.shade80,
+                ),
+                const SizedBox(height: 8.0),
+              ],
+            ),
           ),
         ),
       ),

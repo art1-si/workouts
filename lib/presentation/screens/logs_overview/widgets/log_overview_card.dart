@@ -22,25 +22,27 @@ class LogOverviewCard extends StatelessWidget {
     return Container(
       color: backgroundColor ?? AppColors.primaryShades.shade100,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
         child: GestureDetector(
           onTap: onTap,
           child: Container(
-            color: backgroundColor,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            color: Colors.transparent,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const SizedBox(height: 8.0),
-                const SizedBox(height: 2.0),
-                LoggedSetsTable(
-                  title: title,
-                  exerciseSets: workoutLog,
+                Expanded(
+                  flex: 1,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: StyledText.labelMedium(title.toUpperCase()),
+                  ),
                 ),
-                const SizedBox(height: 16.0),
-                Divider(
-                  color: AppColors.primaryShades.shade80,
+                Expanded(
+                  flex: 3,
+                  child: LoggedSetsTable(
+                    exerciseSets: workoutLog,
+                  ),
                 ),
-                const SizedBox(height: 8.0),
               ],
             ),
           ),
@@ -51,33 +53,32 @@ class LogOverviewCard extends StatelessWidget {
 }
 
 class LoggedSetsTable extends StatelessWidget {
-  const LoggedSetsTable({super.key, required this.exerciseSets, required this.title});
+  const LoggedSetsTable({super.key, required this.exerciseSets});
 
   final List<WorkoutLog> exerciseSets;
-  final String title;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          children: [
-            Expanded(
-              flex: 2,
-              child: StyledText.body(title),
-            ),
-            const _KeyCell('REPS', flex: 1),
-            const _KeyCell('WEIGHT', flex: 1),
-            const _KeyCell('1RM', flex: 1),
-          ],
-        ),
-        ...exerciseSets.mapIndexed((index, e) => Row(children: [
-              _KeyCell('SET ${index + 1}', flex: 2, alignment: Alignment.centerRight),
-              _ValueCell(e.reps.toString(), flex: 1),
-              _ValueCell(e.weight.toString(), flex: 1),
-              _ValueCell(e.exerciseRPE.toString(), flex: 1),
-            ])),
-      ],
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8.0),
+      child: Column(
+        children: [
+          const Row(
+            children: [
+              _KeyCell('', flex: 1),
+              _KeyCell('REPS', flex: 1),
+              _KeyCell('WEIGHT', flex: 1),
+              _KeyCell('1RM', flex: 1),
+            ],
+          ),
+          ...exerciseSets.mapIndexed((index, e) => Row(children: [
+                _KeyCell('SET ${index + 1}', flex: 1, alignment: Alignment.centerRight),
+                _ValueCell(e.reps.toString(), flex: 1),
+                _ValueCell(e.weight.toString(), flex: 1),
+                _ValueCell(e.exerciseRPE.toString(), flex: 1),
+              ])),
+        ],
+      ),
     );
   }
 }
@@ -118,7 +119,7 @@ class _ValueCell extends StatelessWidget {
     return Expanded(
       flex: flex,
       child: Padding(
-        padding: const EdgeInsets.only(top: 6.0),
+        padding: const EdgeInsets.only(top: 4.0),
         child: Center(child: StyledText.labelMedium(value)),
       ),
     );

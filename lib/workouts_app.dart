@@ -16,11 +16,11 @@ class WorkoutsApp extends StatelessWidget {
           routerConfig: AppRouter.router,
           darkTheme: ThemeData(
             brightness: Brightness.dark,
-            scaffoldBackgroundColor: AppColors.primaryShades.shade100,
+            scaffoldBackgroundColor: AppColors.primaryShades.shade110,
           ),
           theme: ThemeData(
             brightness: Brightness.light,
-            scaffoldBackgroundColor: AppColors.primaryShades.shade100,
+            scaffoldBackgroundColor: AppColors.primaryShades.shade110,
           ),
         ),
       ),

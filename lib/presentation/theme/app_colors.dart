@@ -7,8 +7,8 @@ class AppColors {
   static const BasicsColor primaryShades = BasicsColor(_primaryShadeValue, <int, Color>{
     70: Color(0xFFEAEAEA),
     80: Color(0xFF555555),
-    90: Color(0xFF242424),
-    100: Color(0xFF1A1A1A),
+    90: Color(0xFF292929),
+    100: Color(0xFF1F1F1F),
     110: Color(0xFF0D0D0D),
   });
 }

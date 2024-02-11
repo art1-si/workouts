@@ -17,7 +17,7 @@ class HistoryTable extends StatelessWidget {
   Widget build(BuildContext context) {
     final groupedEntries = groupBy(model, (WorkoutLog entry) => entry.dateCreated.atNoon);
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+      padding: const EdgeInsets.symmetric(horizontal: 0.0, vertical: 4.0),
       child: ListView.separated(
         padding: EdgeInsets.zero,
         shrinkWrap: true,

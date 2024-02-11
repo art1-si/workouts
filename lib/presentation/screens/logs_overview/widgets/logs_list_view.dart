@@ -12,10 +12,13 @@ class LogsListView extends ConsumerWidget {
     final workoutLogsAsyncList = ref.watch(workoutLogsForSelectedDateProvider);
     return workoutLogsAsyncList.when(
       data: (data) {
-        return ListView.builder(
+        return ListView.separated(
           physics: const BouncingScrollPhysics(),
           shrinkWrap: true,
           itemCount: data.length,
+          separatorBuilder: (_, __) => const SizedBox(
+            height: 4,
+          ),
           itemBuilder: (context, index) {
             return LogOverviewCard(
               title: data[index].exercise.exerciseName,

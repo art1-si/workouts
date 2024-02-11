@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:workouts/application/selected_date/selected_date_controller.dart';
 import 'package:workouts/application/workout_logs/models/workout_log_view_model.dart';
 import 'package:workouts/application/workout_logs/workout_logs_for_exercise_notifier.dart';
 import 'package:workouts/data/exercises/model/exercise.dart';
@@ -20,12 +21,14 @@ class LogCreationScreen extends ConsumerWidget {
   Widget _body({
     required WorkoutLogViewModel exerciseLog,
     required BuildContext context,
+    required DateTime selectedDate,
   }) {
     return TabBarView(
       physics: const NeverScrollableScrollPhysics(),
       children: <Widget>[
         LogScreen(
           exerciseLog: exerciseLog,
+          selectedDate: selectedDate,
         ),
         GraphOverviewTab(
           workoutLogs: exerciseLog.workoutLog,
@@ -99,6 +102,7 @@ class LogCreationScreen extends ConsumerWidget {
                         return _body(
                           context: context,
                           exerciseLog: exerciseLog,
+                          selectedDate: ref.read(selectedDateProvider),
                         );
                       },
                       //TODO(Artur):Create shimmer effect

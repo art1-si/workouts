@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:workouts/application/selected_date/selected_date_controller.dart';
 import 'package:workouts/application/workout_logs/models/workout_log_view_model.dart';
 import 'package:workouts/data/exercises/model/exercise.dart';
 import 'package:workouts/data/workout_logs/models/workout_log.dart';
 import 'package:workouts/global/utils/uuid_mixin.dart';
+import 'package:workouts/tools/logger/logger.dart';
+
+final newEntryMediatorProvider = Provider.autoDispose.family<NewEntryMediator, WorkoutLogViewModel>((ref, log) {
+  final selectedDate = ref.watch(selectedDateProvider);
+  return NewEntryMediator(log, selectedDate);
+});
 
 class NewEntryMediator with UUIDGenerator {
   NewEntryMediator(WorkoutLogViewModel logs, this._selectedDate) : _exercise = logs.exercise {
@@ -52,6 +60,7 @@ class NewEntryMediator with UUIDGenerator {
       );
 
   void setWeightWithNewValue(double newValue) {
+    Logger.debug('New weight: $newValue');
     _weight = newValue;
   }
 

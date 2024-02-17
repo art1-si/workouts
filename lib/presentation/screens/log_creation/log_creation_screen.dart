@@ -8,7 +8,6 @@ import 'package:workouts/presentation/screens/log_creation/exercise_log_view_con
 import 'package:workouts/presentation/screens/log_creation/tabs/create_entry/log_screen.dart';
 import 'package:workouts/presentation/screens/log_creation/tabs/graph_overview/graph_overview_tab.dart';
 import 'package:workouts/presentation/screens/log_creation/tabs/history_page/history_view.dart';
-import 'package:workouts/presentation/screens/log_creation/tabs/rep_max_view.dart';
 import 'package:workouts/presentation/theme/app_colors.dart';
 import 'package:workouts/presentation/theme/typography.dart';
 

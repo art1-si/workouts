@@ -6,6 +6,7 @@ import 'package:workouts/data/exercises/model/exercise.dart';
 import 'package:workouts/presentation/navigation/screens.dart';
 import 'package:workouts/presentation/screens/exercise_selector/widgets/exapndable_list_view.dart';
 import 'package:workouts/presentation/theme/app_colors.dart';
+import 'package:workouts/presentation/theme/typography.dart';
 
 class ExerciseSelectorScreen extends ConsumerWidget {
   const ExerciseSelectorScreen({super.key});
@@ -29,7 +30,8 @@ class ExerciseSelectorScreen extends ConsumerWidget {
           ),
         ],
         elevation: 0,
-        title: const Text('Select Exercises'),
+        centerTitle: true,
+        title: StyledText.headlineSmall('Select Exercises'),
       ),
       body: exercisesAsyncValue.when(
         data: (data) => ExpandableListView<String, Exercise>(

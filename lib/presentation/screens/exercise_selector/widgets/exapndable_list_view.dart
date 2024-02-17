@@ -130,7 +130,7 @@ class ExpandableTile<ElementT> extends StatelessWidget {
   Widget get _exerciseTypeTile {
     return ListTile(
       onTap: onElementTapped,
-      title: StyledText.body(
+      title: StyledText.labelMedium(
         groupTitle.capitalize,
       ),
     );
@@ -161,7 +161,7 @@ class ExpandableTile<ElementT> extends StatelessWidget {
                     color: Colors.transparent,
                     child: Align(
                       alignment: Alignment.centerLeft,
-                      child: StyledText.body(subElementTitle(e)),
+                      child: StyledText.labelMedium(subElementTitle(e)),
                     ),
                   ),
                 ),

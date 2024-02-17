@@ -36,9 +36,6 @@ class LogCreationScreen extends ConsumerWidget {
         HistoryView(
           exerciseLog: exerciseLog.workoutLog,
         ),
-        RepMaxView(
-          exerciseLog: exerciseLog,
-        ),
       ],
     );
   }
@@ -150,10 +147,6 @@ class _TabBars extends StatelessWidget implements PreferredSizeWidget {
         SizedBox(
           height: 35,
           child: Center(child: Text('HISTORY', overflow: TextOverflow.ellipsis)),
-        ),
-        SizedBox(
-          height: 35,
-          child: Center(child: Text('%RM', overflow: TextOverflow.ellipsis)),
         ),
       ],
     );

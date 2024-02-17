@@ -9,7 +9,7 @@ class AppColors {
     80: Color(0xFF555555),
     90: Color(0xFF292929),
     100: Color(0xFF1F1F1F),
-    110: Color(0xFF1A1A1A),
+    110: Color(0xFF171717),
   });
 }
 

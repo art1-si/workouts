@@ -49,12 +49,11 @@ class _SecondaryButtonState extends State<SecondaryButton> {
           ),
           child: Center(
             child: _isLoading
-                ? Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Center(
-                      child: CircularProgressIndicator(
-                        color: AppColors.primaryShades.shade100,
-                      ),
+                ? SizedBox(
+                    height: 20,
+                    width: 20,
+                    child: CircularProgressIndicator(
+                      color: AppColors.primaryShades.shade100,
                     ),
                   )
                 : widget.child,

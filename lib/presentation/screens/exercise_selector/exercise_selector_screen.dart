@@ -5,6 +5,7 @@ import 'package:workouts/application/exercises/combine_exercises_controller.dart
 import 'package:workouts/data/exercises/model/exercise.dart';
 import 'package:workouts/presentation/navigation/screens.dart';
 import 'package:workouts/presentation/screens/exercise_selector/widgets/exapndable_list_view.dart';
+import 'package:workouts/presentation/theme/app_colors.dart';
 
 class ExerciseSelectorScreen extends ConsumerWidget {
   const ExerciseSelectorScreen({super.key});
@@ -15,7 +16,8 @@ class ExerciseSelectorScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: AppColors.primaryShades.shade90,
+        scrolledUnderElevation: 0,
         actions: [
           exercisesAsyncValue.when(
             data: (data) => IconButton(

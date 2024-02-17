@@ -369,13 +369,13 @@ class _SwipeActions extends StatelessWidget {
               height: 35,
               width: 35,
               decoration: BoxDecoration(
-                color: AppColors.primaryShades.shade80,
+                color: Colors.transparent,
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Center(
                 child: Icon(
                   Icons.chevron_left_rounded,
-                  size: 32,
+                  size: 24,
                   color: AppColors.primaryShades.shade70,
                 ),
               ),
@@ -388,12 +388,12 @@ class _SwipeActions extends StatelessWidget {
               height: 35,
               width: 35,
               decoration: BoxDecoration(
-                color: AppColors.primaryShades.shade80,
+                color: Colors.transparent,
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Icon(
                 Icons.chevron_right_rounded,
-                size: 32,
+                size: 24,
                 color: AppColors.primaryShades.shade70,
               ),
             ),

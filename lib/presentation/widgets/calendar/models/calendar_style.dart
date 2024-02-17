@@ -57,9 +57,8 @@ class CalendarStyle {
       ),
       titleBuilder: (date) => Padding(
         padding: const EdgeInsets.only(
-          left: 16,
-          top: 24,
-          bottom: 24,
+          top: 16,
+          bottom: 16,
         ),
         child: StyledText.labelMedium(DateFormat.yMMMM().format(date)),
       ),

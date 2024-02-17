@@ -63,7 +63,7 @@ class _ExpandableListViewState<GroupT, ElementT> extends State<ExpandableListVie
   }
 
   void _scrollToIndex(int index) async {
-    final newScrollExtent = index * (ExpandableTile.tileHeight + 16);
+    final newScrollExtent = index * (ExpandableTile.tileHeight + 4);
 
     await Future.delayed(expansionAnimationDuration);
 
@@ -129,7 +129,6 @@ class ExpandableTile<ElementT> extends StatelessWidget {
 
   Widget get _exerciseTypeTile {
     return ListTile(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       onTap: onElementTapped,
       title: StyledText.body(
         groupTitle.capitalize,
@@ -175,16 +174,12 @@ class ExpandableTile<ElementT> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final expandedHeight = (subElements.length * subTileHeight) + tileHeight + 8;
+    final expandedHeight = (subElements.length * subTileHeight) + tileHeight;
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.only(top: 4.0),
       child: AnimatedContainer(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(
-            color: AppColors.primaryShades.shade90,
-            width: 2,
-          ),
+          color: AppColors.primaryShades.shade100,
         ),
         height: expanded ? expandedHeight : tileHeight,
         duration: duration,

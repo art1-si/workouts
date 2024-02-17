@@ -24,16 +24,16 @@ class _LogsOverviewScreenState extends ConsumerState<LogsOverviewScreen> {
         children: [
           Container(
             height: 48,
-            color: AppColors.primaryShades.shade100,
+            color: AppColors.primaryShades.shade90,
           ),
           Container(
-            height: 64,
-            color: AppColors.primaryShades.shade100,
+            height: 24,
+            color: AppColors.primaryShades.shade90,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24.0),
               child: Align(
-                alignment: Alignment.centerLeft,
-                child: StyledText.headlineMedium('Workouts'),
+                alignment: Alignment.center,
+                child: StyledText.headlineSmall('Workouts'.toUpperCase()),
               ),
             ),
           ),

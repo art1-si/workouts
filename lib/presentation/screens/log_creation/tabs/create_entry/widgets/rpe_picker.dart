@@ -13,7 +13,7 @@ class RPEPicker extends StatefulWidget {
   final ValueChanged<int> onChanged;
   final int initValue;
 
-  static const List<int> _rpePicker = [4, 5, 6, 7, 8, 9, 10];
+  static const List<int> _rpePicker = [5, 6, 7, 8, 9, 10];
 
   @override
   State<RPEPicker> createState() => _RPEPickerState();
@@ -83,7 +83,7 @@ class _Item extends StatelessWidget {
         width: 40,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          border: selected ? Border.all(color: selectedColor.withOpacity(0.2)) : null,
+          border: selected ? Border.all(color: selectedColor) : null,
           color: selected ? selectedColor.withOpacity(0.1) : null,
         ),
         duration: const Duration(milliseconds: 250),
@@ -94,7 +94,7 @@ class _Item extends StatelessWidget {
               duration: const Duration(milliseconds: 250),
               style: TextStyle(
                   fontSize: selected ? 18 : 14,
-                  color: selected ? selectedColor.withOpacity(0.7) : Colors.white54,
+                  color: selected ? selectedColor : Colors.white54,
                   fontWeight: selected ? FontWeight.bold : null),
               child: Text(
                 rpe.toString(),

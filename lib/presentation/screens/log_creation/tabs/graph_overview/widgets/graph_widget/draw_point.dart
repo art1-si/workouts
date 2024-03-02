@@ -14,8 +14,8 @@ class GraphPoint extends StatelessWidget {
         size: Size(constraints.maxWidth, constraints.maxHeight),
         painter: DrawPoint(
           pressedElementPoint: pressedElementPoint,
-          color: const Color.fromARGB(255, 95, 196, 255),
-          topGradientColor: const Color.fromARGB(255, 95, 196, 255).withOpacity(0.5),
+          color: AppColors.accentSecondary,
+          topGradientColor: AppColors.accent.withOpacity(0.5),
           bottomGradientColor: AppColors.accent.withOpacity(0.5),
         ),
       );

@@ -58,16 +58,22 @@ class StyledText extends Text {
     return StyledText(data, style: const TextStyle(fontSize: 16, color: Colors.white));
   }
 
-  factory StyledText.labelMedium(String data, {Color? color}) {
-    return StyledText(data, style: TextStyle(fontSize: 14, color: color ?? Colors.white));
+  factory StyledText.labelMedium(String data, {Color? color, bool bold = false}) {
+    return StyledText(data,
+        style: TextStyle(
+            fontSize: 14, color: color ?? Colors.white, fontWeight: bold ? FontWeight.bold : FontWeight.normal));
   }
 
-  factory StyledText.labelSemiMedium(String data, {Color? color}) {
-    return StyledText(data, style: TextStyle(fontSize: 12, color: color ?? Colors.white));
+  factory StyledText.labelSemiMedium(String data, {Color? color, bool bold = false}) {
+    return StyledText(data,
+        style: TextStyle(
+            fontSize: 12, color: color ?? Colors.white, fontWeight: bold ? FontWeight.bold : FontWeight.normal));
   }
 
-  factory StyledText.labelSmall(String data, {Color? color}) {
-    return StyledText(data, style: TextStyle(fontSize: 10, color: color ?? Colors.white));
+  factory StyledText.labelSmall(String data, {Color? color, bool bold = false}) {
+    return StyledText(data,
+        style: TextStyle(
+            fontSize: 10, color: color ?? Colors.white, fontWeight: bold ? FontWeight.bold : FontWeight.normal));
   }
 
   factory StyledText.button(String data, {Color? color}) {

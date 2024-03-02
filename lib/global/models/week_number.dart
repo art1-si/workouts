@@ -83,7 +83,7 @@ class WeekNumber {
   DateTime get firstDayOfTheWeek => allDaysInWeek.first;
 
   /// Returns last date for this week number.
-  DateTime get lastDayOfTheWeek => allDaysInWeek.last;
+  DateTime get lastDayOfTheWeek => allDaysInWeek.last.copyWith(hour: 23, minute: 59, second: 59);
 
   /// Return all days in this week
   List<DateTime> get allDaysInWeek {

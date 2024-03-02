@@ -131,6 +131,8 @@ class CalendarController extends ChangeNotifier implements ValueListenable<Calen
     }
   }
 
+  int get currentPageIndex => pageViewController.page!.round();
+
   int get initialPage => _initialPage;
 
   late final _monthlyViewPageController = InfinitePageController(initialPage: _initialPage);

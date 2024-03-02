@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:workouts/presentation/features/weekly_set_count_summary/weekly_set_count_summery.dart';
 import 'package:workouts/presentation/screens/logs_overview/widgets/date_selector.dart';
 import 'package:workouts/presentation/screens/logs_overview/widgets/logs_list_view.dart';
 import 'package:workouts/presentation/theme/app_colors.dart';
@@ -38,6 +39,7 @@ class _LogsOverviewScreenState extends ConsumerState<LogsOverviewScreen> {
             ),
           ),
           DateSelector(datePickerController: _datePickerController),
+          WeeklySetCountSummery(calendarController: _datePickerController),
           const Expanded(child: LogsListView()),
         ],
       ),

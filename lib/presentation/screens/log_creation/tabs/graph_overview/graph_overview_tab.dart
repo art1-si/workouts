@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:workouts/data/workout_logs/models/workout_log.dart';
-import 'package:workouts/presentation/screens/log_creation/tabs/graph_overview/widgets/graph.dart';
+import 'package:workouts/presentation/screens/log_creation/tabs/graph_overview/services/graph_selector_provider.dart';
+import 'package:workouts/presentation/screens/log_creation/tabs/graph_overview/widgets/log_graph.dart';
 import 'package:workouts/presentation/theme/app_colors.dart';
 
 import 'package:workouts/presentation/theme/typography.dart';
@@ -24,10 +25,28 @@ class GraphOverviewTab extends StatelessWidget {
 
     return Container(
         color: AppColors.primaryShades.shade110,
-        child: Column(
+        child: ListView(
           children: [
-            WorkoutOverviewGraph(
-              workoutLogs: workoutLogs,
+            AspectRatio(
+              aspectRatio: 1,
+              child: WorkoutOverviewGraph(
+                workoutLogs: workoutLogs,
+                graphProperties: GraphProperties.oneRepMax,
+              ),
+            ),
+            AspectRatio(
+              aspectRatio: 1,
+              child: WorkoutOverviewGraph(
+                workoutLogs: workoutLogs,
+                graphProperties: GraphProperties.perWeight,
+              ),
+            ),
+            AspectRatio(
+              aspectRatio: 1,
+              child: WorkoutOverviewGraph(
+                workoutLogs: workoutLogs,
+                graphProperties: GraphProperties.simpleVolumePerSet,
+              ),
             ),
           ],
         ));

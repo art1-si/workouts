@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:workouts/presentation/screens/log_creation/tabs/graph_overview/model/graph_model.dart';
+import 'package:workouts/presentation/screens/log_creation/tabs/graph_overview/widgets/graph_widget/controller/graph_offset_point.dart';
 import 'package:workouts/presentation/theme/app_colors.dart';
 
 class GraphPoint extends StatelessWidget {
-  const GraphPoint({Key? key, required this.entry}) : super(key: key);
+  const GraphPoint({Key? key, required this.pressedElementPoint}) : super(key: key);
 
-  final GraphModel entry;
+  final GraphOffsetPoint pressedElementPoint;
 
   @override
   Widget build(BuildContext context) {
@@ -13,10 +13,10 @@ class GraphPoint extends StatelessWidget {
       return CustomPaint(
         size: Size(constraints.maxWidth, constraints.maxHeight),
         painter: DrawPoint(
-          pointPosition: entry,
-          color: AppColors.accentSecondary,
-          topGradientColor: AppColors.accentSecondary.withOpacity(0.5),
-          bottomGradientColor: AppColors.accentSecondary.withOpacity(0.5),
+          pressedElementPoint: pressedElementPoint,
+          color: const Color.fromARGB(255, 95, 196, 255),
+          topGradientColor: const Color.fromARGB(255, 95, 196, 255).withOpacity(0.5),
+          bottomGradientColor: AppColors.accent.withOpacity(0.5),
         ),
       );
     });
@@ -25,13 +25,13 @@ class GraphPoint extends StatelessWidget {
 
 class DrawPoint extends CustomPainter {
   const DrawPoint({
-    required this.pointPosition,
+    required this.pressedElementPoint,
     required this.color,
     required this.topGradientColor,
     required this.bottomGradientColor,
   });
 
-  final GraphModel pointPosition;
+  final GraphOffsetPoint pressedElementPoint;
   final Color color;
   final Color topGradientColor;
   final Color bottomGradientColor;
@@ -54,7 +54,7 @@ class DrawPoint extends CustomPainter {
       ..color = color
       ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.fill
-      ..strokeWidth = 16;
+      ..strokeWidth = 8;
 
     //var _dx = pointPosition.x * size.width;
     // var _nextDx = pointPosition.nextX * size.width;
@@ -68,12 +68,12 @@ class DrawPoint extends CustomPainter {
       shadowLine2,
     ); */
     canvas
-      ..drawLine(
-          Offset((pointPosition.x * size.width), 0), Offset(pointPosition.x * size.width, size.height), shadowLine2)
-      ..drawLine(Offset((pointPosition.x * size.width), pointPosition.y * size.height),
-          Offset(pointPosition.x * size.width, pointPosition.y * size.height), points);
+      ..drawLine(Offset((pressedElementPoint.xAxis * size.width), 0),
+          Offset(pressedElementPoint.xAxis * size.width, size.height), shadowLine2)
+      ..drawLine(Offset((pressedElementPoint.xAxis * size.width), pressedElementPoint.yAxis * size.height),
+          Offset(pressedElementPoint.xAxis * size.width, pressedElementPoint.yAxis * size.height), points);
   }
 
   @override
-  bool shouldRepaint(DrawPoint oldDelegate) => oldDelegate.pointPosition != pointPosition;
+  bool shouldRepaint(DrawPoint oldDelegate) => oldDelegate.pressedElementPoint != pressedElementPoint;
 }

@@ -1,36 +1,39 @@
 import 'package:flutter/material.dart';
-import 'package:workouts/presentation/screens/log_creation/tabs/graph_overview/model/graph_model.dart';
+import 'package:workouts/presentation/screens/log_creation/tabs/graph_overview/widgets/graph_widget/controller/graph_offset_point.dart';
 import 'package:workouts/presentation/theme/app_colors.dart';
 
-class LinerGraph extends StatelessWidget {
-  const LinerGraph({
+class LinerGraphPainter extends StatelessWidget {
+  const LinerGraphPainter({
     Key? key,
-    required this.data,
-    required this.isPressed,
+    required this.graphOffsetPoints,
+    required this.constraints,
+    required this.lineColor,
+    this.strokeWidth = 2,
   }) : super(key: key);
 
-  final List<GraphModel> data;
-  final bool isPressed;
+  final List<GraphOffsetPoint> graphOffsetPoints;
+  final BoxConstraints constraints;
+  final Color lineColor;
+  final double strokeWidth;
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (context, constraints) {
-      return RepaintBoundary(
-        child: CustomPaint(
-          size: Size(constraints.maxWidth, constraints.maxHeight),
-          painter: DrawGraph(
-            tapped: isPressed,
-            entries: data,
-            lineColor: AppColors.accent,
-            tappedLineColor: AppColors.accentSecondary,
-            topGradientColor: Colors.white.withOpacity(0.1),
-            bottomGradientColor: Colors.white.withOpacity(0.07),
-            tappedBottomGradientColor: Colors.white.withOpacity(0.07),
-            tappedTopGradientColor: Colors.white.withOpacity(0.1),
-          ),
+    return RepaintBoundary(
+      child: CustomPaint(
+        size: Size(constraints.maxWidth, constraints.maxHeight),
+        painter: DrawGraph(
+          tapped: false,
+          graphOffsetPoints: graphOffsetPoints,
+          lineColor: lineColor,
+          tappedLineColor: AppColors.accentSecondary,
+          topGradientColor: Colors.white.withOpacity(0.1),
+          bottomGradientColor: Colors.white.withOpacity(0.07),
+          tappedBottomGradientColor: Colors.white.withOpacity(0.07),
+          tappedTopGradientColor: Colors.white.withOpacity(0.1),
+          strokeWidth: strokeWidth,
         ),
-      );
-    });
+      ),
+    );
   }
 }
 
@@ -40,13 +43,14 @@ class DrawGraph extends CustomPainter {
     required this.bottomGradientColor,
     required this.tappedTopGradientColor,
     required this.tappedBottomGradientColor,
-    required this.entries,
+    required this.graphOffsetPoints,
     required this.lineColor,
     required this.tappedLineColor,
     required this.tapped,
+    this.strokeWidth = 2,
   });
 
-  final List<GraphModel> entries;
+  final List<GraphOffsetPoint> graphOffsetPoints;
   final bool tapped;
   final Color lineColor;
   final Color tappedLineColor;
@@ -54,6 +58,7 @@ class DrawGraph extends CustomPainter {
   final Color bottomGradientColor;
   final Color tappedTopGradientColor;
   final Color tappedBottomGradientColor;
+  final double strokeWidth;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -69,33 +74,30 @@ class DrawGraph extends CustomPainter {
       ..shader = gradient.createShader(Rect.fromLTRB(0, 0, size.width, size.height))
       ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.fill
-      ..strokeWidth = 2;
+      ..strokeWidth = strokeWidth;
 
     var line2 = Paint()
       ..color = (!tapped) ? lineColor : tappedLineColor
       ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.fill
-      ..strokeWidth = 2;
+      ..strokeWidth = strokeWidth;
 
-    if (entries.length > 1) {
-      for (var element in entries) {
-        var _dx = element.x * size.width;
-        var _dy = element.y * size.height;
-        var _nextDx = element.nextX * size.width;
-        var _nextDy = element.nextY * size.height;
+    if (graphOffsetPoints.length > 1) {
+      for (var i = 0; i < graphOffsetPoints.length; i++) {
+        final point = graphOffsetPoints[i];
+        final isLast = i == graphOffsetPoints.length - 1;
+        if (isLast) {
+          break;
+        }
+        final nextPoint = graphOffsetPoints[i + 1];
+
+        var _dx = point.xAxis * size.width;
+        var _dy = point.yAxis * size.height;
+        var _nextDx = nextPoint.xAxis * size.width;
+        var _nextDy = nextPoint.yAxis * size.height;
+
         //Draw main line
-
         canvas..drawLine(Offset(_dx, _dy), Offset(_nextDx, _nextDy), line2);
-
-        //Draw background
-        // ..drawPath(
-        //   Path()
-        //     ..moveTo(_dx, _dy)
-        //     ..lineTo(_dx, size.height)
-        //     ..lineTo(_nextDx, size.height)
-        //     ..lineTo(_nextDx, _nextDy),
-        //   shadowLine2,
-        // );
       }
     } else {
       var _dx = 0.0;
@@ -120,5 +122,6 @@ class DrawGraph extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(DrawGraph oldDelegate) => oldDelegate.tapped != tapped || oldDelegate.entries != entries;
+  bool shouldRepaint(DrawGraph oldDelegate) =>
+      oldDelegate.tapped != tapped || oldDelegate.graphOffsetPoints != graphOffsetPoints;
 }

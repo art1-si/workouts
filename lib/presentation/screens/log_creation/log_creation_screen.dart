@@ -46,7 +46,7 @@ class LogCreationScreen extends ConsumerWidget {
         builder: (context, child) {
           final logsForSelectedExercise = ref.watch(workoutLogsForExerciseProvider(viewController.value));
           return DefaultTabController(
-            length: 4,
+            length: 3,
             child: GestureDetector(
               onTap: () {
                 final currentFocus = FocusScope.of(context);
@@ -127,25 +127,34 @@ class _TabBars extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const TabBar(
-      dividerHeight: 0,
-      indicatorWeight: 0.1,
-      indicatorColor: Colors.transparent,
-      labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, overflow: TextOverflow.fade),
-      labelColor: Colors.white,
-      unselectedLabelStyle: TextStyle(fontSize: 14, overflow: TextOverflow.fade),
-      tabs: <Widget>[
-        SizedBox(
-          height: 35,
-          child: Center(child: Text('LOG', overflow: TextOverflow.ellipsis)),
+    return Column(
+      children: [
+        const TabBar(
+          dividerHeight: 0,
+          indicatorWeight: 0.1,
+          indicatorColor: Colors.transparent,
+          labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, overflow: TextOverflow.fade),
+          labelColor: Colors.white,
+          unselectedLabelStyle: TextStyle(fontSize: 14, overflow: TextOverflow.fade),
+          tabs: <Widget>[
+            SizedBox(
+              height: 35,
+              child: Center(child: Text('LOG', overflow: TextOverflow.ellipsis)),
+            ),
+            SizedBox(
+              height: 35,
+              child: Center(child: Text('GRAPH', overflow: TextOverflow.ellipsis)),
+            ),
+            SizedBox(
+              height: 35,
+              child: Center(child: Text('HISTORY', overflow: TextOverflow.ellipsis)),
+            ),
+          ],
         ),
-        SizedBox(
-          height: 35,
-          child: Center(child: Text('GRAPH', overflow: TextOverflow.ellipsis)),
-        ),
-        SizedBox(
-          height: 35,
-          child: Center(child: Text('HISTORY', overflow: TextOverflow.ellipsis)),
+        Divider(
+          height: 0,
+          thickness: 0.5,
+          color: AppColors.primaryShades.shade90,
         ),
       ],
     );

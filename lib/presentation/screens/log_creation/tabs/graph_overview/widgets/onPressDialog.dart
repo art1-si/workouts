@@ -1,29 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:workouts/data/workout_logs/models/workout_log.dart';
 import 'package:workouts/global/extensions/date_time.dart';
-import 'package:workouts/presentation/screens/log_creation/tabs/graph_overview/model/graph_model.dart';
 import 'package:workouts/presentation/theme/app_colors.dart';
 import 'package:workouts/presentation/theme/typography.dart';
 
 class OnPressDialog extends StatelessWidget {
   OnPressDialog({
     Key? key,
-    required this.details,
+    required this.log,
+    required this.valueBuilder,
   }) : super(key: key);
 
-  final GraphModel<WorkoutLog>? details;
+  final WorkoutLog? log;
+  final double Function(WorkoutLog log) valueBuilder;
 
   @override
   Widget build(BuildContext context) {
-    if (details != null) {
-      final _date = details!.data.dateCreated;
+    if (log != null) {
+      final _date = log!.dateCreated;
       final _formateDate = _date.toPMTViewFormat();
       return _PopUpTable(
-        rpeCount: details!.data.exerciseRPE,
-        field1: '${details!.data.weight}',
-        field2: '${details!.data.reps}',
+        rpeCount: log!.exerciseRPE,
+        field1: '${log!.weight}',
+        field2: '${log!.reps}',
         field4: 'Date: $_formateDate',
-        field3: details!.correspondingValue.toString(),
+        field3: valueBuilder(log!).toString(),
       );
     }
     return Container();

@@ -2,7 +2,7 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:workouts/presentation/screens/log_creation/tabs/graph_overview/widgets/graph_widget/graph_view_controller.dart';
+import 'package:workouts/presentation/screens/log_creation/tabs/graph_overview/widgets/graph_widget/controller/graph_view_controller.dart';
 import 'package:workouts/presentation/screens/log_creation/tabs/rep_max_view.dart';
 import 'package:workouts/presentation/theme/app_colors.dart';
 
@@ -16,17 +16,14 @@ class LineDividers extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final firstElement = graphViewController.graphPoints.first;
-    final _distance = firstElement.nextX - firstElement.x;
     return LayoutBuilder(builder: (context, constraints) {
       return RepaintBoundary(
         child: CustomPaint(
           size: Size(constraints.maxWidth, constraints.maxHeight),
           painter: _DrawLines(
             dividerColor: AppColors.primaryShades.shade80,
-            distance: _distance,
-            highestValue: graphViewController.maxValue,
-            lowestValue: graphViewController.minValue,
+            highestValue: graphViewController.greatestValue,
+            lowestValue: graphViewController.smallestValue,
           ),
         ),
       );
@@ -39,9 +36,7 @@ class _DrawLines extends CustomPainter {
     required this.lowestValue,
     required this.highestValue,
     required this.dividerColor,
-    required this.distance,
   });
-  final double distance;
   final double? lowestValue;
   final double highestValue;
   final Color dividerColor;
@@ -87,12 +82,6 @@ class _DrawLines extends CustomPainter {
       createdWeightParagraph(canvas, size.height / 2, highestValue);
 
       canvas.drawLine(Offset(0, size.height / 2), Offset(size.width, size.height / 2), dividerLine);
-    }
-    var gridGap = size.width / 5;
-    var _distanceToSize = (distance) * size.width;
-    var _correspondingGap = _distanceToSize;
-    while (_correspondingGap < gridGap) {
-      _correspondingGap = _correspondingGap + _distanceToSize;
     }
   }
 

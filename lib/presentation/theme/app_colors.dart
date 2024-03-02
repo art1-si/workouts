@@ -1,8 +1,8 @@
 import 'package:flutter/widgets.dart';
 
 class AppColors {
-  static const Color accent = Color.fromARGB(255, 70, 110, 253);
-  static const Color accentSecondary = Color.fromARGB(255, 126, 79, 255);
+  static const Color accent = Color(0xff5A45F6);
+  static const Color accentSecondary = Color(0xffBB4FFA);
   static const int _primaryShadeValue = 0xFF1E1E1E;
   static const BasicsColor primaryShades = BasicsColor(_primaryShadeValue, <int, Color>{
     70: Color(0xFFEAEAEA),

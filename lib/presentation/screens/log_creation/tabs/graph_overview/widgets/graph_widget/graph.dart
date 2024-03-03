@@ -68,7 +68,7 @@ class _LinearGraphState extends State<LinearGraph> {
               child: Stack(
                 children: [
                   LinerGraphPainter(
-                    lineColor: AppColors.accent.withOpacity(0.5),
+                    lineColor: AppColors.accent50,
                     graphOffsetPoints: widget.graphViewController.graphOffsetPoints,
                     constraints: constrains,
                     strokeWidth: 2,

@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 
 class AppColors {
   static const Color accent = Color(0xff3444d1);
+  static const Color accent50 = Color(0xff2A3278);
   static const Color accentSecondary = Color(0xff6D6BFF);
   static const int _primaryShadeValue = 0xFF1E1E1E;
   static const BasicsColor primaryShades = BasicsColor(_primaryShadeValue, <int, Color>{

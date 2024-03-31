@@ -39,7 +39,7 @@ class _LogsOverviewScreenState extends ConsumerState<LogsOverviewScreen> {
             ),
           ),
           DateSelector(datePickerController: _datePickerController),
-          WeeklySetCountSummery(calendarController: _datePickerController),
+          // WeeklySetCountSummery(calendarController: _datePickerController),
           const Expanded(child: LogsListView()),
         ],
       ),

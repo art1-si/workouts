@@ -32,7 +32,7 @@ class LogOverviewCard extends StatelessWidget {
               children: [
                 Expanded(
                   flex: 1,
-                  child: StyledText.labelSmall(
+                  child: StyledText.labelSemiMedium(
                     title.toUpperCase(),
                     bold: true,
                   ),

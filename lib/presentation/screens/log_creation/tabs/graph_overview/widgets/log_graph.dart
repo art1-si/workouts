@@ -37,7 +37,7 @@ class _WorkoutOverviewGraphState extends State<WorkoutOverviewGraph> {
     }
   }
 
-  late final graphViewController = GraphViewController(
+  late var graphViewController = GraphViewController(
     graphElements: widget.workoutLogs
         .map(
           (e) => (yAxis: valueYGetter(e), xAxis: e.dateCreated),

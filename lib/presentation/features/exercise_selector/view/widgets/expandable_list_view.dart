@@ -1,8 +1,8 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import '../../../../../../lib.old/global/extensions/string_extensions.dart';
-import '../../../../theme/app_colors.dart';
-import '../../../../theme/typography.dart';
+import 'package:workouts/presentation/shared/extensions/string_extensions.dart';
+import 'package:workouts/presentation/theme/app_colors.dart';
+import 'package:workouts/presentation/theme/typography.dart';
 
 class ExpandableListView<GroupT, ElementT> extends StatefulWidget {
   const ExpandableListView({

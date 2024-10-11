@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class Exercise {
   final int id;
   final String name;
@@ -29,26 +27,6 @@ class Exercise {
       type: type ?? this.type,
     );
   }
-
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'id': id,
-      'exerciseName': name,
-      'exerciseType': type,
-    };
-  }
-
-  factory Exercise.fromMap(Map<String, dynamic> map) {
-    return Exercise(
-      id: map['id'] as int,
-      name: map['name'] as String,
-      type: map['type'] as String,
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory Exercise.fromJson(String source) => Exercise.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() => 'Exercise(id: $id, exerciseName: $name, exerciseType: $type)';

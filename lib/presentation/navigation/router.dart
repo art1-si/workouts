@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:workouts/domain/entities/exercise.dart';
 import 'package:workouts/presentation/features/exercise_creation/view/execise_creation_modal.dart';
+import 'package:workouts/presentation/features/set_entry_creator/view/log_creation_screen.dart';
 import 'package:workouts/presentation/features/splash/splash_screen.dart';
 import 'navigation_routes.dart';
-import '../../dev_tools/logger/logger.dart';
 
 class AppRouter {
   final rootNavigatorKey = GlobalKey<NavigatorState>();

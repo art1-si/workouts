@@ -1,5 +1,5 @@
 /// The app build configuration (matches Flutter Flavor)
-enum BuildConfiguration { dev, internal, uat, acceptance, store }
+enum BuildConfiguration { dev, uat, production }
 
 /// Provides details about the configuration of the app
 class AppConfiguration {
@@ -9,15 +9,13 @@ class AppConfiguration {
     switch (value) {
       case 'dev':
         return BuildConfiguration.dev;
-      case 'internal':
-        return BuildConfiguration.internal;
+
       case 'uat':
         return BuildConfiguration.uat;
-      case 'acceptance':
-        return BuildConfiguration.acceptance;
+
       case 'store':
       default:
-        return BuildConfiguration.store;
+        return BuildConfiguration.production;
     }
   }
 

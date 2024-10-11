@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:workouts/data/exercises/model/exercise.dart';
-import 'package:workouts/presentation/navigation/screens.dart';
-import 'package:workouts/presentation/screens/dashboard/dashboard_screen.dart';
-import 'package:workouts/presentation/screens/exercise_creation/execise_creation_modal.dart';
-import 'package:workouts/presentation/screens/exercise_selector/exercise_selector_screen.dart';
-import 'package:workouts/presentation/screens/log_creation/log_creation_screen.dart';
-import 'package:workouts/presentation/screens/login/login_screen.dart';
-import 'package:workouts/presentation/screens/logs_overview/logs_overview_screen.dart';
-import 'package:workouts/presentation/screens/splash/splash_screen.dart';
-import 'package:workouts/tools/logger/logger.dart';
+import 'package:workouts/presentation/features/exercise_creation/view/execise_creation_modal.dart';
+import 'package:workouts/presentation/features/splash/splash_screen.dart';
+import 'navigation_routes.dart';
+import '../../dev_tools/logger/logger.dart';
 
 class AppRouter {
   final rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -19,24 +13,24 @@ class AppRouter {
     final exerciseSelectorNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'exerciseSelector');
 
     _goRouter = GoRouter(
-      initialLocation: Screens.splash.path,
+      initialLocation: NavigationRoute.splash.path,
       observers: [
         AnalyticsObserver(),
       ],
       routes: [
         GoRoute(
-          name: Screens.splash.named,
-          path: Screens.splash.path,
+          name: NavigationRoute.splash.named,
+          path: NavigationRoute.splash.path,
           builder: (context, state) => const SplashScreen(),
         ),
         GoRoute(
-          name: Screens.login.named,
-          path: Screens.login.path,
+          name: NavigationRoute.login.named,
+          path: NavigationRoute.login.path,
           builder: (context, state) => const LoginScreen(),
         ),
         GoRoute(
-          name: Screens.exerciseCreation.named,
-          path: Screens.exerciseCreation.path,
+          name: NavigationRoute.exerciseCreation.named,
+          path: NavigationRoute.exerciseCreation.path,
           pageBuilder: (context, state) => MaterialPage(
             fullscreenDialog: true,
             child: ExerciseCreationModal(
@@ -45,8 +39,8 @@ class AppRouter {
           ),
         ),
         GoRoute(
-          name: Screens.logCreation.named,
-          path: Screens.logCreation.path,
+          name: NavigationRoute.logCreation.named,
+          path: NavigationRoute.logCreation.path,
           pageBuilder: (context, state) {
             final params = state.extra as Map<String, dynamic>?;
             return MaterialPage(
@@ -68,8 +62,8 @@ class AppRouter {
               navigatorKey: logOverviewNavigatorKey,
               routes: [
                 GoRoute(
-                  name: Screens.logsOverview.named,
-                  path: Screens.logsOverview.path,
+                  name: NavigationRoute.logsOverview.named,
+                  path: NavigationRoute.logsOverview.path,
                   builder: (context, state) => const LogsOverviewScreen(),
                 ),
               ],
@@ -94,8 +88,8 @@ class AppRouter {
               navigatorKey: exerciseSelectorNavigatorKey,
               routes: [
                 GoRoute(
-                    name: Screens.exerciseSelector.named,
-                    path: Screens.exerciseSelector.path,
+                    name: NavigationRoute.exerciseSelector.named,
+                    path: NavigationRoute.exerciseSelector.path,
                     builder: (context, state) => const ExerciseSelectorScreen()),
               ],
             ),

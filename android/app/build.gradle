@@ -61,27 +61,15 @@ android {
             versionNameSuffix "-dev"
             resValue "string", "app_name", "[dev] Workouts"
         }
-        internal {
-            dimension "version"
-            applicationIdSuffix ".internal"
-            versionNameSuffix "-internal"
-            resValue "string", "app_name", "[internal] Workouts"
-        }
         uat {
             dimension "version"
             applicationIdSuffix ".uat"
             versionNameSuffix "-uat"
             resValue "string", "app_name", "[uat] Workouts"
         }
-        acceptance {
-            dimension "version"
-            applicationIdSuffix ".acc"
-            versionNameSuffix "-acc"
-            resValue "string", "app_name", "[ACC] Workouts"
-        }
         production {
             dimension "version"
-            applicationId "nl.wrk.workouts"
+            applicationId "com.wrk.workouts"
             resValue "string", "app_name", "Workouts"
         }
     }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'bottom_navigation_bar_item.dart';
 import '../../../../theme/app_colors.dart';
 
-/// The different Navigation Bars in the PMT app.
+/// The different Navigation Bars in the Workouts app.
 class WorkoutsBottomNavigationBar extends StatelessWidget {
   final int selectedIndex;
   final Function(int) onTap;

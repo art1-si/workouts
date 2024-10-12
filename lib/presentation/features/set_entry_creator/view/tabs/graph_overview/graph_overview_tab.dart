@@ -96,7 +96,7 @@ class GraphDateFilterSelector extends ConsumerWidget {
                 }
                 ref.read(graphDateFilterNotifierProvider.notifier).set(date);
               },
-              child: StyledText.button(graphFilterDate?.toPMTViewFormatShort() ?? 'CUSTOM'),
+              child: StyledText.button(graphFilterDate?.toWorkoutsViewFormatShort() ?? 'CUSTOM'),
             ),
             TextButton(
               onPressed: () {

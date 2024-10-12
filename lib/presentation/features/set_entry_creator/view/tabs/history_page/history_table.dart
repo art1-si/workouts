@@ -31,7 +31,7 @@ class HistoryTable extends StatelessWidget {
           return _Animator(
             index: i,
             child: LogOverviewCard(
-              title: date.toPMTViewFormat(),
+              title: date.toWorkoutsViewFormat(),
               workoutLog: groupedEntries[date]!,
               backgroundColor: AppColors.primaryShades.shade100,
               onTap: () {},

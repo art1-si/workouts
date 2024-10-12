@@ -18,7 +18,7 @@ class OnPressDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     if (log != null) {
       final _date = log!.dateCreated;
-      final _formateDate = _date.toPMTViewFormat();
+      final _formateDate = _date.toWorkoutsViewFormat();
       return _PopUpTable(
         rpeCount: log!.exerciseRPE,
         field1: '${log!.weight}',

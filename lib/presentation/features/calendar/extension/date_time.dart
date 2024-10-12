@@ -3,32 +3,32 @@ import 'package:intl/intl.dart';
 import 'package:workouts/presentation/features/calendar/model/date_system.dart';
 import 'package:workouts/presentation/features/calendar/model/week_number.dart';
 
-extension PMTDateTimeFormatting on DateTime {
+extension WorkoutsDateTimeFormatting on DateTime {
   /// Getter for `this` date that return midnight time.
   DateTime get atMidnight {
     return copyWith(hour: 0, minute: 0, second: 0, millisecond: 0, microsecond: 0);
   }
 
-  String toPMTTimeViewFormat() {
+  String toWorkoutsTimeViewFormat() {
     return DateFormat('Hm').format(this);
   }
 
   /// Date formatter in format `dd MMM yyyy`.
-  String toPMTViewFormat() {
+  String toWorkoutsViewFormat() {
     return DateFormat('dd MMM yyyy').format(this);
   }
 
   /// Date formatter in format `dd MMM`.
-  String toPMTViewFormatShort() {
+  String toWorkoutsViewFormatShort() {
     return DateFormat('dd MMM').format(this);
   }
 
-  String toPMTHeaderFormat() {
+  String toWorkoutsHeaderFormat() {
     return DateFormat(DateFormat.MONTH_WEEKDAY_DAY, Intl.getCurrentLocale()).format(this);
   }
 
   /// It will format `this` date in format of `yyyy-MM-dd`.
-  String toPmtAPIParameterFormat() {
+  String toWorkoutsAPIParameterFormat() {
     return DateFormat('yyyy-MM-dd').format(this);
   }
 
@@ -41,7 +41,7 @@ extension PMTDateTimeFormatting on DateTime {
   }
 
   static String timeRange(DateTime startTime, DateTime endTime) {
-    return '${startTime.toPMTTimeViewFormat()} - ${endTime.toPMTTimeViewFormat()}';
+    return '${startTime.toWorkoutsTimeViewFormat()} - ${endTime.toWorkoutsTimeViewFormat()}';
   }
 }
 

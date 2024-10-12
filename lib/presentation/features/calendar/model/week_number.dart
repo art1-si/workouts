@@ -13,7 +13,7 @@ class WeekNumber {
     return DateTime.now().weekNumber(dateSystem: dateSystem);
   }
 
-  /// Expects the PMT format 2023-05
+  /// Expects the Workouts format 2023-05
   factory WeekNumber.fromString(String yearWeek, {required DateSystem dateSystem}) {
     final components = yearWeek.split('-');
     if (components.length != 2) {
@@ -104,8 +104,8 @@ class WeekNumber {
     };
   }
 
-  /// Combines the `year` and `weekNumber` into the `week` parameter for the PMT Api.
-  String get pmtWeekNumberAPIParam => '$year-$weekNumber';
+  /// Combines the `year` and `weekNumber` into the `week` parameter for the Workouts Api.
+  String get workoutsWeekNumberAPIParam => '$year-$weekNumber';
 
   /// Add a number of weeks
   WeekNumber operator +(int b) {

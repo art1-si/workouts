@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../../lib.old/presentation/features/weekly_set_count_summary/weekly_set_count_summery.dart';
+import 'package:workouts/presentation/features/calendar/view/calendar_controller.dart';
+import 'package:workouts/presentation/features/calendar/view/infinite_scroll_calendar.dart';
+import 'package:workouts/presentation/theme/app_colors.dart';
+import 'package:workouts/presentation/theme/typography.dart';
 import 'widgets/date_selector.dart';
 import 'widgets/logs_list_view.dart';
-import '../../../theme/app_colors.dart';
-import '../../../theme/typography.dart';
-import '../../../../../lib.old/presentation/widgets/calendar/calendar_controller.dart';
-import '../../../../../lib.old/presentation/widgets/calendar/infinite_scroll_calendar.dart';
 
-class LogsOverviewScreen extends ConsumerStatefulWidget {
+class LogsOverviewScreen extends StatefulWidget {
   const LogsOverviewScreen({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _LogsOverviewScreenState();
+  State<StatefulWidget> createState() => _LogsOverviewScreenState();
 }
 
-class _LogsOverviewScreenState extends ConsumerState<LogsOverviewScreen> {
+class _LogsOverviewScreenState extends State<LogsOverviewScreen> {
   final CalendarDatePickerController _datePickerController =
       CalendarDatePickerController(initialCalendarView: CalendarViewType.weekly);
   @override

@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../../../lib.old/application/selected_date/selected_date_controller.dart';
-import '../../../../theme/app_colors.dart';
-import '../../../../../../lib.old/presentation/widgets/calendar/calendar_controller.dart';
-import '../../../../../../lib.old/presentation/widgets/calendar/calendar_grid.dart';
-import '../../../../../../lib.old/presentation/widgets/calendar/calendar_view.dart';
-import '../../../../../../lib.old/presentation/widgets/calendar/infinite_scroll_calendar.dart';
-import '../../../../../../lib.old/presentation/widgets/calendar/models/date_picker_style.dart';
+import 'package:workouts/presentation/features/calendar/view/calendar_controller.dart';
+import 'package:workouts/presentation/features/calendar/view/calendar_grid.dart';
+import 'package:workouts/presentation/features/calendar/view/calendar_view.dart';
+import 'package:workouts/presentation/features/calendar/view/infinite_scroll_calendar.dart';
+import 'package:workouts/presentation/features/calendar/view/models/date_picker_style.dart';
+import 'package:workouts/presentation/theme/app_colors.dart';
 
-class DateSelector extends ConsumerStatefulWidget {
+class DateSelector extends StatefulWidget {
   const DateSelector({
     super.key,
     required this.datePickerController,
@@ -16,10 +14,10 @@ class DateSelector extends ConsumerStatefulWidget {
   final CalendarDatePickerController datePickerController;
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _DateSelectorState();
+  State<StatefulWidget> createState() => _DateSelectorState();
 }
 
-class _DateSelectorState extends ConsumerState<DateSelector> {
+class _DateSelectorState extends State<DateSelector> {
   @override
   Widget build(BuildContext context) {
     return Container(

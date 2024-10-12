@@ -1,19 +1,19 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import '../../../../../../lib.old/data/workout_logs/models/workout_log.dart';
-import '../../../../theme/app_colors.dart';
-import '../../../../theme/typography.dart';
+import 'package:workouts/domain/models/set_entry.dart';
+import 'package:workouts/presentation/theme/app_colors.dart';
+import 'package:workouts/presentation/theme/typography.dart';
 
-class LogOverviewCard extends StatelessWidget {
-  const LogOverviewCard({
+class SetEntryOverviewCard extends StatelessWidget {
+  const SetEntryOverviewCard({
     super.key,
-    required this.workoutLog,
+    required this.setEntry,
     required this.onTap,
     required this.title,
     this.backgroundColor,
   });
   final String title;
-  final List<WorkoutLog> workoutLog;
+  final List<SetEntry> setEntry;
   final VoidCallback onTap;
   final Color? backgroundColor;
 
@@ -40,7 +40,7 @@ class LogOverviewCard extends StatelessWidget {
                 Expanded(
                   flex: 3,
                   child: LoggedSetsTable(
-                    exerciseSets: workoutLog,
+                    exerciseSets: setEntry,
                   ),
                 ),
               ],
@@ -55,7 +55,7 @@ class LogOverviewCard extends StatelessWidget {
 class LoggedSetsTable extends StatelessWidget {
   const LoggedSetsTable({super.key, required this.exerciseSets});
 
-  final List<WorkoutLog> exerciseSets;
+  final List<SetEntry> exerciseSets;
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +75,6 @@ class LoggedSetsTable extends StatelessWidget {
                 _KeyCell('SET ${index + 1}', flex: 1, alignment: Alignment.centerRight),
                 _ValueCell(e.reps.toString(), flex: 1),
                 _ValueCell(e.weight.toString(), flex: 1),
-                _ValueCell(e.exerciseRPE.toString(), flex: 1),
               ])),
         ],
       ),

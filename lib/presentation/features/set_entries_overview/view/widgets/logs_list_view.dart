@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import '../../../../../../lib.old/application/workout_logs/workout_logs_view_model_controller.dart';
-import '../../../../navigation/navigation_routes.dart';
+import 'package:workouts/presentation/navigation/navigation_routes.dart';
 import 'log_overview_card.dart';
 
-class LogsListView extends ConsumerWidget {
+class LogsListView extends StatelessWidget {
   const LogsListView({super.key});
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final workoutLogsAsyncList = ref.watch(workoutLogsForSelectedDateProvider);
+  Widget build(BuildContext context) {
     return workoutLogsAsyncList.when(
       data: (data) {
         return ListView.separated(
@@ -21,9 +18,9 @@ class LogsListView extends ConsumerWidget {
             height: 4,
           ),
           itemBuilder: (context, index) {
-            return LogOverviewCard(
+            return SetEntryOverviewCard(
               title: data[index].exercise.exerciseName,
-              workoutLog: data[index].workoutLog,
+              setEntry: data[index].workoutLog,
               onTap: () => context.pushNamed(NavigationRoute.logCreation.named,
                   extra: {'exercises': data.map((e) => e.exercise).toList(), 'indexOfSelectedExercise': index}),
             );

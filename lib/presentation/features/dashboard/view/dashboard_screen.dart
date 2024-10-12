@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../../../navigation/navigation_routes.dart';
+import 'package:workouts/presentation/navigation/navigation_routes.dart';
 import 'bottom_navigation_bar/bottom_navigation_bar.dart';
 
 class DashboardScreen extends StatelessWidget {
@@ -12,7 +12,7 @@ class DashboardScreen extends StatelessWidget {
   final StatefulNavigationShell navigationShell;
   @override
   Widget build(BuildContext context) {
-    final location = GoRouter.of(context).location;
+    final location = GoRouter.of(context).;
     final isModalLocation = NavigationRoute.fromLocation(location)?.isModal ?? false;
 
     return Scaffold(

@@ -1,5 +1,5 @@
 import 'package:workouts/data/dto_models/set_entry_dto.dart';
-import 'package:workouts/data/sources/set_entry_data_source/set_entry_data_source.dart';
+import 'package:workouts/data/data_sources/set_entry_data_source/set_entry_data_source.dart';
 import 'package:workouts/domain/entities/set_entry.dart';
 import 'package:workouts/domain/repositories/set_entry_repository.dart';
 

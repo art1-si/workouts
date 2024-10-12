@@ -3,7 +3,7 @@ import 'package:workouts/data/exceptions/data_source_exceptions.dart';
 import 'package:workouts/data/sources/exercise_data_source/exercise_data_source.dart';
 import 'package:workouts/data/sources/exercise_data_source/exercise_in_memory_data_source.dart';
 import 'package:workouts/data/sources/exercise_data_source/exercise_local_data_source.dart';
-import 'package:workouts/data/sources/exercise_data_source/exercise_remote_data_source.dart';
+import 'package:workouts/data/sources/exercise_data_source/exercise_remote_data_source/exercise_remote_data_source.dart';
 
 class ExerciseDataSourceManager implements ExerciseDataSource {
   ExerciseDataSourceManager({

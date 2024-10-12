@@ -13,8 +13,8 @@ extension ToExerciseEntity on ExerciseDto {
   }
 }
 
-final class DataCompositeExerciseRepository implements ExerciseRepository {
-  DataCompositeExerciseRepository({
+final class ExerciseDataRepository implements ExerciseRepository {
+  ExerciseDataRepository({
     required ExerciseDataSource exerciseDataSource,
   }) : _exerciseDataSource = exerciseDataSource;
 

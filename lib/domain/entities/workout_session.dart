@@ -1,12 +1,18 @@
 import 'package:flutter/foundation.dart';
 
 import 'package:workouts/domain/entities/exercise_series.dart';
+import 'package:workouts/domain/extensions/date_time_extensions.dart';
 
 /// Represents a workout session within a date with multiple exercises.
 class WorkoutSession {
-  WorkoutSession({required this.date, required this.exerciseSeries});
+  WorkoutSession({required this.exerciseSeries}) {
+    assert(exerciseSeries.isNotEmpty, 'exerciseSeries cannot be empty');
+    assert(exerciseSeries.every((element) => element.date.atMidnight == exerciseSeries.first.date.atMidnight),
+        'exerciseSeries must all be for the same date');
+    date = exerciseSeries.first.date;
+  }
 
-  final DateTime date;
+  late final DateTime date;
   final List<ExerciseSeries> exerciseSeries;
 
   @override

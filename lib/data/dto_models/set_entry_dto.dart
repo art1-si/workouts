@@ -1,51 +1,68 @@
+import 'dart:convert';
+
 class SetEntryDto {
   SetEntryDto({
     required this.id,
     required this.exerciseId,
-    required this.exerciseType,
     required this.weight,
     required this.reps,
-    required this.dateCreated,
+    required this.createdAt,
+    required this.updatedAt,
   });
-  final String id;
-  final String exerciseId;
-  final String exerciseType;
+  final int id;
+  final int exerciseId;
   final double weight;
   final int reps;
-  final DateTime dateCreated;
+  final DateTime createdAt;
+  final DateTime? updatedAt;
 
   SetEntryDto copyWith({
-    String? id,
-    String? exerciseId,
-    String? exerciseType,
+    int? id,
+    int? exerciseId,
     double? weight,
     int? reps,
-    DateTime? dateCreated,
+    DateTime? createdAt,
+    DateTime? updatedAt,
   }) {
     return SetEntryDto(
       id: id ?? this.id,
       exerciseId: exerciseId ?? this.exerciseId,
-      exerciseType: exerciseType ?? this.exerciseType,
       weight: weight ?? this.weight,
       reps: reps ?? this.reps,
-      dateCreated: dateCreated ?? this.dateCreated,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
     );
+  }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'id': id,
+      'exerciseId': exerciseId,
+      'weight': weight,
+      'reps': reps,
+      'createdAt': createdAt.millisecondsSinceEpoch,
+      'updatedAt': updatedAt?.millisecondsSinceEpoch,
+    };
   }
 
   factory SetEntryDto.fromMap(Map<String, dynamic> map) {
     return SetEntryDto(
-      id: map['id'] as String,
-      exerciseId: map['exerciseId'] as String,
-      exerciseType: map['exerciseType'] as String,
+      id: map['id'] as int,
+      exerciseId: map['exerciseId'] as int,
       weight: map['weight'] as double,
       reps: map['reps'] as int,
-      dateCreated: DateTime.parse(map['dateCreated'] as String),
+      createdAt: DateTime.fromMillisecondsSinceEpoch(map['createdAt'] as int),
+      updatedAt: map['updatedAt'] != null ? DateTime.fromMillisecondsSinceEpoch(map['updatedAt'] as int) : null,
     );
   }
 
+  String toJson() => json.encode(toMap());
+
+  factory SetEntryDto.fromJson(String source) => SetEntryDto.fromMap(json.decode(source) as Map<String, dynamic>);
+
   @override
   String toString() {
-    return 'SetEntryDto(id: $id, exerciseID: $exerciseId, exerciseType: $exerciseType, weight: $weight, reps: $reps, dateCreated: $dateCreated)';
+    return 'SetEntryDto(id: $id, exerciseId: $exerciseId, weight: $weight, reps: $reps, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -54,19 +71,19 @@ class SetEntryDto {
 
     return other.id == id &&
         other.exerciseId == exerciseId &&
-        other.exerciseType == exerciseType &&
         other.weight == weight &&
         other.reps == reps &&
-        other.dateCreated == dateCreated;
+        other.createdAt == createdAt &&
+        other.updatedAt == updatedAt;
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
         exerciseId.hashCode ^
-        exerciseType.hashCode ^
         weight.hashCode ^
         reps.hashCode ^
-        dateCreated.hashCode;
+        createdAt.hashCode ^
+        updatedAt.hashCode;
   }
 }

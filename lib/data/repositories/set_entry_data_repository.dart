@@ -1,6 +1,19 @@
+import 'package:workouts/data/dto_models/set_entry_dto.dart';
 import 'package:workouts/data/sources/set_entry_data_source/set_entry_data_source.dart';
 import 'package:workouts/domain/entities/set_entry.dart';
 import 'package:workouts/domain/repositories/set_entry_repository.dart';
+
+extension ToSetEntryEntity on SetEntryDto {
+  SetEntry toSetEntryEntity() {
+    return SetEntry(
+      id: id,
+      exerciseId: exerciseId,
+      weight: weight,
+      reps: reps,
+      dateCreated: createdAt,
+    );
+  }
+}
 
 class SetEntryDataRepository implements SetEntryRepository {
   SetEntryDataRepository({
@@ -10,32 +23,33 @@ class SetEntryDataRepository implements SetEntryRepository {
   final SetEntryDataSource _setEntryDataSource;
 
   @override
-  Future<SetEntry> addSetEntry({required SetEntry setEntry}) {
-    // TODO: implement addSetEntry
-    throw UnimplementedError();
+  Future<SetEntry> addSetEntry({required int exerciseId, required int reps, required double weight}) async {
+    final setEntryDto = await _setEntryDataSource.addSetEntry(exerciseId: exerciseId, reps: reps, weight: weight);
+    return setEntryDto.toSetEntryEntity();
   }
 
   @override
   Future<void> deleteSetEntry({required int setEntryId}) {
-    // TODO: implement deleteSetEntry
-    throw UnimplementedError();
+    return _setEntryDataSource.deleteSetEntry(id: setEntryId);
   }
 
   @override
-  Future<List<SetEntry>> getSetEntries({DateTime? startDate, DateTime? endDate}) {
-    // TODO: implement getSetEntries
-    throw UnimplementedError();
+  Future<List<SetEntry>> getSetEntries({DateTime? startDate, DateTime? endDate}) async {
+    final setEntries = await _setEntryDataSource.getSetEntries(startDate: startDate, endDate: endDate);
+    return setEntries.map((e) => e.toSetEntryEntity()).toList();
   }
 
   @override
-  Future<List<SetEntry>> getSetEntriesPerExercise({required int exerciseId, DateTime? startDate, DateTime? endDate}) {
-    // TODO: implement getSetEntriesPerExercise
-    throw UnimplementedError();
+  Future<List<SetEntry>> getSetEntriesPerExercise(
+      {required int exerciseId, DateTime? startDate, DateTime? endDate}) async {
+    final setEntries =
+        await _setEntryDataSource.getSetEntries(exerciseId: exerciseId, startDate: startDate, endDate: endDate);
+    return setEntries.map((e) => e.toSetEntryEntity()).toList();
   }
 
   @override
-  Future<SetEntry> updateSetEntry({required int setEntryId, double? weight, int? reps}) {
-    // TODO: implement updateSetEntry
-    throw UnimplementedError();
+  Future<SetEntry> updateSetEntry({required int setEntryId, double? weight, int? reps}) async {
+    final setEntryDto = await _setEntryDataSource.updateSetEntry(id: setEntryId, reps: reps, weight: weight);
+    return setEntryDto.toSetEntryEntity();
   }
 }

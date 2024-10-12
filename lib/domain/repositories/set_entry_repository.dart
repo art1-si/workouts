@@ -12,8 +12,11 @@ abstract interface class SetEntryRepository {
   Future<List<SetEntry>> getSetEntriesPerExercise({required int exerciseId, DateTime? startDate, DateTime? endDate});
 
   /// Adds a new set entry to the data source.
+  /// [exerciseId] is the ID of the exercise the set entry is for.
+  /// [reps] is the number of reps in the set.
+  /// [weight] is the weight used in the set.
   /// Returns the newly added set entry.
-  Future<SetEntry> addSetEntry({required SetEntry setEntry});
+  Future<SetEntry> addSetEntry({required int exerciseId, required int reps, required double weight});
 
   /// Updates an existing set entry in the data source.
   /// [setEntryId] is the ID of the set entry to update.

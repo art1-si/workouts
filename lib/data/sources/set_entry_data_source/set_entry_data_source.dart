@@ -7,7 +7,7 @@ abstract interface class SetEntryDataSource {
   /// - [reps] is the number of reps in the set.
   /// - [weight] is the weight used in the set.
   /// returns the newly created set entry.
-  Future<SetEntryDto> addSetEntry({required int exerciseId, required int reps, required int weight});
+  Future<SetEntryDto> addSetEntry({required int exerciseId, required int reps, required double weight});
 
   /// Updates an existing set entry in the data source.
   ///
@@ -15,7 +15,7 @@ abstract interface class SetEntryDataSource {
   /// - [reps] is the new number of reps in the set. If null, the reps will not be updated.
   /// - [weight] is the new weight used in the set. If null, the weight will not be updated.
   /// returns the updated set entry.
-  Future<SetEntryDto> updateSetEntry({required int id, int? reps, int? weight});
+  Future<SetEntryDto> updateSetEntry({required int id, int? reps, double? weight});
 
   /// Deletes a set entry from the data source.
   ///

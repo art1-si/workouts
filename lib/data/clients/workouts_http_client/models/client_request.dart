@@ -10,21 +10,30 @@ enum HttpMethod {
 
 /// Abstract base class for client requests.
 abstract base class ClientRequest {
+  const ClientRequest({
+    required this.method,
+    required this.path,
+    this.body,
+    this.headers,
+    this.parameters,
+    this.timeout = const Duration(seconds: 30),
+  });
+
   /// The HTTP method for the endpoint.
-  HttpMethod get method;
+  final HttpMethod method;
 
   /// The path for the endpoint.
-  String get path;
+  final String path;
 
   /// The request body for the endpoint.
-  String? get body => null;
+  final String? body;
 
   /// The request headers for the endpoint.
-  Map<String, String>? get headers => null;
+  final Map<String, String>? headers;
 
   /// The request query parameters for the endpoint.
-  Map<String, String>? get parameters => null;
+  final Map<String, String>? parameters;
 
   /// The request timeout for the endpoint.
-  Duration get timeout => const Duration(seconds: 30);
+  final Duration timeout;
 }

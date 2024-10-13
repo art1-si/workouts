@@ -14,7 +14,7 @@ class WorkoutsHttpClient {
   final RequestConstructor _requestConstructor;
 
   Future<ParsedResponseT> executeRequest<ParsedResponseT>({
-    required ClientRequest request,
+    required ApiRequest request,
     required ParsedResponseT Function(String responseBody) parser,
   }) async {
     Logger.info('Executing request: ${request.method} ${request.path}');

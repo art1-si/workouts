@@ -4,7 +4,7 @@ import 'package:workouts/data/clients/workouts_http_client/models/client_request
 
 class RequestConstructor {
   Future<http.Request> constructRequest({
-    required ClientRequest request,
+    required ApiRequest request,
   }) async {
     final uri = await _constructUri(request);
     final draftRequest = http.Request(request.method.key, uri);
@@ -23,7 +23,7 @@ class RequestConstructor {
     return draftRequest;
   }
 
-  Future<Uri> _constructUri(ClientRequest request) async {
+  Future<Uri> _constructUri(ApiRequest request) async {
     final apiContext = ApiContext.instance;
 
     final _host = apiContext.host;

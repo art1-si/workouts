@@ -1,5 +1,5 @@
-import 'package:workouts/data/dto_models/exercise_dto.dart';
 import 'package:workouts/data/data_sources/exercise_data_source/exercise_data_source.dart';
+import 'package:workouts/data/dto_models/exercise_dto.dart';
 import 'package:workouts/domain/entities/exercise.dart';
 import 'package:workouts/domain/repositories/exercise_repository.dart';
 

@@ -12,7 +12,7 @@ class ApiContext {
 
   final NetworkClientStorage networkClientStorage;
   final String baseUrl;
-  final JwtAccessTokens? jwtAccessTokens;
+  JwtAccessTokens? jwtAccessTokens;
 
   static ApiContext? _instance;
 
@@ -27,20 +27,54 @@ class ApiContext {
     return _instance!;
   }
 
-  static Future<void> load() async {
-    final storage = await NetworkClientStorage.instance();
-    final baseUrl = storage.getString(_apiBaseUrlKey);
-    if (baseUrl == null) {
-      throw const BaseUrlNotFoundException();
+  static Future<void> createIfNotExist({
+    required String baseUrl,
+    JwtAccessTokens? jwtAccessTokens,
+  }) async {
+    if (_instance != null) {
+      return;
     }
-    final jwtAccessTokens = await storage.getSecret(_jwtAccessToken);
-    final jwtRefreshToken = await storage.getSecret(_jwtRefreshToken);
+    final storedInstance = await _loadStoredInstance();
+    if (storedInstance != null) {
+      _instance = storedInstance;
+      return;
+    }
+
+    final storage = await NetworkClientStorage.instance();
+    await storage.setString(_apiBaseUrlKey, baseUrl);
+    if (jwtAccessTokens != null) {
+      await storage.setSecret(_jwtAccessToken, jwtAccessTokens.$1);
+      await storage.setSecret(_jwtRefreshToken, jwtAccessTokens.$2);
+    }
 
     _instance = ApiContext._internal(
       networkClientStorage: storage,
       baseUrl: baseUrl,
+      jwtAccessTokens: jwtAccessTokens,
+    );
+  }
+
+  static Future<ApiContext?> _loadStoredInstance() async {
+    final storage = await NetworkClientStorage.instance();
+    final baseUrl = storage.getString(_apiBaseUrlKey);
+    if (baseUrl == null) {
+      return null;
+    }
+    final jwtAccessTokens = await storage.getSecret(_jwtAccessToken);
+    final jwtRefreshToken = await storage.getSecret(_jwtRefreshToken);
+
+    return ApiContext._internal(
+      networkClientStorage: storage,
+      baseUrl: baseUrl,
       jwtAccessTokens: jwtAccessTokens != null && jwtRefreshToken != null ? (jwtAccessTokens, jwtRefreshToken) : null,
     );
+  }
+
+  Future<void> setTokens(String accessToken, String refreshToken) async {
+    await networkClientStorage.setSecret(_jwtAccessToken, accessToken);
+    await networkClientStorage.setSecret(_jwtRefreshToken, refreshToken);
+
+    jwtAccessTokens = (accessToken, refreshToken);
   }
 
   /// Obtains the request host, stripping it from any
@@ -76,5 +110,13 @@ class ApiContext {
       pathPrefix = pathPrefix.substring(1);
     }
     return pathPrefix;
+  }
+
+  bool hasTokens() => jwtAccessTokens != null;
+
+  Future<void> clearTokens() async {
+    jwtAccessTokens = null;
+    await networkClientStorage.removeSecret(_jwtAccessToken);
+    await networkClientStorage.removeSecret(_jwtRefreshToken);
   }
 }

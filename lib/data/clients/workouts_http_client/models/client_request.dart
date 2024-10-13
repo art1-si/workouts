@@ -9,8 +9,8 @@ enum HttpMethod {
 }
 
 /// Abstract base class for client requests.
-abstract base class ClientRequest {
-  const ClientRequest({
+abstract base class ApiRequest {
+  const ApiRequest({
     required this.method,
     required this.path,
     this.body,

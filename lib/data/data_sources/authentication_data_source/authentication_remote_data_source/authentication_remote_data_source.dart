@@ -1,5 +1,7 @@
 import 'package:workouts/data/clients/workouts_http_client/api_context.dart';
+import 'package:workouts/data/clients/workouts_http_client/models/forbidden_middleware.dart';
 import 'package:workouts/data/data_sources/authentication_data_source/authentication_data_source.dart';
+import 'package:workouts/data/data_sources/authentication_data_source/authentication_remote_data_source/api_requests/refresh_token_request.dart';
 import 'package:workouts/data/data_sources/authentication_data_source/authentication_remote_data_source/api_requests/sign_in_request.dart';
 import 'package:workouts/data/data_sources/authentication_data_source/authentication_remote_data_source/api_requests/sign_up_request.dart';
 import 'package:workouts/data/data_sources/remote_data_source.dart';
@@ -9,6 +11,30 @@ final class AuthenticationRemoteDataSource extends RemoteDataSource implements A
   AuthenticationRemoteDataSource({
     required super.httpClient,
   });
+
+  static Future<ForbiddenMiddleware?> forbiddenMiddleware() async {
+    final refreshToken = ApiContext.instance.jwtAccessTokens?.refreshToken;
+    if (refreshToken == null) {
+      return null;
+    }
+    final refreshTokenRequest = RefreshTokenRequest(refreshToken: refreshToken);
+    final shouldRetryInitialRequest = (Future<AuthTokenDto> Function() responseCallback) async {
+      try {
+        final response = await responseCallback();
+        await ApiContext.instance.setTokens(response.accessToken, response.refreshToken);
+        return true;
+      } catch (e) {
+        return false;
+      }
+    };
+    final refreshTokenResponseParser = AuthTokenDto.fromJson;
+
+    return ForbiddenMiddleware<AuthTokenDto>(
+      refreshTokenRequest: refreshTokenRequest,
+      shouldRetryInitialRequest: shouldRetryInitialRequest,
+      refreshTokenResponseParser: refreshTokenResponseParser,
+    );
+  }
 
   @override
   Future<bool> isAuthenticated() async {

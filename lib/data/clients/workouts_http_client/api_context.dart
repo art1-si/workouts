@@ -1,7 +1,7 @@
 import 'package:workouts/data/clients/workouts_http_client/exceptions/api_context_exceptions.dart';
 import 'package:workouts/data/clients/workouts_http_client/network_storage.dart';
 
-typedef JwtAccessTokens = (String accessToken, String refreshToken);
+typedef JwtAccessTokens = ({String accessToken, String refreshToken});
 
 class ApiContext {
   ApiContext._internal({
@@ -43,8 +43,8 @@ class ApiContext {
     final storage = await NetworkClientStorage.instance();
     await storage.setString(_apiBaseUrlKey, baseUrl);
     if (jwtAccessTokens != null) {
-      await storage.setSecret(_jwtAccessToken, jwtAccessTokens.$1);
-      await storage.setSecret(_jwtRefreshToken, jwtAccessTokens.$2);
+      await storage.setSecret(_jwtAccessToken, jwtAccessTokens.accessToken);
+      await storage.setSecret(_jwtRefreshToken, jwtAccessTokens.refreshToken);
     }
 
     _instance = ApiContext._internal(
@@ -66,7 +66,9 @@ class ApiContext {
     return ApiContext._internal(
       networkClientStorage: storage,
       baseUrl: baseUrl,
-      jwtAccessTokens: jwtAccessTokens != null && jwtRefreshToken != null ? (jwtAccessTokens, jwtRefreshToken) : null,
+      jwtAccessTokens: jwtAccessTokens != null && jwtRefreshToken != null
+          ? (accessToken: jwtAccessTokens, refreshToken: jwtRefreshToken)
+          : null,
     );
   }
 
@@ -74,7 +76,7 @@ class ApiContext {
     await networkClientStorage.setSecret(_jwtAccessToken, accessToken);
     await networkClientStorage.setSecret(_jwtRefreshToken, refreshToken);
 
-    jwtAccessTokens = (accessToken, refreshToken);
+    jwtAccessTokens = (accessToken: accessToken, refreshToken: refreshToken);
   }
 
   /// Obtains the request host, stripping it from any

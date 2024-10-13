@@ -34,3 +34,12 @@ final class ResponseParseException extends NetworkClientException {
     return 'ResponseParseException: The response could not be parsed.\nError: $error';
   }
 }
+
+final class NoRefreshTokenException extends NetworkClientException {
+  const NoRefreshTokenException();
+
+  @override
+  String toString() {
+    return 'NoRefreshTokenException: No refresh token found. Failed to refresh access token.';
+  }
+}

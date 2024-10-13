@@ -1,7 +1,7 @@
-import 'package:workouts/data/dto_models/set_entry_dto.dart';
-import 'package:workouts/data/exceptions/data_source_exceptions.dart';
 import 'package:workouts/data/data_sources/local_data_source.dart';
 import 'package:workouts/data/data_sources/set_entry_data_source/set_entry_data_source.dart';
+import 'package:workouts/data/dto_models/set_entry_dto.dart';
+import 'package:workouts/data/exceptions/data_source_exceptions.dart';
 
 final class SetEntryLocalDataSource extends LocalDataSource implements SetEntryDataSource {
   SetEntryLocalDataSource({required super.sqlDatabaseClient});

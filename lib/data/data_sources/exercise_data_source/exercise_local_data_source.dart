@@ -1,6 +1,6 @@
-import 'package:workouts/data/dto_models/exercise_dto.dart';
 import 'package:workouts/data/data_sources/exercise_data_source/exercise_data_source.dart';
 import 'package:workouts/data/data_sources/local_data_source.dart';
+import 'package:workouts/data/dto_models/exercise_dto.dart';
 
 final class ExerciseLocalDataSource extends LocalDataSource implements ExerciseDataSource {
   const ExerciseLocalDataSource({

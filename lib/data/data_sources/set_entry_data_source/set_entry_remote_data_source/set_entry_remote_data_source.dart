@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-import 'package:workouts/data/dto_models/set_entry_dto.dart';
 import 'package:workouts/data/data_sources/remote_data_source.dart';
 import 'package:workouts/data/data_sources/set_entry_data_source/set_entry_data_source.dart';
 import 'package:workouts/data/data_sources/set_entry_data_source/set_entry_remote_data_source/api_requests/create_set_entry_request.dart';
 import 'package:workouts/data/data_sources/set_entry_data_source/set_entry_remote_data_source/api_requests/get_set_entries_request.dart';
 import 'package:workouts/data/data_sources/set_entry_data_source/set_entry_remote_data_source/api_requests/update_set_entry_request.dart';
+import 'package:workouts/data/dto_models/set_entry_dto.dart';
 
 final class SetEntryRemoteDataSource extends RemoteDataSource implements SetEntryDataSource {
   SetEntryRemoteDataSource({required super.httpClient});

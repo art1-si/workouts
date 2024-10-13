@@ -12,6 +12,9 @@ final class AuthenticationRemoteDataSource extends RemoteDataSource implements A
     required super.httpClient,
   });
 
+  /// Returns a [ForbiddenMiddleware] instance if the user has a refresh token, otherwise returns null.
+  /// The [ForbiddenMiddleware] instance is used to refresh the access token when a 403 Forbidden response is received.
+  /// The [ForbiddenMiddleware] instance is used by the `WorkoutsHttpClient` to automatically refresh the access token when a 403 Forbidden response is received.
   static Future<ForbiddenMiddleware?> forbiddenMiddleware() async {
     final refreshToken = ApiContext.instance.jwtAccessTokens?.refreshToken;
     if (refreshToken == null) {

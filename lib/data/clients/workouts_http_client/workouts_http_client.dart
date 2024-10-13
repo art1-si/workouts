@@ -26,6 +26,14 @@ class WorkoutsHttpClient {
   /// And if the server returns a 403 status code, the client will throw a [ResponseException].
   final Future<ForbiddenMiddleware?> Function()? forbiddenMiddleware;
 
+  /// Executes the given request and returns the parsed response.
+  ///
+  /// Throws a [ResponseException] if the response status code is not in the range of 200-299.
+  /// Throws a [ResponseParseException] if the response body cannot be parsed.
+  /// Throws a [ClientTimeOutException] if the request times out.
+  ///
+  /// If the server returns a 403 status code and the [forbiddenMiddleware] callback is provided,
+  /// the client will attempt to refresh the token and retry the initial request.
   Future<ParsedResponseT> executeRequest<ParsedResponseT>({
     required ApiRequest request,
     required ParsedResponseT Function(String responseBody) parser,
@@ -49,6 +57,8 @@ class WorkoutsHttpClient {
     );
   }
 
+  /// Sends the given request and returns the response. The response is not parsed.
+  /// Throws a [ClientTimeOutException] if the request times out.
   Future<http.Response> _sendRequest(http.Request request) async {
     final response = await _client.send(request).timeout(const Duration(seconds: 10), onTimeout: () {
       throw const ClientTimeOutException();
@@ -57,6 +67,10 @@ class WorkoutsHttpClient {
     return http.Response.fromStream(response);
   }
 
+  /// Wraps the given request executor with a handler that will attempt to refresh the token if the server returns a 403 status code.
+  /// If the [forbiddenMiddleware] callback is not provided, the client will not attempt to refresh the token.
+  /// And if the server returns a 403 status code, the client will throw a [ResponseException].
+  /// Returns the response from the request executor.
   Future<http.Response> _forbiddenHandlerWrapper(
     Future<http.Response> Function() requestExecutor,
   ) async {
@@ -92,6 +106,8 @@ class WorkoutsHttpClient {
     return response;
   }
 
+  /// Parses the response body and returns the parsed response.
+  /// Throws a [ResponseParseException] if the response body cannot be parsed.
   ParsedResponseT _parseResponse<ParsedResponseT>({
     required http.Response response,
     required ParsedResponseT Function(String responseBody) parser,
